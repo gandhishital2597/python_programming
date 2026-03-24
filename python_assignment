@@ -1,0 +1,47 @@
+Module : 6 Python Fundamentals
+
+Introduction to python
+ Theory:
+ Que1 : Introduction to python and its feature (simple,high-level,interpreted langugage)
+ Answer : python is a simple,highlevel  open-source, independent,dynamic and interpreted language.
+ its widely used in web application,software development,data science and machine learning
+ ->developer use python because it is efficient and easy to learn and can run on many diffrent plateform
+->python also used for desktop based application using tkinter + sql.
+
+Que2 :  History and evolution of Python.
+Answer : python developed by guido van rosum in 1991.
+python named  because guido van russum faviourite comedy show its named is
+ monty python's flying circus  and he wanted to uniq name so  named is a python
+ 1980 : guido van russum work programming language is a ABC language
+ABC language : simple write and learn but its a limited
+but In christmas holiday guido van russum think that a made a language there should bu simple
+and powerful.then  started language of python
+
+Que3 : Advantages of using Python over other programming languages.
+Answer :  Answer : python is a simple,highlevel  open-source, independent,dynamic and interpreted language.
+ its widely used in web application,software development,data science and machine learning
+ ->developer use python because it is efficient and easy to learn and can run on many diffrent plateform
+
+Que 4: Installing Python and setting up the development environment (Anaconda, PyCharm, or VS
+Code).
+Answer : Go to official website : https://www.python.org and  Download Python then Install it
+Using PyCharm : Download : https://www.jetbrains.com/pycharm
+2.Install ,3.Open PyCharm , 4.Create new project 5,Select Python interpreter
+
+Que 5: Writing and executing your first Python program.
+print('hello')
+
+
+Lab Exerices :
+Programme 1 : Write a Python program that prints "Hello, World!"
+print("Hello, World!")
+
+output : "Hello, World!"
+
+Progrmme 2: Set up Python on your local machine and write a program to display your name.
+print("Shital Gandhi")
+
+output : "shital Gandhi"
+
+
+

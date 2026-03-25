@@ -101,5 +101,47 @@ bool = True
 print(type(bool)) #<class 'bool'>
 fruit = ['banana','apple','mango']
 print(type(fruit)) # <class 'list'>
+---------------------------------------------------------------------------------------------------------
+Practical Example 5: Write a Python program to find greater and less than a number using
+if_else.
+
+num = int(input("Enter a number:"))
+if num >= 30:
+    print("The number is greater than 30")
+else:
+    print("The number is less than 30")
+ o/p : 
+ Enter a number:23
+The number is less than 30
+
+Practical Example 6: Write a Python program to check if a number is prime using if_else.
+#make a python to check prime num
+num=17
+count=0
+#take for loop till num and check reminder
+for i in range(1,num+1):
+    if num%i==0:
+       count+=1
+       print("factor is ",i) #print factore
+if count>2:      #2 thi vadhare count ma factore avse to num is not prime
+    print("num is not prime")
+else:
+    print("num is prime num")  #2 factore avse to number prime
+
+Practical Example 8: Write a Python program to check if a person is eligible to donate blood
+using a nested if.
+
+age = int(input("Enter your age: "))
+weight = int(input("Enter your weight: "))
+
+if age >= 18:
+    if weight >= 50:
+        print("You are eligible to donate blood")
+    else:
+        print("Not eligible: Weight should be at least 50 kg")
+else:
+    print("Not eligible: Age should be at least 18")
+
+---------------------------------------------------------------------------------------------------------------
 
 

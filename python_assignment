@@ -94,16 +94,14 @@ you can write variables in python using 3 ways
 3.snake_case : student_number
 
 memory allocation :
-Memory allocation in Python is automatic; variables store references to objects, and
-Python manages memory using garbage collection
+Memory allocation in Python is automatic,variables store references to objects, and Python manages memory using garbage collection
 
 Que3 : Python operators: arithmetic, comparison, logical, bitwise.
 Answer :
-Python operators are used to perform calculations, comparisons, logical operations, and bit-level operations
 arithmetic operators : +,-,*,//,/,**,%
 comparison operators : ==,!=,>,<,>=,<=
 logical operators : and,or,not
-bitwise operators : &,^,~,<<,>>,
+bitwise operators : &,^,~,<<,>>
 
 
 

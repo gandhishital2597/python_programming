@@ -31,5 +31,32 @@ Using PyCharm : Download : https://www.jetbrains.com/pycharm
 Que 5: Writing and executing your first Python program.
 print('hello')
 
+2. Programming Style
+Que 1 : Understanding Python’s PEP 8 guidelines.
+PEP 8 (Python Enhancement Proposal 8) is a style guide,It tells you how to write clean and readable Python code.
+PEP 8 Important for Makes code easy to read,Helps teamwork,Makes code look professional
+PEP 8 is a guideline that defines how to write clean, readable, and standard Python code
+
+Que 2 : Indentation, comments, and naming conventions in Python
+1.Indentation : spaces at the beginning of a line,spaces to define block of code
+Use 4 spaces (PEP 8 rule) , Same indentation for same block
+
+2.comments : Comments are something that are ignored by the python interpreter
+Comments in python use :
+1.# keyword for Single-line comment
+2.""" """ : Multi-line comment
+
+3.naming conventions :
+Naming Conventions: you can write variables in python using 3 ways
+1.camelCase : studentNumber
+2.PascalCase : StudentNumber
+3.snake_case : student_number
+
+Que : 3 Writing readable and maintainable code.
+Readable code = easy to understand
+Maintainable code = easy to update/change later
+
+
+
 
 

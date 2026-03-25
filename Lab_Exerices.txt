@@ -9,3 +9,25 @@ print("Shital Gandhi")
 
 output : "shital Gandhi"
 
+Programme 3 : Write a Python program that demonstrates the correct use of indentation, comments, and
+variables following PEP 8 guidelines.
+
+age = 0
+age = int(input("Enter a age : "))
+if age > 18:
+    print("Adult")
+else:
+    print("child")
+
+#output: if you enter a 2 : answer is child and enter a 20: answer is adult
+
+num = 0
+num=int(input("Enter a number: "))
+if num % 2 == 0:
+    print("Even")
+else:
+    print("Odd")
+
+#output : if enter a 20 number so answer is even and enter 17 number: answer is even
+
+

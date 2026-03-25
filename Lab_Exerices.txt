@@ -8,7 +8,7 @@ Progrmme 2: Set up Python on your local machine and write a program to display y
 print("Shital Gandhi")
 
 output : "shital Gandhi"
-
+-----------------------------------------------------------------------------------------------------------------
 Programme 3 : Write a Python program that demonstrates the correct use of indentation, comments, and
 variables following PEP 8 guidelines.
 
@@ -29,5 +29,77 @@ else:
     print("Odd")
 
 #output : if enter a 20 number so answer is even and enter 17 number: answer is even
+--------------------------------------------------------------------------------------------------------------
+Programme 4 : Write a Python program to demonstrate the creation of variables and different data types.
+Answer :
+#How to write varibale using 3 methods
+StudentName = 'student' #pascalcase
+print(StudentName)
+rollNumber =123 #camelcase
+print(rollNumber)
+date_birth = 23 #snakecase
+print(date_birth)
+
+#datatypes in python
+a=12
+print(type(a)) #<class 'int'>
+b="python"
+print(type(b)) #<class 'str'>
+c=12.12
+print(type(c)) #<class 'float'>
+d='A'
+print(type(d)) #<class 'str'>
+bool = True
+print(type(bool)) #<class 'bool'>
+fruit = ['banana','apple','mango']
+print(type(fruit)) # <class 'list'>
+
+
+Practical Example 1: How does the Python code structure work?
+Answer : Python code runs from top to bottom and is structured using imports, variables, functions,
+and main execution logic
+
+Practical Example 2: How to create variables in Python?
+Answer : In Python, you don’t need to declare variable type,Just assign value using = without declaring type
+name = "Shital"
+age = 20
+price = 99.99
+
+Practical Example 3: How to take user input using the input() function.
+Answer : input() always returns data as string
+1.
+name = input("Enter your name: ")
+print("Hello", name)
+output : Enter your name:
+Hello,shital
+
+2.Taking Integer Input:
+age = 0
+age = int(input("Enter a age : "))
+if age > 18:
+    print("Adult")
+else:
+    print("child")
+#if you enter a string value python return a error
+# ValueError: invalid literal for int() with base 10
+
+3.Taking Float Input:
+price = float(input("Enter price: "))
+print(price)
+#if you add integer value python return o/p value convert in floating
+
+Practical Example 4: How to check the type of a variable dynamically using type().
+a=12
+print(type(a)) #<class 'int'>
+b="python"
+print(type(b)) #<class 'str'>
+c=12.12
+print(type(c)) #<class 'float'>
+d='A'
+print(type(d)) #<class 'str'>
+bool = True
+print(type(bool)) #<class 'bool'>
+fruit = ['banana','apple','mango']
+print(type(fruit)) # <class 'list'>
 
 

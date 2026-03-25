@@ -56,6 +56,55 @@ Que : 3 Writing readable and maintainable code.
 Readable code = easy to understand
 Maintainable code = easy to update/change later
 
+3. Core Python Concepts
+Que 1 : Understanding data types: integers, floats,strings, lists, tuples, dictionaries,sets.
+Answer :
+Data types : Datatypes are are thing we store in Variables and it defines what datatype variables are
+type() :  type convension cheked which type of data.
+
+types of datatype :
+1.Numbers or  Numeric : int,float,complex
+int : All the numbers are excluding decimal places and fraction 1,2,-1,-2
+
+float : All the decimal numbers  and fraction values are  float 1.5,1.55,1.677
+
+string : this is used anything store,littrally anything of your keyboard.you have use quotes to store anything
+and it will be consider  as string
+you can use double quotes(""),single quotes('') both works same
+
+boolean : there are  nothing much but to say this is the data type which will and always
+ give result of True and False
+
+lists :list is collection of elements stord in single var,it is orderd way(they have index pos),
+it is mutable(you can add,remove,delete elements)
+it allows duplicate values
+
+Que2 : Python variables and memory allocation.
+Answer :
+variables : are used  as a storage to store  thing in python,you can write anything  as a varibale name
+Rules of define a variable name :
+1.you can not use numbers in variable start
+2.you can not use spaces in variables
+3.you should not use special character in variable
+
+Naming Conventions:
+you can write variables in python using 3 ways
+1.camelCase : studentNumber
+2.PascalCase : StudentNumber
+3.snake_case : student_number
+
+memory allocation :
+Memory allocation in Python is automatic; variables store references to objects, and
+Python manages memory using garbage collection
+
+Que3 : Python operators: arithmetic, comparison, logical, bitwise.
+Answer :
+Python operators are used to perform calculations, comparisons, logical operations, and bit-level operations
+arithmetic operators : +,-,*,//,/,**,%
+comparison operators : ==,!=,>,<,>=,<=
+logical operators : and,or,not
+bitwise operators : &,^,~,<<,>>,
+
 
 
 

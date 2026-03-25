@@ -30,7 +30,7 @@ Using PyCharm : Download : https://www.jetbrains.com/pycharm
 
 Que 5: Writing and executing your first Python program.
 print('hello')
-
+---------------------------------------------------------------------------------------------------------------
 2. Programming Style
 Que 1 : Understanding Python’s PEP 8 guidelines.
 PEP 8 (Python Enhancement Proposal 8) is a style guide,It tells you how to write clean and readable Python code.
@@ -55,7 +55,7 @@ Naming Conventions: you can write variables in python using 3 ways
 Que : 3 Writing readable and maintainable code.
 Readable code = easy to understand
 Maintainable code = easy to update/change later
-
+---------------------------------------------------------------------------------------------------------------
 3. Core Python Concepts
 Que 1 : Understanding data types: integers, floats,strings, lists, tuples, dictionaries,sets.
 Answer :
@@ -102,7 +102,27 @@ arithmetic operators : +,-,*,//,/,**,%
 comparison operators : ==,!=,>,<,>=,<=
 logical operators : and,or,not
 bitwise operators : &,^,~,<<,>>
+--------------------------------------------------------------------------------------------------------------
+4. Conditional Statements
+Que 1 : Introduction to conditionalstatements: if, else, elif
+Answer :Conditional statements are used to control program flow based on conditions using if, else, and elif
+if Statement : Executes code only if condition is True
+if-else Statement : Two choices: True or False
+if-elif-else Statement : Used for multiple conditions
 
+
+Que2 :Nested if-else conditions?
+Answer :
+Nested = if inside another if,Used when you need to check multiple conditions step by step
+Basic Syntax:
+if condition1:
+    if condition2:
+        # code
+    else:
+        # code
+else:
+    # code
+-------------------------------------------------------------------------------------------------------------------
 
 
 

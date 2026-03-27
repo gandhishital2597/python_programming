@@ -1,1 +1,27 @@
 Module 7: Python – Collections, functions and Modules
+
+Accessing List
+
+Que1 :Understanding how to create and access elements in a list.
+Answer : A list is a collection of items stored in a single variable.
+create list
+list_var=[1,2,"python",12.32,'x']
+print(list_var)
+access elements with Index always starts from 0
+
+Que 2 :Indexing in lists (positive and negative indexing).
+Answer : Indexing means accessing elements of a list using position (index number).
+Positive Indexing (Left to Right) start with 0
+Negative Indexing (Right to Left) start with -1
+
+Que 3 :Slicing a list: accessing a range of elements.
+Answer : Slicing means getting a part (range) of a list.
+list[start : end : step]
+start → where to begin
+end → where to stop
+step → jump
+
+list_var = [1,3,4,7,5,6,"test"]
+print(list_var[2:4])
+print(list_var[3:])
+print(list_var[-1])

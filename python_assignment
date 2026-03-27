@@ -123,7 +123,44 @@ if condition1:
 else:
     # code
 -------------------------------------------------------------------------------------------------------------------
+5. Looping (For, While)
 
+Que 1: Introduction to for and while loops
+for loop → Used when you know the number of iterations
+It is mainly used to iterate over a sequence (like list, range, string, etc.)
+
+for loops iterate over a collection of items, such as list or dict, and run a block of code with each element from
+the collection.
+range is a function that returns a series of numbers under an iterable form, thus it can be used in for loops:
+
+while Loop : A while loop will cause the loop statements to be executed until the loop condition is falsey.
+
+
+Que:2 How loops work in Python.
+Loop : A loop keeps running a block of code again and again
+It stops only when a condition becomes false or the sequence ends
+
+How Loops Work (Step-by-Step)
+
+Think like this:
+Start
+Check condition / get next item
+Run the code
+Repeat
+Stop when done
+
+Start → Condition Check → Execute Code → Update → Repeat → Stop
+
+Que 3 : Using loops with collections (lists, tuples, etc.).
+Loop with List :
+fruit = ["banana","mango","orange"]
+for i in fruit :
+    print(i)
+Loop with tuples
+marks = (11,23,34)
+for i in marks:
+    print(i)
+--------------------------------------------------------------------------------------------------------------------
 
 
 

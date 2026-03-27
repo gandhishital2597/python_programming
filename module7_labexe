@@ -1,0 +1,13 @@
+Lab:
+1.Write a Python program to create a list with elements of multiple data types (integers,
+strings, floats, etc.).
+
+List_data = ["java",'pyhton',12.33,45,'php']
+print(list_data)
+
+2.Write a Python program to access elements at different index positions.
+List_data = ["java",'pyhton',12.33,45,'php']
+print(list_data[1:4])
+print(list_data[2:])
+print(list_data[::-1])
+

@@ -128,6 +128,24 @@ if count>2:      #2 thi vadhare count ma factore avse to num is not prime
 else:
     print("num is prime num")  #2 factore avse to number prime
 
+Practical Example 7: Write a Python program to calculate grades based on percentage using
+if-else ladder.
+total_percentage= int(input("Enter the total percentage : "))
+if total_percentage >=90:
+    print("Grade A")
+elif total_percentage >=80:
+    print("Grade B")
+elif total_percentage >=70:
+    print("Grade C")
+elif total_percentage >=60:
+    print("Grade D")
+elif total_percentage >=50:
+    print("Grade E")
+elif total_percentage >=40:
+    print("Grade F")
+else:
+    print("Fail")
+
 Practical Example 8: Write a Python program to check if a person is eligible to donate blood
 using a nested if.
 

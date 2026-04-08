@@ -143,6 +143,31 @@ t = (10, 20, 30, 40, 50) : print(t[1:4])
 6.Step in Slicing : print(t[0:5:2])
 7.Reverse Tuple using slicing :print(t[::-1])
 
+---------------------------------------------------------------------------------------
+8. Functions
+
+Question 1 : Defining functions in Python:
+def demo():
+    print("hello world")
+demo()
+
+Question 2 :Different types of functions: with/without parameters, with/without return values.
+1. Function without parameters & without return value: No input, no output (just prints)
+2. Function with parameters & without return value :Takes input, but does not return anything
+3. Function without parameters & with return value :  No input, but returns a value
+4. Function with parameters & with return value : Takes input and returns result (most important )
+
+
+Question 3 :Anonymous functions (lambda functions).
+What is a Lambda Function?
+A lambda function is a small, unnamed (anonymous) function
+It is written in one line
+
+lambda arguments : expression
+add = lambda a, b: a + b
+print(add(5, 3))
+
+
 
 
 

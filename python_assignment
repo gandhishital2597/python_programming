@@ -162,5 +162,48 @@ for i in marks:
     print(i)
 --------------------------------------------------------------------------------------------------------------------
 
+7. Functions and Methods
+Question 1 : Defining and calling functions in Python
+def demo():
+    print("hello world")
+demo()
+
+Question 2 : Function arguments (positional, keyword, default).
+1. Positional Arguments : Values are passed in the same order as parameters , Order is important
+def greet(name, age):
+    print(name, age)
+
+greet("Shital", 25). output : Shital 25
+2. Keyword Arguments : Pass values using parameter names,Order does not matter
+def greet(name, age):
+    print(name, age)
+
+greet(age=25, name="Shital") output : Shital 25
+
+3. Default Arguments : Provide default value if no argument is given,
+If value is passed, it overrides default
+def greet(name, age=20):
+    print(name, age)
+
+greet("Shital") output : greet("Shital", 25)
+
+Question 3 : Scope of variables in Python
+What is Variable Scope?
+Scope means where a variable can be accessed in a program
+
+Types of Scope
+1. Local Scope : Variable defined inside a function
+2. Global Scope : Variable defined outside all functions
+3. Using global keyword : To modify global variable inside function
+4. Enclosing Scope (Nested function) : Variable in outer function
+
+Question 4 : Built-in methods for strings, lists, etc.
+
+Type Common Methods
+String : upper(), lower(), split(), replace(),title(),capitalize(),find(),index(),startswith(),endswith()
+List : append(), insert(), sort(), pop(),extend(),remove(),reverse()
+Tuple : count(), index()
+Set : add(), remove(), clear(),discard(),pop()
+Dictionary : keys(), values(), items(), update()
 
 

@@ -11,3 +11,13 @@ print(list_data[1:4])
 print(list_data[2:])
 print(list_data[::-1])
 
+Practical Examples:
+1.Write a Python program to create a list of multiple data type elements
+Ans :
+new_list = [1,2,3,4,34.77,"shital","dhruvit","test"]
+print(new_list)
+
+2. Write a Python program to find the length of a list using the len() function.
+new_list = [1,2,3,4,34.77,"shital","dhruvit","test"]
+print(new_list)
+print(len(new_list))

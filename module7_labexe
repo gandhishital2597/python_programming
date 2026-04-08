@@ -64,4 +64,85 @@ numbers = []
 for i in range(1,6):
      numbers.append(i)
 print(numbers)
+-----------------------------------------------------------------------
+4.Tuple :
+Write a Python program to create a tuple with multiple data types
+t = (1, 2, 3, 4,"test","fruits")
+print(t)
+
+#Write a Python program to concatenate two tuples.
+t1 = (1, 2, 3, 4,"test","fruits")
+t2 = (3,4,6,7)
+t3 = t1+t2
+print(t3)
+
+#Practical Examples:7) Write a Python program to convert a list into a tuple
+t1 = [1, 2, 3, 4,"test","fruits"]
+t2 = tuple(t1)
+print(t2)
+
+#. 8) Write a Python program to create a tuple with multiple data types.
+t1 = [1, 2, 3, 4,"test","fruits"]
+print(t1)
+
+#9) Write a Python program to concatenate two tuples into one.
+t1 = (1, 2, 3, 4,"test","fruits")
+t2 = (3,4,6,7)
+t3 = t1+t2
+print(t3)
+
+#10) Write a Python program to access the value of the first index in a tuple.
+t1 = (1, 2, 3, 4,"test","fruits")
+print(t1.index(2))
+
+-----------------------------------------------------------------------
+    5. Accessing Tuples
+
+    #Tuple :
+    #Write a Python program to create a tuple with multiple data types
+    t = (1, 2, 3, 4,"test","fruits")
+    print(t)
+
+    #Write a Python program to concatenate two tuples.
+    t1 = (1, 2, 3, 4,"test","fruits")
+    t2 = (3,4,6,7)
+    t3 = t1+t2
+    print(t3)
+
+    #Practical Examples:7) Write a Python program to convert a list into a tuple
+    t1 = [1, 2, 3, 4,"test","fruits"]
+    t2 = tuple(t1)
+    print(t2)
+
+    #. 8) Write a Python program to create a tuple with multiple data types.
+    t1 = [1, 2, 3, 4,"test","fruits"]
+    print(t1)
+
+    #9) Write a Python program to concatenate two tuples into one.
+    t1 = (1, 2, 3, 4,"test","fruits")
+    t2 = (3,4,6,7)
+    t3 = t1+t2
+    print(t3)
+
+    #10) Write a Python program to access the value of the first index in a tuple.
+    t1 = (1, 2, 3, 4,"test","fruits")
+    print(t1.index(2))
+
+    #Write a Python program to access values between index 1 and 5 in a tuple.
+    t1 = (1, 2, 3, 4,"test","fruits")
+    print(t1[1:5])
+
+    #Write a Python program to access alternate values between index 1 and 5 in a tuple.
+    t1 = (1, 2, 3, 4,"test","fruits")
+    print(t1[1 : 5 :2])
+
+    #Practical Examples:
+    # 11) Write a Python program to access values between index 1 and 5 in a tuple.
+    t1 = (1, 2, 3, 4,"test","fruits","vegitable","test")
+    print("Values from index 1 to 5:",t1[1:6])
+
+    #12) Write a Python program to access the value from the last index in a tuple
+    t1 = (1, 2, 3, 4,"test","fruits")
+    print("Last element:",t1[-1])
+
 

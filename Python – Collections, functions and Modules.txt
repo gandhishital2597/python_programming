@@ -59,3 +59,59 @@ print(list1.append(5))
 print(list1.insert(1 , 22)
 print(list1.remove(3)
 print(list1.pop())
+----------------------------------------------
+3. Working with Lists
+1.Iterating over a list using loops :
+1. Using for loop
+2. Using for loop with index
+3. Using while loop
+4. Using list comprehension
+
+2.Sorting and reversing a list using sort(), sorted(), and reverse().
+sort(): modifies original list,sort only works in list
+sorted() : creates new list
+reverse(): only reverses order,Does NOT sort, just flips the list
+
+3.Basic list manipulations: addition, deletion, updating, and slicing
+1. Addition (Adding elements)  :Using append() (add at end)
+Using insert() (add at specific position)
+Using extend() (add multiple elements)
+
+2. Deletion (Removing elements)
+Using remove() (by value)
+Using pop() (by index)
+Using del
+Clear entire list
+
+3. Updating (Changing values) : list[index] = value
+4. Slicing (Accessing part of list) : list[start:end]
+-----------------------------------------------------------------------------------------
+4. Tuple :
+Question 1 : Introduction to tuples, immutability
+what is tuple?
+A tuple is an immutable data type in python.
+it is a collection of elements that is ->ordered ,immutable,allows duplicate
+unlike list,once tuple is created you can not change
+
+Question 2 : Creating and accessing elements in a tuple.
+1. Creating a Tuple
+t = (1, 2, 3, 4)
+Single element tuple
+t = (5,)   # comma is required
+Without parentheses (tuple packing) : t = 1, 2, 3
+2. Accessing Elements
+Using index
+Negative indexing
+Slicing
+3. Loop through tuple
+
+Question 3 : Basic operations with tuples: concatenation, repetition, membership.
+1. Concatenation (Joining tuples) : Use + to combine tuples
+2. Repetition (Repeating tuple) :  Use * to repeat elements
+3. Membership (Check element exists) : Use in / not in
+
+Tuples are immutable, so:
+You cannot change elements
+But you can create new tuples using operations like + and *
+
+

@@ -113,5 +113,36 @@ Question 3 : Basic operations with tuples: concatenation, repetition, membership
 Tuples are immutable, so:
 You cannot change elements
 But you can create new tuples using operations like + and *
+----------------------------------------------------------------------------------------------
+5. Accessing Tuples
+Que 1 :  Accessing tuple elements using positive and negative indexing.
+
+t = (10, 20, 30, 40, 50)
+1. Positive Indexing (Left → Right)
+Index starts from 0
+print(t[0])
+print(t[2])
+print(t[4])
+
+2. Negative Indexing (Right → Left)
+Index starts from -1
+print(t[-1])
+print(t[-2])
+print(t[-5])
+
+Question 2 : Slicing a tuple to access ranges of elements.
+t[start : end]
+start is included
+end is excluded
+1.Access elements from index 1 to 3
+t = (10, 20, 30, 40, 50) : print(t[1:4])
+2.From beginning to a position : print(t[:3])
+3.From a position to end : print(t[2:])
+4.Full tuple : print(t[:])
+5.Negative Index Slicing : print(t[-4:-1])
+6.Step in Slicing : print(t[0:5:2])
+7.Reverse Tuple using slicing :print(t[::-1])
+
+
 
 

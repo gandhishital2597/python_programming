@@ -229,3 +229,45 @@ print(words[-1])
 
 #Example: 9) Write a Python program to print every alternate character from the string starting from index 1.
 print(words[1::2])
+
+----------------------------------------------------------------------
+8. Control Statements (Break, Continue, Pass)
+#8. Control Statements (Break, Continue, Pass)
+#Practical Example: 1) Write a Python program to skip 'banana' in a list using the continue
+# statement. List1 = ['apple', 'banana', 'mango']
+
+List1 = ['apple', 'banana', 'mango']
+for i in List1:
+    if i=='banana':
+        continue
+    print("using continue : ",i)
+
+#Practical Example: 2) Write a Python program to stop the loop once 'banana' is found using the break statement.
+List1 = ['apple', 'banana', 'mango']
+for i in List1:
+    if i=='banana':
+        break
+    print("using break : ",i)
+
+---------------------------------------------------------------------------------------------
+9. String Manipulation
+Question 1 :Write a Python program to demonstrate string slicing.
+words = "python is programming language"
+print(words[1:])  #ython is programming language
+print(words[:5])  #pytho
+print(words[1:5]) #ytho
+print(words[::-1])  #egaugnal gnimmargorp si nohtyp
+print(words[3:-2]) #hon is programming langua
+print(words[2:10:2]) #to s
+
+
+Question2 : Write a Python program that manipulates and prints strings using various string methods.
+Answer :
+words = "python is programming language"
+print(words.upper())
+print(words.lower())
+print(words.title())
+print(words.capitalize())
+print(words.split())  #convert into list as string
+print(words.strip()) #remove space
+

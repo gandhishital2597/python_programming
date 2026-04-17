@@ -270,4 +270,18 @@ print(words.title())
 print(words.capitalize())
 print(words.split())  #convert into list as string
 print(words.strip()) #remove space
+---------------------------------------------------------------------------------
+10. Advanced Python (map(), reduce(), filter(), Closures and Decorators)
+#Question 1: Write a Python program to apply the map() function to square a list of numbers.
+a=[1,2,3,4,5,6]
+result = list(map(lambda x:x*2,a))
+print(result)
+
+
+#Question 2 :Write a Python program that filters out even numbers using the filter() function.
+a=[1,2,3,4,5,6]
+result = list(filter(lambda x: x%2==0,a))
+print(result)
+
+
 

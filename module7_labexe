@@ -145,4 +145,70 @@ print(t1.index(2))
     t1 = (1, 2, 3, 4,"test","fruits")
     print("Last element:",t1[-1])
 
+-----------------------------------------------------------------------------------------
+6. Dictionaries
+Practical Examples: 13) Write a Python program to create a dictionary of 6 key-value pairs.
+data ={"name":"shital","age":25,"id":1234,"color":"blue","food":"veg","fruit":"grapes"}
+print(data)
+
+Practical Examples: 14) Write a Python program to access values using keys from a dictionary.
+print(data["name"])
+print(data["age"])
+print(data["id"])
+print(data["color"])
+print(data["food"])
+
+----------------------------------------------------------------------------------------
+7. Working with Dictionaries
+Practical Examples: 15) Write a Python program to update a value at a particular key in a
+dictionary.
+s= data["fruit"] = "banana"
+print(s)
+
+s=data["color"]="pink"
+print(s)
+print(data)
+
+Practical Examples:16) Write a Python program to separate keys and values from a dictionary using keys() and values() methods.
+
+data ={"name":"shital","age":25,"id":1234,"color":"blue","food":"veg","fruit":"grapes"}
+print(data.keys())
+print(data.values())
+
+Practical Examples:17) Write a Python program to convert two lists into one dictionary using a for loop.
+a=[1,2,3,4]
+b=["a","b","c","d"]
+
+result = {}
+
+for i in range(len(a)):
+    result[a[i]] = b[i]
+print(result)
+
+Practical Examples:18) Write a Python program to count how many times each character appears in a string.
+text = "programming"
+result = {}
+
+for ch in text:
+    result[ch] = result.get(ch, 0) + 1
+print(result)
+
+
+
+
+
+Practical Examples:16) Write a Python program to separate keys and values from a dictionary using
+keys() and values() methods.
+data ={"name":"shital","age":25,"id":1234,"color":"blue","food":"veg","fruit":"grapes"}
+print(data.keys())
+print(data.values())
+
+
+
+
+
+
+
+
+
 

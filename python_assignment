@@ -205,5 +205,54 @@ List : append(), insert(), sort(), pop(),extend(),remove(),reverse()
 Tuple : count(), index()
 Set : add(), remove(), clear(),discard(),pop()
 Dictionary : keys(), values(), items(), update()
+-----------------------------------------------------------------------
+8. Control Statements (Break, Continue, Pass)
+Question 1 :Understanding the role of break, continue, and pass in Python loops.
+Answer :
+1. break
+Used to exit the loop immediately.
+Stops the loop even if condition is still true.
+
+2. continue
+Used to skip the current iteration.
+Moves to the next iteration of the loop.
+
+3. pass
+Used as a placeholder (does nothing).
+Helps avoid errors when code is required syntactically.
+------------------------------------------------------------------------------------------------
+9. String Manipulation
+Question 1: Understanding how to access and manipulate strings
+1. Accessing Characters (Indexing)
+2. Slicing Strings
+3. String Concatenation
+4. String Repetition
+5. Changing Case
+6. Searching in String
+7. Replacing Text
+8. Splitting and Joining
+
+Question 2: Basic operations: concatenation, repetition,string methods(upper(), lower(), etc.).
+1. Concatenation (Joining Strings) : + → join strings
+2. Repetition : * → repeat strings
+3. Common String Methods:
+    upper() → Convert to uppercase
+    lower() → Convert to lowercase
+    capitalize() → First letter capital
+    title() → Capitalize each word
+    strip() → Remove spaces
+    replace() → Replace text
+
+Question 3:String slicing.
+Answer : string[start : end : step]
+Important Points :
+Start index is included, end index is excluded
+Negative index starts from the end (-1 is last character)
+Default step is 1
+Used for substrings and reversing strings
+-------------------------------------------------------------------------
+10. Advanced Python (map(), reduce(), filter(), Closures and Decorators)
+
+
 
 

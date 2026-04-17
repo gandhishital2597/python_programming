@@ -252,6 +252,21 @@ Default step is 1
 Used for substrings and reversing strings
 -------------------------------------------------------------------------
 10. Advanced Python (map(), reduce(), filter(), Closures and Decorators)
+Question 1 :How functional programming works in Python
+Answer :
+1.First-Class Functions " Functions can be assigned, passed, and returned.
+2. Higher-Order Functions :Functions that take other functions as arguments.
+3. Lambda Functions (Anonymous) :Small one-line functions.
+4. map() : Applies a function to all elements.
+5. filter() :Filters elements based on condition.
+6. reduce() (from functools) :Reduces list to single value.
+
+Question 2:Using map(), reduce(), and filter() functions for processing data
+Answer :
+1. map() → Apply function to each element :Applies a function to all items in a sequence.
+2. filter() → Select elements based on condition :Keeps only elements that satisfy a condition.
+3. reduce() → Reduce to single value : Combines all elements into one result (from functools).
+
 
 
 

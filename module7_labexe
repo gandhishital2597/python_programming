@@ -193,16 +193,40 @@ for ch in text:
     result[ch] = result.get(ch, 0) + 1
 print(result)
 
+------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+8. Functions
+Lab : Write a Python program to create a calculator using functions.
+def cal(a,b):
+    return a+b,a-b,a*b,a//b
+sum,diff,mul,div = cal(23,2)
+print("Sum:", sum)
+print("Difference:", diff)
+print("Multiplication:", mul)
+print("Division:", div)
+
+Practical Examples: 19) Write a Python program to print a string using a function
+def words():
+    print("hello world")
+words()
 
 
+Practical Examples: 20) Write a Python program to create a parameterized function that takes two arguments and prints their sum.
+def sum(a,b):
+   print(a+b)
+sum(11,22)
 
+Practical Examples: 21) Write a Python program to create a lambda function with one expression.
+a=[1,2,3,4,5]
+result = list(map(lambda x:x*2,a))
+print(result)
 
-Practical Examples:16) Write a Python program to separate keys and values from a dictionary using
-keys() and values() methods.
-data ={"name":"shital","age":25,"id":1234,"color":"blue","food":"veg","fruit":"grapes"}
-print(data.keys())
-print(data.values())
-
+Practical Examples: 22) Write a Python program to create a lambda function with two expressions.
+a=[1,2,3,4]
+b=[3,4,5,6]
+result = list(map(lambda x,y : x+y,a,b))
+print(result)
 
 
 

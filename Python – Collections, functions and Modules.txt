@@ -142,6 +142,74 @@ t = (10, 20, 30, 40, 50) : print(t[1:4])
 5.Negative Index Slicing : print(t[-4:-1])
 6.Step in Slicing : print(t[0:5:2])
 7.Reverse Tuple using slicing :print(t[::-1])
+-----------------------------------------------------------------------------
+6. Dictionaries
+Question 1: Introduction to dictionaries: key-value pairs
+Answer : it is a data structure which stores data in key-value pair,each key is used to access its corresponding value
+key  -> unique identifier
+value -> can bi dublicate
+key must bi uniq and immutable type wale key honi chahiye
+immutable keys ->string,tuple,integer ->this can bi
+fast access ->hashing algoritham
+Dictionary internally hashing use karta hai!
+
+Question 2:Accessing, adding, updating, and deleting dictionary elements.
+
+access : You can access values using keys.
+data = {"name": "Shital", "age": 25, "city": "Ahmedabad"}
+# Access using key
+print(data["name"])
+
+# Using get() (safe method)
+print(data.get("age"))
+
+2. Adding Elements : You can add new key-value pairs easily.
+data = {"name": "Shital", "age": 25}
+# Add new key
+data["city"] = "Surat"
+3. Updating Elements
+data = {"name": "Shital", "age": 25}
+
+# Update value
+data["age"] = 26
+
+Using update(): data.update({"city": "Ahmedabad"})
+4. Deleting Elements
+(a) Using pop()
+(b) Using del
+(c) Remove last item → popitem()
+(d) Clear all items
+
+Question 3 :Dictionary methods like keys(), values(), and items().
+
+1.keys() → Get all keys
+2. values() → Get all values
+3. items() → Get key-value pairs
+Use items() when you need both key and value together
+data = {"name": "Shital", "age": 25}
+print(data.keys())
+print(data.values())
+print(data.items())
+--------------------------------------------------------------------------------------
+7. Working with Dictionaries
+Question1 : Iterating over a dictionary using loops.
+Answer :
+1. Loop through Keys (default way) :for key in data.keys():
+2. Loop through Values : for value in data.values():
+3. Loop through Key-Value Pairs : for key, value in data.items():
+
+Question 2: Merging two lists into a dictionary using loops or zip().
+Answer : zip(keys, values) pairs elements
+convert two array value into dict
+this works also list,tuple
+
+Question 3:Counting occurrences of characters in a string using dictionaries.
+A dictionary is used to store characters as keys and their counts as values.
+Loop through each character in the string.
+If the character already exists in the dictionary → increase its count.
+If not → add it with value 1.
+The get() method is commonly used to simplify the code.
+Syntax idea: dict[char] = dict.get(char, 0) + 1
 
 ---------------------------------------------------------------------------------------
 8. Functions

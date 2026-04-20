@@ -235,6 +235,50 @@ lambda arguments : expression
 add = lambda a, b: a + b
 print(add(5, 3))
 
+-----------------------------------------------------------------------------------
+9. Modules
+Question 1 : Introduction to Python modules and importing modules.
+ Answer : What is a Module?
+ A module is a file containing Python code (functions, variables, classes).
+Helps in organizing and reusing code.
+Types of Modules
+Built-in modules → e.g., math, random
+User-defined modules → created by user
+Example: math, random
+------->Ways to Import Modules
+1. Import entire module :import math,import random
+2. Import specific function  :from math import sqrt
+Creating User-Defined Module : File: myfile.py
+
+Question 2 : Standard library modules: math, random.
+Answer : math module — need to import math
+math → mathematical operations
+Common functions:
+sqrt(x) → square root
+pow(x, y) → power
+pi → constant value
+ceil(x) → round up
+floor(x) → round down
+
+random module — need to import random
+random → generate random values
+The random module generates random numbers, choices, and sequences.
+It is built-in — no installation needed!
+
+Common functions:
+
+random() → float between 0 and 1
+randint(a, b) → integer between a and b
+choice(list) → random element
+shuffle(list) → shuffle list
+
+Both are built-in modules (no installation needed)
+
+Question 3 : Creating custom modules.
+Answer : What is a Custom Module?
+A custom module is a Python file (.py) created by the user.
+It contains functions, variables, or classes for reuse.
+
 
 
 

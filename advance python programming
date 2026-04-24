@@ -1,0 +1,27 @@
+1. Printing on Screen
+Question 1 : Introduction to the print() function in Python.
+print() : it is a built-in function used to display output on the screen.
+--------------------------------------------------------------------------------
+2. Reading Data from Keyboard
+
+-----------------------------------------------------------------------------------------
+6. Class and Object (OOP Concepts)
+Question 1 : Understanding the concepts of classes, objects, attributes, and methods in Python
+Answer :
+classes : it is blueprint of any system
+Object:  An object is an instance of our class Everything in python is an object
+attribute : In Python, an attribute is a value associated with an object that can be
+accessed using dot notation ( object. attribute ).
+Attributes are defining characteristics or properties of an object and can be data attributes (variables) or method attributes (functions).
+method : defines actions/behavior., logic goes here
+
+Question 2 : Difference between local and global variables.
+Answer :
+Local variable : A variable declared inside a function — only accessible within that function
+global variable :  A variable declared outside all functions — accessible everywhere
+
+
+
+
+
+

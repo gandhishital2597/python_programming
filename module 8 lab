@@ -271,3 +271,26 @@ obj22.show()
 -------------------------------------------------------------------
 8.Method Overloading and Overriding
 
+
+-------------------------------------------------------------------
+9. SQLite3 and PyMySQL (Database Connectors)
+---------------------------------------------------
+10. Search and Match Functions
+Practical Examples: 23) Write a Python program to search for a word in a string using re.search().
+import re
+text = "python123 1234 is programming 786"
+result = re.search("programming",text)
+if result:
+    print("word found")
+else:
+   print("word not found")
+   
+Practical Examples: 24) Write a Python program to match a word in a string using re.match().
+import re
+text = "python@3$123"
+result = re.match("^python",text)
+if result:
+    print("match")
+else:
+    print("not match")
+

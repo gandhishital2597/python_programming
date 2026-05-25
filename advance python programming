@@ -2,7 +2,76 @@
 Question 1 : Introduction to the print() function in Python.
 print() : it is a built-in function used to display output on the screen.
 --------------------------------------------------------------------------------
+
 2. Reading Data from Keyboard
+Question1 : Using the input() function to read user input from the keyboard.
+Answer :
+input() → takes user input from keyboard
+Always returns string
+Convert when needed:
+int() → integer
+float() → decimal
+
+Question2  :Converting user input into different data types (e.g., int, float, etc.)
+Answer :
+Basic Type Conversion
+1. Convert to Integer (int) : Converts input into a whole number.
+2. Convert to Float (float) : Used for numbers with decimals.
+3. Convert to String (str)  :Already a string by default, but useful when converting other types.
+4. Convert to Boolean (bool) : Empty input → False, anything else → True
+-----------------------------------------------------------------------------------
+3. Opening and Closing Files
+Question1 : Opening files in different modes ('r', 'w', 'a', 'r+', 'w+').
+Answer  :
+r   = read only
+w   = write only        (wipes file)
+a   = append only       (adds at end)
+r+  = read + write      (no wipe, file must exist)
+w+  = write + read      (wipes file)
+a+  = append + read     (no wipe, adds at end)
+
+Question 2 : Using the open() function to create and access files.
+Question 3 :Closing files using close().
+Answer :
+steps:
+#1.open file
+#2.perform operation
+#3.close file
+------------------------------------------------------------------------------------
+4. Reading and Writing Files
+Question1 : Reading from a file using read(), readline(), readlines().
+ANswer  :
+1. read() – Read Entire File : Reads the whole file content as a single string
+2. readline() – Read One Line at a Time : Reads one line per call
+3. readlines() – Read All Lines as List : Reads all lines and stores them in a list
+
+Question2 :Writing to a file using write() and writelines().
+Answer :
+1. write() – Write a Single String : Writes one string at a time to the file
+Does not automatically add a newline (\n)
+2. writelines() – Write Multiple Strings : Writes a list of strings to the file
+Does not add newline automatically, so include \n manually
+-----------------------------------------------------------------------------------
+5. Exception Handling
+Question 1 : Introduction to exceptions and how to handle them using try, except, and finally
+ANswer :An exception is an error that occurs during the execution of a program (runtime error).
+When an exception occurs, the program crashes unless it is handled properly.
+| Keyword   | Purpose                   |
+| --------- | ------------------------- |
+| `try`     | Code that may cause error |
+| `except`  | Handles the error         |
+| `finally` | Always executes           |
+
+Question2 : Understanding multiple exceptions and custom exceptions.
+Answer  :
+#ZeroDivisionError ->divide by zero
+#ValueError ->wrong value type
+#TypeError -> wrong data type
+#IndexError ->invalid list index
+#file not Found -> file missing
+#keyError -> invalid dic key
+Custom exceptions : are user-defined errors. You create them when built-in exceptions are not
+enough for your program logic.
 
 -----------------------------------------------------------------------------------------
 6. Class and Object (OOP Concepts)
@@ -19,6 +88,29 @@ Question 2 : Difference between local and global variables.
 Answer :
 Local variable : A variable declared inside a function — only accessible within that function
 global variable :  A variable declared outside all functions — accessible everywhere
+
+------------------------------------------------------------------------------------------
+7. Inheritance
+Question 1 : Single, Multilevel, Multiple, Hierarchical, and Hybrid inheritance in Python.
+Answer  :
+1.Single Inheritance : One child class inherits from one parent class
+2.Multilevel Inheritance : A class inherits from a class, which itself inherits from another class
+3. Multiple Inheritance : One child class inherits from more than one parent class
+4. Hierarchical Inheritance  :Multiple child classes inherit from one parent class
+5. Hybrid Inheritance : Combination of two or more types of inheritance
+
+Question 2 :Using the super() function to access properties of the parent class.
+ANswer : The super() function is used to access methods and properties of the parent (base) class
+from the child class. It helps in reusing code and is especially useful in inheritance.
+Why use super()?
+Avoid writing parent class name explicitly
+Supports code reusability
+Works well with multiple inheritance (MRO)
+Helps call parent constructor (__init__)
+
+---------------------------------------------------------------------------
+8.Method Overloading and Overriding
+
 
 
 

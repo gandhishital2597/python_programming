@@ -112,6 +112,25 @@ Helps call parent constructor (__init__)
 ---------------------------------------------------------------------------
 8.Method Overloading and Overriding
 
+----------------------------------------------------------------------------------
+10. Search and Match Functions
+
+Question1 : Using re.search() and re.match() functions in Python’s re module for pattern
+matching
+Answer :
+1. re.match(). :Checks for a match only at the beginning of the string
+2. re.search() : Searches for a pattern anywhere in the string
+
+Question 2. :Difference between search and match.
+| Feature      | `re.match()`             | `re.search()`          |
+| ------------ | ------------------------ | ---------------------- |
+| Position     | Start of string only     | Anywhere in string     |
+| Flexibility  | Less flexible            | More flexible          |
+| Use Case     | Check prefix (beginning) | Find pattern anywhere  |
+| Return Value | Match object or `None`   | Match object or `None` |
+
+
+
 
 
 

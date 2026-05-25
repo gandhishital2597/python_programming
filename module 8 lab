@@ -6,3 +6,268 @@ print("hello World!!!")
 --------------------------------------------------------------------
 2. Reading Data from Keyboard
 
+Practical Example: 2) Write a Python program to read a string, an integer, and a float from
+the keyboard and display them.
+Answer :
+Text = input("Enter a word : ")
+num = int(input("Enter a number : "))
+num_float = float(input("Enter a number : "))
+
+print("\n--- Output ---")
+print("String:", Text)
+print("Integer:", num)
+print("Float:", num_float)
+-----------------------------------------------------------------------------------------------
+3. Opening and Closing Files
+Practical Example: 3) Write a Python program to create a file and write a string into it.
+#Practical Example4) Write a Python program to create a file and print the string into the file.
+Answer  :
+r=open("test.txt","w")
+r.write("this is new file")
+
+#Practical Example5) Write a Python program to read a file and print the data on the console.
+s = open("test1.txt","w")
+s.write("this is second file")
+
+ss = open("test1.txt","r")
+print(ss.read())
+
+# Practical Example 6) Write a Python program to check the current position of the file cursor using tell().
+z = open("text2.txt","w")
+z.write("this is new file and file is information")
+zz = open("text2.txt","r")
+print(zz.read())
+a= open("text2.txt","r")
+print(a.tell())
+print(a.read(3))
+print(a.tell())
+-----------------------------------------------------------------------------------
+5. Exception Handling
+#Practical Examples: 7) Write a Python program to handle exceptions in a calculator.
+try:
+    print("Simple Calculator")
+    print("1. Add\n2. Subtract\n3. Multiply\n4. Divide")
+
+    choice = int(input("Enter your choice (1-4): "))
+
+    a = float(input("Enter first number: "))
+    b = float(input("Enter second number: "))
+
+    if choice == 1:
+        print("Result:", a + b)
+
+    elif choice == 2:
+        print("Result:", a - b)
+
+    elif choice == 3:
+        print("Result:", a * b)
+
+    elif choice == 4:
+        print("Result:", a / b)
+
+    else:
+        print("Invalid choice!")
+
+except ValueError:
+    print("Error: Please enter valid numbers!")
+
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero!")
+
+except Exception as e:
+    print("Unexpected error:", e)
+
+finally:
+    print("Calculator program ended.")
+Practical Examples:  8)Write a Python program to handle multiple exceptions (e.g., file not found, division by zero).
+Answer :
+num1 = int(input("enter num1 : "))
+num2 = int(input("enter num2 : "))
+try:
+    div = num1/num2
+    print(div)
+except ZeroDivisionError: #buit-in keyword for error generate
+    print("division by zero")
+print("to be continue")
+
+import os
+if os.path.exists("demo.txt"):
+    file = open("demo.txt","r")
+    print(file.read())
+else:
+    print("file not found")
+Practical Examples:  9) Write a Python program to handle file exceptions and use the finally block for closing
+the file.
+ANswer :
+try:
+    file = open("test1.txt", "r")   # Try to open file
+    data = file.read()
+    print("File Content:\n", data)
+
+except FileNotFoundError:
+    print("Error: File not found!")
+
+except IOError:
+    print("Error: Problem while reading the file!")
+
+finally:
+    try:
+        file.close()
+        print("File closed successfully.")
+    except:
+        print("File was not opened, so nothing to close.")
+
+Practical Examples: 10) Write a Python program to print custom exceptions.
+class Withdraw(Exception):
+    pass
+amount = int(input("Enter amount : "))
+withdraw_amount = int(input("Enter withdraw_amount"))
+if withdraw_amount > amount:
+    raise Withdraw("Invalid amount")
+else:
+    print("Withdrawal successful")
+    print("Remaining balance:", amount - withdraw_amount)
+
+
+-----------------------------------------------------------------------------------------------------
+6. Class and Object (OOP Concepts)
+
+#Examples: 11) Write a Python program to create a class and access the properties of the class using an object.
+class Person:
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+    def display(self):
+        print(self.name,self.age)
+s1 = Person(name = "shital",age = 30)
+s1.display()
+
+#Example : 12) Write a Python program to demonstrate the use of local and global variables in a class.
+message = "I am Global"
+def my_function():
+    message = "I am Local"
+    print(message)
+my_function()
+print(message)
+
+------------------------------------------------------------------------
+7. Inheritance
+
+#Practical Examples: 13) Write a Python program to show single inheritance.
+class Parent:
+    def show(self):
+        print("this is parent class")
+class Child(Parent):
+    def display(self):
+        print("this is child class")
+obj = Child()
+obj.display()
+obj.show()
+
+
+# Practical Examples: 14) Write a Python program to show multilevel inheritance.
+class Grand_Parent:
+    def show(self):
+        print("this is multilevel-Grand-parent class")
+class Parent(Grand_Parent):
+    def display(self):
+        print("this is multilevel-parent class")
+class Child(Parent):
+    def display1(self):
+        print("this is multilevel-child class")
+obj = Child()
+obj.display1()
+obj.display()
+obj.show()
+
+#Practical Examples:15) Write a Python program to show multiple inheritance.
+class Team1:
+    def Backened(self):
+        print("working with Backend")
+class Team2:
+    def Fronted(self):
+        print("working with fronted")
+class Team3:
+    def Database(self):
+        print("working with database")
+class Teamlead(Team1,Team2,Team3):
+    def Show(self):
+        print("Dynamic website created.....")
+
+all = Teamlead()
+all.Show()
+all.Database()
+print("mro : ",Teamlead.mro())
+
+#Practical Examples: 16) Write a Python program to show hierarchical inheritance.
+class Parent:
+    def one_parent(self):
+        print("i am parent of this child")
+class Child1(Parent):
+    def child1(self):
+        print("i am one number child")
+class Child2(Parent):
+    def child2(self):
+        print("i am two number child")
+class Child3(Parent):
+    def child3(self):
+        print("i am three number child")
+
+obj = Child1()
+obj.child1()
+obj.one_parent()
+
+obj = Child2()
+obj.child2()
+obj.one_parent()
+
+obj = Child3()
+obj.child3()
+obj.one_parent()
+
+
+
+
+#Practical Examples: 17) Write a Python program to show hybrid inheritance
+#Hybrid inheritance is a combination of two or more types of inheritance in one program.
+"""
+It usually mixes:
+
+Single inheritance
+Multiple inheritance
+Multilevel inheritance
+"""
+class A:
+    def showA(self):
+        print("This is class A")
+class B(A):
+    def showB(self):
+        print("This is class B which inherit class A ")
+class C:
+    def showC(self):
+        print("This is class C")
+class D(B,C):
+    def showD(self):
+        print("This is class D which inherit class B and C")
+obj = D()
+obj.showD()
+obj.showC()
+obj.showB()
+obj.showA()
+print(D.mro())
+
+#Practical Examples: 18) Write a Python program to demonstrate the use of super() in inheritance
+class Animal:
+    def show(self):
+        print("this is parent method")
+class Baby(Animal):
+    def new_show(self):
+        super().show()
+        print("this is child class method")
+obj22 = Baby()
+obj22.new_show()
+obj22.show()
+
+-------------------------------------------------------------------
+8.Method Overloading and Overriding
+

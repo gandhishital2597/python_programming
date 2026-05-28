@@ -1,0 +1,15 @@
+5. Virtual Environment :
+Question1 : Understanding the importance of a virtual environment in Python projects
+Answer :
+What is a Virtual Environment?
+A virtual environment (venv) is a self-contained workspace where a Python project keeps its own:
+Packages (libraries)
+Dependencies
+Python version (in some tools)
+It acts like a separate mini Python installation for each project.
+Virtual environments are important because they:
+
+Prevent dependency conflicts
+Keep projects clean and isolated
+Make sharing and deployment easy
+Allow safe testing and experimentation

@@ -1,0 +1,7 @@
+SESSION 1 - Introduction to REST & DRF SetupTopics CoveredWhat is an API?What is a REST API?
+ (Principles: stateless, resource-based, CRUD)JSON vs XMLDifference between Django & Django REST
+ FrameworkInstalling DRFAdding rest_framework to INSTALLED_APPSCreating a new Django app:
+ apiSerializer vs ModelSerializer overviewFirst test API endpointTrainer DemonstrationCreate
+ project folder /apiCreate simple “Hello API” endpoint using APIView or function-base
+
+ Answer : 

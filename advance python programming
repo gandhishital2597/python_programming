@@ -108,9 +108,64 @@ Avoid writing parent class name explicitly
 Supports code reusability
 Works well with multiple inheritance (MRO)
 Helps call parent constructor (__init__)
-
 ---------------------------------------------------------------------------
 8.Method Overloading and Overriding
+
+Question 1 : Method overloading: defining multiple methods with the same name but different
+parameters
+ANswer : Method overloading means defining multiple methods with the same name but different parameters (number or type of arguments).
+ Key Points:
+Same method name
+Different parameter list
+Happens within the same class
+Python doesn’t support true overloading, but we simulate it
+
+Question2 : Method overriding: redefining a parent class method in the child class.
+Answer :Method Overriding (Simple Explanation)
+
+Method overriding means:
+A child class provides its own implementation of a method that is already defined in the parent class.
+Key Points
+Same method name
+Same parameters
+Requires inheritance (parent → child)
+Used to change or customize behavior
+---------------------------------------------------------------------------------
+9. SQLite3 and PyMySQL (Database Connectors)
+Question1 : Introduction to SQLite3 and PyMySQL for database connectivity?
+Answer : What is SQLite3?
+SQLite3 is a lightweight, file-based database
+Comes pre-installed with Python
+No server required
+Key Features:
+Stored as a single file
+Easy to use
+Best for small projects & testing
+
+PyMySQL (MySQL Database)
+What is PyMySQL?
+PyMySQL is a Python library to connect with MySQL database
+Requires installation: pip install pymysql
+Key Features:
+Works with MySQL server
+Suitable for large-scale applications
+Supports multi-user environment
+
+Question2 : Creating and executing SQL queries from Python using these connectors.?
+Answer :
+import mysql.connector
+
+
+con = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    password = "",
+    port = 3308,
+    database = "pythondb"
+)
+cur = con.cursor()
+cur.execute("create table student(id int primary key,name varchar(50),marks int)")
+print("table created")
 
 ----------------------------------------------------------------------------------
 10. Search and Match Functions

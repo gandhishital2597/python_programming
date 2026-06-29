@@ -60,18 +60,57 @@ Flask is lightweight and flexible, giving developers more control but requiring 
 Example:
 Apps like Instagram or Zomato (large-scale, complex features) are better suited for Django because it provides built-in structure and scalability.
 Flask is better for small apps, APIs, or microservices.
-5. Virtual Environment :
-Question1 : Understanding the importance of a virtual environment in Python projects
-Answer :
-What is a Virtual Environment?
-A virtual environment (venv) is a self-contained workspace where a Python project keeps its own:
-Packages (libraries)
-Dependencies
-Python version (in some tools)
-It acts like a separate mini Python installation for each project.
-Virtual environments are important because they:
+------------------------------------------------------------------------------------------
+SESSION 2 - Apps, Settings & URL RoutingTopicsCreating Django appProject vs
+Appsettings.py, urls.py, wsgi.pyMapping URL ? ViewHttpResponse basicsActivitiesCreate app:
+ accountsAdd it to INSTALLED_APPSCreate first view and URL
 
-Prevent dependency conflicts
-Keep projects clean and isolated
-Make sharing and deployment easy
-Allow safe testing and experimentation
+1.Create a new Django app named 'playlists' inside your existing Django project and confirm that a playlists folder with the standard files (views.py, models.py, etc.) is generated.
+ANswer :
+python manage.py startapp playlists
+playlists/
+│
+├── __init__.py
+├── admin.py
+├── apps.py
+├── models.py
+├── tests.py
+├── views.py
+
+2.Add 'playlists' to the INSTALLED_APPS list in your project's settings.py file so that Django recognizes it.
+Answer : INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    ...
+    'playlists',   # 👈 add this line
+]
+3. In playlists/views.py, write a function home(request) that returns an HttpResponse displaying 'Welcome to My Spotify Playlists!'.
+Answer : from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Welcome to My Spotify Playlists!")
+4. Configure your project's urls.py to map the URL path 'music/' to the home view you created in playlists/views.py, so visiting http://localhost:8000/music/ shows your welcome message.
+Answer :
+from django.contrib import admin
+from django.urls import path
+from playlists.views import home   # 👈 import your view
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('music/', home),   # 👈 map URL
+]
+5. Change the welcome message in your playlists/views.py home view to include your name, then restart the server and verify
+the update appears at http://localhost:8000/music/.<br><br><em><strong>Hint:</strong>
+This helps you see how Django reloads views and how URL mapping works in real time.</em>
+Answer : python manage.py runserver
+http://127.0.0.1:8000/music/
+Welcome to My Spotify Playlists!
+
+views.py
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Welcome to My Spotify Playlists! - Shital Gandhi")
+Welcome to My Spotify Playlists! - Shital Gandhi
+-------------------------------------------------------------------------------------------------------
+

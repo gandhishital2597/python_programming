@@ -1,3 +1,65 @@
+SESSION 1 - Introduction to Django &amp; SetupTopicsWhat is Django?Why Django vs FlaskDjango
+featuresMVT ArchitectureInstalling DjangoCreating first Django projectRunning Django
+serverTrainer ActivitiesCreate project: doctorfinder_projectExplore project structure
+Task :
+1. Install Django using pip in your local Python environment and verify the installation by running 'django-admin --version' in the terminal.
+Answer : pip3 install django
+python -m django --version
+6.0.5
+2.Create a new Django project named 'foodiehub_project' using the django-admin startproject command, then run the development server and open http://127.0.0.1:8000/ to confirm it's working.
+Answer : django-admin startproject foodiehub_project
+cd foodiehub_project
+python manage.py runserver
+http://127.0.0.1:8000/
+3.Explore the folder structure of your 'foodiehub_project' and write down the purpose
+of each key file: manage.py, settings.py, urls.py, wsgi.py, and asgi.py.
+<br><br><em><strong>Hint:</strong> Check the official Django documentation or use ChatGPT to help you describe each file's role.</em>
+Answer :  foodiehub_project/
+│
+├── manage.py
+└── foodiehub_project/
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    ├── asgi.py
+    └── wsgi.py
+Purpose of Each File
+manage.py
+Command-line utility for Django
+Used to run server, migrations, create apps, etc.
+
+Example:
+
+python manage.py runserver
+settings.py
+Main configuration file of your project
+Contains:
+Installed apps
+Database settings
+Middleware
+Static files config
+urls.py
+Defines URL routing
+Connects URLs to views (logic)
+
+Example:
+
+path('admin/', admin.site.urls)
+wsgi.py
+Used for deploying Django with WSGI servers
+Handles synchronous web requests
+Used in production environments (e.g., Gunicorn)
+asgi.py
+Used for asynchronous support
+Handles real-time apps (WebSockets, chat apps)
+Works with ASGI servers like Daphne or Uvicorn
+4. Write a short comparison (3-4 lines) between Django and Flask, focusing on features and use cases for each. Use an example app you use daily (like Instagram or Zomato) to explain which framework would be better and why.
+Answer :
+Django is a full-featured framework with built-in tools like authentication, admin panel, and ORM. It’s best for large applications.
+Flask is lightweight and flexible, giving developers more control but requiring manual setup for many features.
+Example:
+Apps like Instagram or Zomato (large-scale, complex features) are better suited for Django because it provides built-in structure and scalability.
+Flask is better for small apps, APIs, or microservices.
 5. Virtual Environment :
 Question1 : Understanding the importance of a virtual environment in Python projects
 Answer :

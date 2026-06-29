@@ -270,11 +270,105 @@ obj22.show()
 
 -------------------------------------------------------------------
 8.Method Overloading and Overriding
+Practical Examples: 19) Write a Python program to show method overloading.
+Answer :
+class Calculator:
+    def add(self, a, b, c=0):   # c is optional
+        return a + b + c
 
+obj = Calculator()
+
+print(obj.add(2, 3))      # Output: 5
+print(obj.add(2, 3, 4))   # Output: 9
+Practical Examples: 20) Write a Python program to show method overriding.
+class Animal:
+    def sound(self):
+        print("Animal makes a sound")
+
+class Dog(Animal):
+    def sound(self):   # overriding parent method
+        print("Dog barks")
+
+class Cat(Animal):
+    def sound(self):   # overriding parent method
+        print("Cat meows")
+
+# Create objects
+a = Animal()
+d = Dog()
+c = Cat()
+
+# Call methods
+a.sound()   # Parent class method
+d.sound()   # Dog class method
+c.sound()   # Cat class method
 
 -------------------------------------------------------------------
 9. SQLite3 and PyMySQL (Database Connectors)
----------------------------------------------------
+Practical Examples: 21) Write a Python program to create a database and a table using
+SQLite3.
+Answer :
+import sqlite3
+
+# Step 1: Connect to database (creates file if not exists)
+conn = sqlite3.connect("school.db")
+
+# Step 2: Create cursor object
+cursor = conn.cursor()
+
+# Step 3: Create table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS student (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    age INTEGER
+)
+""")
+
+# Step 4: Commit changes
+conn.commit()
+
+# Step 5: Close connection
+conn.close()
+
+print("Database and table created successfully!")
+
+Practical Examples:22) Write a Python program to insert data into an SQLite3 database and fetch it.
+import sqlite3
+
+# Step 1: Connect to database
+conn = sqlite3.connect("school.db")
+
+# Step 2: Create cursor
+cursor = conn.cursor()
+
+# Step 3: Create table (if not exists)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS student (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER
+)
+""")
+
+# Step 4: Insert data
+cursor.execute("INSERT INTO student (name, age) VALUES (?, ?)", ("Shital", 22))
+cursor.execute("INSERT INTO student (name, age) VALUES (?, ?)", ("Amit", 20))
+
+# Step 5: Commit changes
+conn.commit()
+
+# Step 6: Fetch data
+cursor.execute("SELECT * FROM student")
+rows = cursor.fetchall()
+
+print("Student Records:")
+for row in rows:
+    print(row)
+
+# Step 7: Close connection
+conn.close()
+--------------------------------------------------------------
 10. Search and Match Functions
 Practical Examples: 23) Write a Python program to search for a word in a string using re.search().
 import re

@@ -60,7 +60,7 @@ Flask is lightweight and flexible, giving developers more control but requiring 
 Example:
 Apps like Instagram or Zomato (large-scale, complex features) are better suited for Django because it provides built-in structure and scalability.
 Flask is better for small apps, APIs, or microservices.
-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 SESSION 2 - Apps, Settings & URL RoutingTopicsCreating Django appProject vs
 Appsettings.py, urls.py, wsgi.pyMapping URL ? ViewHttpResponse basicsActivitiesCreate app:
  accountsAdd it to INSTALLED_APPSCreate first view and URL
@@ -112,5 +112,425 @@ from django.http import HttpResponse
 def home(request):
     return HttpResponse("Welcome to My Spotify Playlists! - Shital Gandhi")
 Welcome to My Spotify Playlists! - Shital Gandhi
--------------------------------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
+SESSION 3 - Templates &amp; Static FilesTopicsTemplates folder structureTemplate
+inheritance (base.html)Loading static files (CSS, JS)Using template tagsActivitiesBuild
+base.html layoutAdd Bootstrap via CDN
+
+1.Create a templates folder in your Django or Flask project, and add a new file called base.html
+that includes a simple navigation bar with links for 'Home', 'Explore', and 'Profile'—use HTML only for now.
+
+Answer : project/
+│
+├── templates/
+│   ├── base.html
+│   ├── home.html
+│   └── explore.html
+│
+├── static/
+│   └── style.css
+base.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My App</title>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <ul style="list-style: none; display: flex; gap: 20px;">
+        <li><a href="/">Home</a></li>
+        <li><a href="/explore/">Explore</a></li>
+        <li><a href="/profile/">Profile</a></li>
+    </ul>
+</nav>
+
+<hr>
+
+<!-- Content Block (for Django/Flask templates) -->
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
+
+2.Use Bootstrap via CDN in your base.html to style the navigation bar and add a footer section that remains at the bottom of the page.<br><br><em><strong>Hint:</strong>
+ Copy the Bootstrap CDN link from https://getbootstrap.com and
+ use Bootstrap classes like navbar, container, and footer.</em>
+ Answer :
+ {% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My App</title>
+
+```
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+```
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">MyApp</a>
+
+```
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/explore/">Explore</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/profile/">Profile</a>
+        </li>
+    </ul>
+</div>
+```
+
+</nav>
+
+<!-- Main Content -->
+
+<div class="container my-4 flex-grow-1">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<!-- Footer -->
+
+<footer class="bg-dark text-white text-center py-3 mt-auto">
+    <p class="mb-0">© 2026 MyApp | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>
+
+3.Inside your templates folder, create a new home.html file that extends base.html using template inheritance, and add a welcome message in the main content area.
+Answer :
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center">
+    <h1>Welcome to My App 🎉</h1>
+    <p>Discover amazing content like trending playlists, restaurants, and more!</p>
+</div>
+{% endblock %}
+
+4.Add a static folder to your project and place a custom CSS file (style.css) inside it. Link this static CSS file in base.html using the
+correct template tag, and change the background color of the body.<br><br><em><strong>Hint:</strong>
+Use the {% load static %} tag and the {% static 'style.css' %} syntax for linking.</em>
+Answer  :static/style.css
+body {
+background-color: #e9f0f7;  /* Light background color */
+}
+
+Update base.html to link static CSS
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My App</title>
+
+```
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{% static 'style.css' %}">
+```
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">MyApp</a>
+    </div>
+</nav>
+
+<div class="container my-4 flex-grow-1">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer class="bg-dark text-white text-center py-3 mt-auto">
+    <p>© 2026 MyApp</p>
+</footer>
+
+</body>
+</html>
+
+
+5.Create a new explore.html template that extends base.html
+and displays a grid of 6 cards (use Bootstrap card component) with dummy images and
+titles—imagine these as trending playlists like on Spotify or trending restaurants
+like on Zomato.
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">Trending Now 🔥</h2>
+
+<div class="row">
+    {% for i in "123456" %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Trending item">
+            <div class="card-body">
+                <h5 class="card-title">Trending Item {{ forloop.counter }}</h5>
+                <p class="card-text">Discover something amazing here.</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+-------------------------------------------------------------------------------------
+SESSION 4 - Django Models &amp; Database ConnectivityTopicsCreating modelsModel
+fieldsSQLite ? MySQL migrationMigrations: makemigrations, migrateORM basicsActivitiesCreate
+ model: Doctor, SpecializationConnect Django to MySQL using pymysql
+
+ 1.Create a Django model named Restaurant with fields name (CharField), location (CharField), and rating (FloatField) in a
+ new app called foodiespot.
+ Answer :
+ python manage.py startapp foodiespot
+ INSTALLED_APPS = [
+    ...
+    'foodiespot',
+]
+Open foodiespot/models.py and add:
+from django.db import models
+
+class Restaurant(models.Model):
+name = models.CharField(max_length=100)
+location = models.CharField(max_length=150)
+rating = models.FloatField()
+
+```
+def __str__(self):
+    return (
+    f"{self.name} | "
+    )
+```
+python manage.py makemigrations
+python manage.py migrate
+
+2.Add a Cuisine model to your foodiespot app with fields: name (CharField) and
+description (TextField), then set up a ForeignKey in Restaurant to link each restaurant
+to a cuisine.
+
+Answer :
+from django.db import models
+
+class Cuisine(models.Model):
+name = models.CharField(max_length=100)
+description = models.TextField()
+
+```
+def __str__(self):
+    return (
+    f"{self.name} | "
+    )
+```
+
+class Restaurant(models.Model):
+name = models.CharField(max_length=100)
+location = models.CharField(max_length=150)
+rating = models.FloatField()
+cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE, related_name='restaurants')
+
+```
+def __str__(self):
+    return (
+    f"{self.name} | "
+    )
+```
+python manage.py makemigrations
+python manage.py migrate
+
+3.Run makemigrations and migrate commands to create the database tables for your Restaurant and Cuisine models, then verify the tables are created in your SQLite database using DB Browser
+for SQLite or the Django shell.
+Answer  :
+python manage.py makemigrations
+python manage.py migrate
+python manage.py shell
+
+from foodiespot.models import Restaurant, Cuisine
+
+# Check if tables exist by querying
+Cuisine.objects.all()
+Restaurant.objects.all()
+
+4.Change your Django project’s database settings to connect to a MySQL database using
+pymysql, and update your foodiespot app’s models to work with MySQL instead of SQLite.
+<br><br><em><strong>Hint:</strong> Install pymysql and update DATABASES in settings.py. Make sure MySQL server is running and you have created the database.</em>
+
+Answer :
+pip install pymysql
+Open your project’s __init__.py (same folder as settings.py) and add:
+import pymysql
+pymysql.install_as_MySQLdb()
+Update DATABASES in settings.py
+DATABASES = {
+'default': {
+'ENGINE': 'django.db.backends.mysql',
+'NAME': 'foodiespot_db',      # your database name
+'USER': 'root',               # your MySQL username
+'PASSWORD': 'yourpassword',   # your MySQL password
+'HOST': 'localhost',
+'PORT': '3306',
+}
+}
+Create MySQL Database : mysql -u root -p
+CREATE DATABASE foodiespot_db;
+python manage.py makemigrations
+python manage.py migrate
+Models (No Major Change Needed)
+your existing models already work with MySQL.
+
+5.Use Django’s ORM to add three new Restaurant objects and two Cuisine objects, then write a query to get all restaurants with a rating above 4.0 and print their names.
+Answer :
+In views.py (inside foodiespot app):
+from django.shortcuts import render
+from .models import Restaurant
+
+def explore_view(request):
+restaurants = Restaurant.objects.filter(rating__gt=4.0)
+return render(request, 'explore.html', {'restaurants': restaurants})
+
+urls.py
+from django.urls import path
+from foodiespot.views import explore_view
+
+urlpatterns = [
+path('explore/', explore_view, name='explore'),
+]
+
+explore.html
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">Top Rated Restaurants 🍽️</h2>
+
+<div class="row">
+    {% for restaurant in restaurants %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="restaurant">
+            <div class="card-body">
+                <h5 class="card-title">{{ restaurant.name }}</h5>
+                <p class="card-text">
+                     {{ restaurant.location }} <br>
+                     Rating: {{ restaurant.rating }} <br>
+                     Cuisine: {{ restaurant.cuisine.name }}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">No restaurants found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+-----------------------------------------------------------------------------------------
+SESSION 5 - Django Admin CustomizationTopicsEnabling adminAdding models to adminCustom
+list displaySearch fields, filtersActivitiesCustomize admin for Doctor modelInclude filters
+for specialization
+1.Enable the Django admin interface in your project and create a superuser account so
+you can log in to the admin dashboard.
+Answer :
+Create Superuser
+python manage.py createsuperuser
+Username: admin
+Email address: admin@example.com
+Password: ********
+urls.py:
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+python manage.py runserver
+http://127.0.0.1:8000/admin/
+Login using your superuser credentials
+
+2.Create a new model called Restaurant with fields name, cuisine, and rating, then register it with the Django admin so it appears in the admin panel.
+already Create the Model (models.py) : Restaurant
+python manage.py makemigrations
+python manage.py migrate
+Register Model in Admin (admin.py)
+from django.contrib import admin
+from .models import Restaurant
+
+admin.site.register(Restaurant)
+python manage.py runserver
+http://127.0.0.1:8000/admin/
+Login with your superuser
+You will now see Restaurant in the admin panel
+
+3.Customize the Restaurant admin by displaying name, cuisine, and rating in the list view using the list_display option in admin.py.
+Answer :
+admin.py
+from django.contrib import admin
+from .models import Restaurant
+
+class RestaurantAdmin(admin.ModelAdmin):
+list_display = ('name', 'cuisine', 'rating')
+
+admin.site.register(Restaurant, RestaurantAdmin)
+What this does?
+Shows columns in admin list page:
+Name
+Cuisine
+Rating
+Makes admin more readable and user-friendly
+http://127.0.0.1:8000/admin/
+
+4.Add search functionality in the Restaurant admin so you can search restaurants by name or cuisine using the search_fields option.
+Answer :
+Update admin.py
+from django.contrib import admin
+from .models import Restaurant
+
+class RestaurantAdmin(admin.ModelAdmin):
+list_display = ('name', 'cuisine', 'rating')
+search_fields = ('name', 'cuisine')
+
+admin.site.register(Restaurant, RestaurantAdmin)
+
+5.Add a filter in the Restaurant admin panel to filter restaurants by cuisine using the list_filter option.<br><br><em><strong>Hint:</strong> Use list_filter = ['cuisine'] in your RestaurantAdmin class.</em>
+Answer :
+admin.py
+from django.contrib import admin
+from .models import Restaurant
+
+class RestaurantAdmin(admin.ModelAdmin):
+list_display = ('name', 'cuisine', 'rating')
+search_fields = ('name', 'cuisine')
+list_filter = ('cuisine',)
+
+admin.site.register(Restaurant, RestaurantAdmin)
+What this does
+✔ Adds a sidebar filter in the admin panel
+✔ Lets you filter restaurants by cuisine type
+✔ Makes browsing large data much easier

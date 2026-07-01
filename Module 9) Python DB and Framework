@@ -534,3 +534,1367 @@ What this does
 ✔ Adds a sidebar filter in the admin panel
 ✔ Lets you filter restaurants by cuisine type
 ✔ Makes browsing large data much easier
+-----------------------------------------------------------------------------------------
+SESSION 6 - Django Forms BasicsTopicsDjango Form classGET vs POSTCSRF tokenHandling
+form submissionActivitiesBuild “Add Doctor” formDisplay validation errors
+1.Create a Django Form class named AddRestaurantForm with fields for restaurant name,
+cuisine type, and contact email, then render it in a template using the GET method.
+Answer :
+Create Form Class (forms.py)
+Inside your app folder, create or open forms.py:
+from django import forms
+
+class AddRestaurantForm(forms.Form):
+    name = forms.CharField(label="Restaurant Name", max_length=100)
+    cuisine = forms.CharField(label="Cuisine Type", max_length=100)
+    email = forms.EmailField(label="Contact Email")
+
+Create View (views.py)
+from django.shortcuts import render
+from .forms import AddRestaurantForm
+
+def add_restaurant(request):
+    form = AddRestaurantForm()
+    return render(request, 'add_restaurant.html', {'form': form})
+
+Create Template (add_restaurant.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Restaurant</title>
+</head>
+<body>
+
+<h2>Add Restaurant</h2>
+
+<form method="GET">
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
+
+Add URL (urls.py)
+from django.urls import path
+from .views import add_restaurant
+
+urlpatterns = [
+    path('add/', add_restaurant, name='add_restaurant'),
+]
+Using method="GET" means data will appear in the URL like:
+http://127.0.0.1:8000/add/?name=ABC&cuisine=Indian&email=test@gmail.com
+
+2.Modify your AddRestaurantForm to handle form submission using the POST method and display the submitted data on a new page after the user submits the form.
+Answer :
+Your forms.py stays the same:
+from django import forms
+
+class AddRestaurantForm(forms.Form):
+    name = forms.CharField(label="Restaurant Name", max_length=100)
+    cuisine = forms.CharField(label="Cuisine Type", max_length=100)
+    email = forms.EmailField(label="Contact Email")
+Update View (views.py)
+from django.shortcuts import render
+from .forms import AddRestaurantForm
+
+def add_restaurant(request):
+    if request.method == 'POST':
+        form = AddRestaurantForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            return render(request, 'restaurant_success.html', {'data': data})
+    else:
+        form = AddRestaurantForm()
+
+    return render(request, 'add_restaurant.html', {'form': form})
+. Update Template (add_restaurant.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Restaurant</title>
+</head>
+<body>
+
+<h2>Add Restaurant</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
+Create Success Page (restaurant_success.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success</title>
+</head>
+<body>
+
+<h2>Restaurant Added Successfully!</h2>
+
+<p><strong>Name:</strong> {{ data.name }}</p>
+<p><strong>Cuisine:</strong> {{ data.cuisine }}</p>
+<p><strong>Email:</strong> {{ data.email }}</p>
+
+</body>
+</html>
+URLs (urls.py) : No change needed if already added:
+from django.urls import path
+from .views import add_restaurant
+
+urlpatterns = [
+    path('add/', add_restaurant, name='add_restaurant'),
+]
+3.Add validation to your AddRestaurantForm so that the restaurant name must be at least 3 characters and the contact email must be a valid email address. Display any validation errors directly above the form fields in your template.<br><br><em><strong>Hint:</strong> Use Django's built-in validators and {{ form.errors }} in your template.</em>
+Answer :
+Update Form with Validation (forms.py)
+Use Django validators + custom validation:
+
+from django import forms
+from django.core.validators import MinLengthValidator
+
+class AddRestaurantForm(forms.Form):
+    name = forms.CharField(
+        label="Restaurant Name",
+        max_length=100,
+        validators=[MinLengthValidator(3, message="Name must be at least 3 characters long.")]
+    )
+    cuisine = forms.CharField(label="Cuisine Type", max_length=100)
+    email = forms.EmailField(label="Contact Email")  # already validates email format
+
+View (views.py) : No major change—Django automatically handles validation:
+from django.shortcuts import render
+from .forms import AddRestaurantForm
+
+def add_restaurant(request):
+    if request.method == 'POST':
+        form = AddRestaurantForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            return render(request, 'restaurant_success.html', {'data': data})
+    else:
+        form = AddRestaurantForm()
+
+    return render(request, 'add_restaurant.html', {'form': form})
+
+Template with Error Display (add_restaurant.html)
+Show errors above each field:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Restaurant</title>
+</head>
+<body>
+
+<h2>Add Restaurant</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <!-- Name Field -->
+    {% if form.name.errors %}
+        <div style="color:red;">
+            {{ form.name.errors }}
+        </div>
+    {% endif %}
+    {{ form.name.label_tag }}
+    {{ form.name }}
+
+    <br><br>
+
+    <!-- Cuisine Field -->
+    {% if form.cuisine.errors %}
+        <div style="color:red;">
+            {{ form.cuisine.errors }}
+        </div>
+    {% endif %}
+    {{ form.cuisine.label_tag }}
+    {{ form.cuisine }}
+
+    <br><br>
+
+    <!-- Email Field -->
+    {% if form.email.errors %}
+        <div style="color:red;">
+            {{ form.email.errors }}
+        </div>
+    {% endif %}
+    {{ form.email.label_tag }}
+    {{ form.email }}
+
+    <br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
+4.Implement CSRF protection in your form template and verify that submitting the form without the CSRF token results in a forbidden error.<br><br><em><strong>Hint:</strong> Use {% csrf_token %} inside your form tags.</em>
+Answer :
+Update your add_restaurant.html form:
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Submit</button>
+</form>
+In settings.py, make sure this line exists:
+'django.middleware.csrf.CsrfViewMiddleware',
+------------------------------------------------------------------------------------------------
+SESSION 7 - Django Model FormsTopicsModelForm benefitsAutomatic form generationSaving form data to modelActivitiesCreate DoctorFormSave doctor details from form
+1.Create a Django model called Restaurant with fields name (CharField), cuisine (CharField), and rating (FloatField), then generate a ModelForm named RestaurantForm for it.
+ANswer :
+models.py
+from django.db import models
+
+class Restaurant(models.Model):
+    name = models.CharField(max_length=100)
+    cuisine = models.CharField(max_length=100)
+    rating = models.FloatField()
+
+    def __str__(self):
+        return self.name
+python manage.py makemigrations
+python manage.py migrate
+
+Create ModelForm (forms.py)
+from django import forms
+from .models import Restaurant
+
+class RestaurantForm(forms.ModelForm):
+    class Meta:
+        model = Restaurant
+        fields = ['name', 'cuisine', 'rating']
+Optional (Add Labels or Styling)
+class RestaurantForm(forms.ModelForm):
+    class Meta:
+        model = Restaurant
+        fields = ['name', 'cuisine', 'rating']
+        labels = {
+            'name': 'Restaurant Name',
+            'cuisine': 'Cuisine Type',
+            'rating': 'Rating (0-5)'
+        }
+2.Use RestaurantForm to build a simple Django view that displays the form and saves new restaurant entries to the database when submitted.
+Answer :
+Create View (views.py)
+This view:
+
+Shows the form (GET request)
+Saves data when submitted (POST request)
+from django.shortcuts import render, redirect
+from .forms import RestaurantForm
+
+def add_restaurant(request):
+    if request.method == 'POST':
+        form = RestaurantForm(request.POST)
+        if form.is_valid():
+            form.save()   # ✅ Saves data to database
+            return redirect('restaurant_success')  # redirect after save
+    else:
+        form = RestaurantForm()
+
+    return render(request, 'add_restaurant.html', {'form': form})
+Create Template (add_restaurant.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Restaurant</title>
+</head>
+<body>
+
+<h2>Add Restaurant</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>
+Success Page View (views.py)
+from django.http import HttpResponse
+
+def restaurant_success(request):
+    return HttpResponse("Restaurant added successfully!")
+urls.py
+from django.urls import path
+from .views import add_restaurant, restaurant_success
+
+urlpatterns = [
+    path('add/', add_restaurant, name='add_restaurant'),
+    path('success/', restaurant_success, name='restaurant_success'),
+]
+
+3.Customize the RestaurantForm to add a placeholder for the name field and set the minimum value for the rating field to 1 and maximum to 5.<br><br><em><strong>Hint:</strong> Use the widgets attribute inside the ModelForm's Meta class.</em>
+Answer :
+Updated RestaurantForm (forms.py)
+from django import forms
+from .models import Restaurant
+
+class RestaurantForm(forms.ModelForm):
+    class Meta:
+        model = Restaurant
+        fields = ['name', 'cuisine', 'rating']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'placeholder': 'Enter restaurant name'
+            }),
+            'rating': forms.NumberInput(attrs={
+                'min': 1,
+                'max': 5,
+                'step': 0.1
+            })
+        }
+
+4.Add validation to RestaurantForm so that the name must be at least 3 characters and the rating must be between 1 and 5. Show appropriate error messages on the form.
+Answer :
+Update RestaurantForm (forms.py)
+from django import forms
+from .models import Restaurant
+
+class RestaurantForm(forms.ModelForm):
+    class Meta:
+        model = Restaurant
+        fields = ['name', 'cuisine', 'rating']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'placeholder': 'Enter restaurant name'
+            }),
+            'rating': forms.NumberInput(attrs={
+                'min': 1,
+                'max': 5,
+                'step': 0.1
+            })
+        }
+
+    # ✅ Name validation (at least 3 characters)
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        if len(name) < 3:
+            raise forms.ValidationError("Name must be at least 3 characters long.")
+        return name
+
+    # ✅ Rating validation (between 1 and 5)
+    def clean_rating(self):
+        rating = self.cleaned_data.get('rating')
+        if rating < 1 or rating > 5:
+            raise forms.ValidationError("Rating must be between 1 and 5.")
+        return rating
+Update Template (add_restaurant.html)
+<form method="POST">
+    {% csrf_token %}
+
+    <!-- Name -->
+    {% if form.name.errors %}
+        <div style="color:red;">
+            {{ form.name.errors }}
+        </div>
+    {% endif %}
+    {{ form.name.label_tag }}
+    {{ form.name }}
+
+    <br><br>
+
+    <!-- Cuisine -->
+    {% if form.cuisine.errors %}
+        <div style="color:red;">
+            {{ form.cuisine.errors }}
+        </div>
+    {% endif %}
+    {{ form.cuisine.label_tag }}
+    {{ form.cuisine }}
+
+    <br><br>
+
+    <!-- Rating -->
+    {% if form.rating.errors %}
+        <div style="color:red;">
+            {{ form.rating.errors }}
+        </div>
+    {% endif %}
+    {{ form.rating.label_tag }}
+    {{ form.rating }}
+
+    <br><br>
+
+    <button type="submit">Save</button>
+</form>
+---------------------------------------------------------------------------------------
+SESSION 8 - User Authentication SystemTopicsUser modelSignupLoginLogoutPassword hashingAuthentication backendActivitiesBuild Register ? Login ? LogoutDisplay logged-in username in navbar
+1.Create a Python Django project called musiczone and add a User model if not already present. Set up the default authentication system so users can register, log in, and log out through Django's built-in views.
+Answer:
+Create Django Project
+Run this in terminal:
+django-admin startproject musiczone
+cd musiczone
+python manage.py startapp accounts
+Add App to settings.py
+INSTALLED_APPS = [
+    ...
+    'accounts',
+]
+Use Default Django User Model
+from django.contrib.auth.models import User
+Enable Authentication URLs
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),  # login/logout
+    path('', include('accounts.urls')),
+]
+Create App URLs (accounts/urls.py)
+from django.urls import path
+from .views import register_view, home
+
+urlpatterns = [
+    path('', home, name='home'),
+    path('register/', register_view, name='register'),
+]
+Create Registration View (views.py)
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+
+def home(request):
+    return render(request, 'home.html')
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # redirect to login page
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'register.html', {'form': form})
+register.html
+<h2>Register</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+registration/login.html
+<h2>Login</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+home.html
+<h2>Home Page</h2>
+
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'register' %}">Register</a>
+{% endif %}
+Configure Template Path (settings.py)
+TEMPLATES = [
+    {
+        ...
+        'DIRS': ['templates'],  # add this
+        ...
+    },
+]
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+User Registration → /register/
+Login → /accounts/login/
+Logout → /accounts/logout/
+Authentication handled by Django
+
+2.Build a signup form for a food delivery app (like Zomato) using Django. The form should collect username, email, and password, and save new users securely with hashed passwords.
+Answer :
+Create Signup Form (forms.py)
+from django import forms
+from django.contrib.auth.models import User
+
+class SignupForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']Create Signup View (views.py)
+
+Use set_password() to hash password before saving:
+from django.shortcuts import render, redirect
+from .forms import SignupForm
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])  # 🔐 hash password
+            user.save()
+            return redirect('login')  # redirect after signup
+    else:
+        form = SignupForm()
+
+    return render(request, 'signup.html', {'form': form})
+Create Template (signup.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+</head>
+<body>
+
+<h2>Food Delivery Signup</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Sign Up</button>
+</form>
+
+</body>
+</html>
+Add URL (urls.py)
+from django.urls import path
+from .views import signup_view
+
+urlpatterns = [
+    path('signup/', signup_view, name='signup'),
+]
+3.Implement a login feature for a movie booking site (BookMyShow style) using Django's authentication backend. After login, redirect the user to a welcome page showing their username.
+Answer:
+Create Login View (views.py)
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)  # ✅ logs in user
+            return redirect('welcome')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid username or password'})
+
+    return render(request, 'login.html')
+Create Welcome View (views.py)
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def welcome_view(request):
+    return render(request, 'welcome.html')
+Create Login Template (login.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+<h2>Login to BookMyShow</h2>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Username:</label>
+    <input type="text" name="username"><br><br>
+
+    <label>Password:</label>
+    <input type="password" name="password"><br><br>
+
+    <button type="submit">Login</button>
+</form>
+
+</body>
+</html>
+Create Welcome Template (welcome.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+
+<h2>Welcome, {{ request.user.username }} 🎉</h2>
+
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>
+Configure URLs (urls.py)
+from django.urls import path
+from .views import login_view, welcome_view
+from django.contrib.auth.views import LogoutView
+
+urlpatterns = [
+    path('login/', login_view, name='login'),
+    path('welcome/', welcome_view, name='welcome'),
+    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
+]
+Add Login Redirect Setting (settings.py)
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'welcome
+4.Display the logged-in user's username in the navbar of your e-commerce app (Flipkart-style) template. Show 'Login' and 'Signup' links if no user is logged in, and 'Logout' if a user is logged in.<br><br><em><strong>Hint:</strong> Use Django's template tags like {% if user.is_authenticated %} to conditionally render navbar items.</em>
+Answer :
+Navbar Template (base.html or navbar.html)
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>E-commerce App</title>
+    <style>
+        .navbar {
+            background-color: #2874f0;
+            padding: 15px;
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .right {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <span><strong>MyShop</strong></span>
+
+```
+<div class="right">
+    {% if user.is_authenticated %}
+        <span>👤 {{ user.username }}</span>
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">Signup</a>
+    {% endif %}
+</div>
+```
+
+</div>
+
+</body>
+</html>
+5.Add a logout button to your app's navbar that logs out the user and redirects them to the homepage. Test that after logging out, the username is no longer shown and the login/signup links appear.
+ANswer :
+Updated Navbar Template
+<div class="navbar" style="background:#2874f0; padding:15px; color:white;">
+    <span><strong>MyShop</strong></span>
+
+```
+<div style="float:right;">
+    {% if user.is_authenticated %}
+        <span>👤 {{ user.username }}</span>
+
+        <!-- Logout Form -->
+        <form action="{% url 'logout' %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="background:none; border:none; color:white; cursor:pointer; font-weight:bold;">
+                Logout
+            </button>
+        </form>
+
+    {% else %}
+        <a href="{% url 'login' %}" style="color:white; margin-left:10px;">Login</a>
+        <a href="{% url 'signup' %}" style="color:white; margin-left:10px;">Signup</a>
+    {% endif %}
+</div>
+```
+
+</div>
+Configure Logout in urls.py
+from django.urls import path
+from django.contrib.auth.views import LogoutView
+
+urlpatterns = [
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+]
+Make Sure You Have Home URL : path('', views.home, name='home')
+------------------------------------------------------------------------------------
+SESSION 9 - Email Sending in DjangoTopicsSMTP setupDjango email functionsHTML email templatesActivitiesSend welcome email on signup
+1..Configure SMTP email settings in your Django project's settings.py file to use Gmail for sending emails. Test your setup by sending a simple test email using Django's send_mail function.
+Answer :
+Configure Email Settings (settings.py)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'your_email@gmail.com'
+EMAIL_HOST_PASSWORD = 'your_app_password'  # ⚠️ NOT your normal Gmail password
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+Send Test Email (Shell Method) : python manage.py shell
+from django.core.mail import send_mail
+
+send_mail(
+    subject='Test Email',
+    message='This is a test email from Django.',
+    from_email='your_email@gmail.com',
+    recipient_list=['receiver_email@gmail.com'],
+    fail_silently=False,
+)
+2.Create a Django view function send_password_reset_email(request, user_email) that sends a password reset link to the given email address using send_mail. Use a subject line and plain text message body similar to what you see in apps like Paytm or Flipkart.
+Answer :
+View Function (views.py)
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse
+from django.urls import reverse
+
+def send_password_reset_email(request, user_email):
+    # Generate a dummy reset link (you can later replace with token-based link)
+    reset_link = request.build_absolute_uri(
+        reverse('password_reset_confirm')  # make sure this URL exists
+    )
+
+    subject = "Reset Your Password - MyShop"
+
+    message = f"""
+Hi,
+
+We received a request to reset your password for your MyShop account.
+
+Click the link below to reset your password:
+{reset_link}
+
+If you did not request this, please ignore this email.
+
+Thanks,
+MyShop Team
+"""
+
+    send_mail(
+        subject=subject,
+        message=message,
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[user_email],
+        fail_silently=False,
+    )
+
+    return HttpResponse("Password reset email sent successfully!")
+Instead of manual implementation, Django provides built-in views:django.contrib.auth.views.PasswordResetView
+3.Design an HTML email template called order_confirmation.html for a Swiggy-style food order confirmation. Use Django's EmailMultiAlternatives to send an email with this HTML template when a user places an order.<br><br><em><strong>Hint:</strong> Use Django's render_to_string to generate the HTML content from your template.</em>
+Answer :
+HTML Email Template (order_confirmation.html)
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+</head>
+<body style="font-family: Arial, sans-serif; background:#f5f5f5; padding:20px;">
+
+```
+<div style="max-width:600px; margin:auto; background:white; padding:20px; border-radius:10px;">
+
+    <h2 style="color:#fc8019;">🍽️ Order Confirmed!</h2>
+
+    <p>Hi {{ user.username }},</p>
+
+    <p>Your order has been successfully placed. Here are your order details:</p>
+
+    <hr>
+
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Restaurant:</strong> {{ order.restaurant_name }}</p>
+
+    <h3>Items:</h3>
+    <ul>
+        {% for item in order.items %}
+            <li>{{ item.name }} - ₹{{ item.price }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>Total Amount:</strong> ₹{{ order.total }}</p>
+
+    <hr>
+
+    <p>Your food is being prepared and will be delivered soon 🚀</p>
+
+    <p>Thank you for ordering with us!</p>
+
+    <p style="color:gray;">– FoodExpress Team</p>
+</div>
+```
+
+</body>
+</html>
+Send Email Using EmailMultiAlternatives (views.py)
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.conf import settings
+
+def send_order_email(user, order):
+    subject = "Your Order is Confirmed! 🍽️"
+    from_email = settings.EMAIL_HOST_USER
+    to_email = [user.email]
+
+    # Render HTML content
+    html_content = render_to_string('order_confirmation.html', {
+        'user': user,
+        'order': order
+    })
+
+    # Plain text fallback
+    text_content = f"Hi {user.username}, your order #{order.id} is confirmed!"
+
+    # Create email
+    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+    email.attach_alternative(html_content, "text/html")
+    email.send()
+4.Modify your HTML email template to include the user's name and order details dynamically using Django template variables. Test by sending a sample order confirmation email to yourself.
+Answer :
+Updated HTML Template (order_confirmation.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 600px;
+            border-radius: 10px;
+        }
+        .header {
+            background-color: #fc8019;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+        }
+        .order-box {
+            margin-top: 20px;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: gray;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+             Order Confirmed!
+        </div>
+
+        <p>Hi <strong>{{ user_name }}</strong>,</p>
+
+        <p>Your order has been successfully placed. Here are your order details:</p>
+
+        <div class="order-box">
+            <p><strong>Order ID:</strong> {{ order_id }}</p>
+            <p><strong>Restaurant:</strong> {{ restaurant_name }}</p>
+
+            <hr>
+
+            {% for item in items %}
+            <div class="item">
+                <span>{{ item.name }} (x{{ item.quantity }})</span>
+                <span>₹{{ item.price }}</span>
+            </div>
+            {% endfor %}
+
+            <div class="total">
+                Total: ₹{{ total_price }}
+            </div>
+        </div>
+
+        <p>We’ll notify you once your food is on the way </p>
+
+        <div class="footer">
+            Thanks for ordering with FoodieSpot 
+        </div>
+    </div>
+</body>
+</html>
+Send Email Using EmailMultiAlternatives,views.py
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.conf import settings
+from django.http import HttpResponse
+
+
+def send_order_email(request):
+    # Sample test data
+    context = {
+        "user_name": "Shital",
+        "order_id": "ORD12345",
+        "restaurant_name": "Pizza Palace",
+        "items": [
+            {"name": "Veg Pizza", "quantity": 1, "price": 250},
+            {"name": "Garlic Bread", "quantity": 2, "price": 150},
+        ],
+        "total_price": 550,
+    }
+
+    subject = "Your Order is Confirmed 🍽️"
+    from_email = settings.EMAIL_HOST_USER
+    to_email = ["your_email@gmail.com"]  # replace with your email
+
+    # Render HTML template
+    html_content = render_to_string("order_confirmation.html", context)
+
+    # Plain text fallback
+    text_content = f"Hi {context['user_name']}, your order {context['order_id']} is confirmed."
+
+    # Create email
+    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+    email.attach_alternative(html_content, "text/html")
+
+    email.send()
+
+    return HttpResponse("Order confirmation email sent!")
+python manage.py runserver
+http://127.0.0.1:8000/send-order-email/
+Check your Gmail inbox
+5.Use ChatGPT or Copilot to help you generate a catchy subject line and body for a 'Welcome to IPL Fantasy League' HTML email. Implement the email sending logic in a Django view and send the email to a test user.<br><br><em><strong>Hint:</strong> Paste your AI-generated subject and body into your code, then send the email using EmailMultiAlternatives.</em>
+Answer :
+Generate a catchy IPL welcome email (AI-style)
+Create an HTML template
+Send it using EmailMultiAlternatives
+Test it in a Django view
+Catchy Subject & Email Body (AI-Generated)
+Subject Line :Welcome to IPL Fantasy League – Build Your Dream Team & Win Big!
+Email Message (HTML Content Idea)
+Energetic
+Cricket-themed
+Action-driven (like Dream11 / MPL style)
+HTML Template (ipl_welcome_email.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            margin: auto;
+            width: 600px;
+            border-radius: 10px;
+        }
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ff5722;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: center;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+       Welcome to IPL Fantasy League!
+    </div>
+
+    <p>Hi <strong>{{ user_name }}</strong>,</p>
+
+    <p>
+        The stadium is roaring, the crowd is ready, and now it's YOUR turn to shine! 🌟
+    </p>
+
+    <p>
+        Build your dream team, compete with friends, and win exciting rewards every match day.
+    </p>
+
+    <ul>
+        <li>Create your fantasy team</li>
+        <li> Earn points based on real match performance</li>
+        <li> Climb the leaderboard & win prizes</li>
+    </ul>
+
+    <p style="text-align:center;">
+        <a href="{{ login_url }}" class="btn">Start Playing Now</a>
+    </p>
+
+    <p>
+        Let the games begin! May your captain score big! 💥
+    </p>
+
+    <div class="footer">
+        © 2026 IPL Fantasy League | All Rights Reserved
+    </div>
+</div>
+</body>
+</html>
+Django View to Send Email
+views.py
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.conf import settings
+from django.http import HttpResponse
+
+
+def send_ipl_welcome_email(request):
+    # Test user data
+    context = {
+        "user_name": "Shital",
+        "login_url": "http://127.0.0.1:8000/login/"
+    }
+
+    subject = "🏏 Welcome to IPL Fantasy League – Build Your Dream Team & Win Big!"
+    from_email = settings.EMAIL_HOST_USER
+    to_email = ["your_email@gmail.com"]  # replace with your email
+
+    # Render HTML
+    html_content = render_to_string("ipl_welcome_email.html", context)
+
+    # Plain text fallback
+    text_content = f"""
+Hi {context['user_name']},
+
+Welcome to IPL Fantasy League!
+
+Create your dream team and start winning today.
+
+Login here: {context['login_url']}
+"""
+
+    # Create email
+    email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+    email.attach_alternative(html_content, "text/html")
+
+    email.send()
+
+    return HttpResponse("IPL Welcome Email Sent Successfully!")
+python manage.py runserver
+http://127.0.0.1:8000/send-ipl-email/
+Check your Gmail inbox
+
+--------------------------------------------------------------------------------------
+SESSION 10 - Forgot Password + Session ManagementTopicsDjango sessionsReset password with OTP linkSession expiryMiddleware basicsActivitiesImplement forgot passwordStore OTP in session
+1.Create a Django view called forgot_password_view that renders a form where users enter their email to request a password reset.
+Answer :Create the View (views.py)
+from django.shortcuts import render
+from django.http import HttpResponse
+
+def forgot_password_view(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+
+        # For now, just print or handle the email
+        print("Password reset requested for:", email)
+
+        return HttpResponse("If this email exists, a reset link will be sent.")
+
+    return render(request, "forgot_password.html")
+Create the Template (forgot_password.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forgot Password</title>
+</head>
+<body>
+
+    <h2>Forgot Password</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <button type="submit">Send Reset Link</button>
+    </form>
+
+</body>
+</html>
+Add URL (urls.py)
+from django.urls import path
+from .views import forgot_password_view
+
+urlpatterns = [
+    path('forgot-password/', forgot_password_view, name='forgot_password'),
+]
+python manage.py runserver
+http://127.0.0.1:8000/forgot-password/
+2.Generate a random 6-digit OTP in your Django view, store it in the session, and send it to the user's email using Django's send_mail function.<br><br><em><strong>Hint:</strong> Use request.session['otp'] to save the OTP and settings.py to configure email backend for testing.</em>
+Answer :
+Django View (views.py)
+import random
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import render
+from django.http import HttpResponse
+
+
+def send_otp_view(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+
+        # Generate 6-digit OTP
+        otp = random.randint(100000, 999999)
+
+        # Store OTP in session
+        request.session['otp'] = otp
+        request.session['otp_email'] = email  # optional (for verification later)
+
+        # Email content
+        subject = "Your OTP for Password Reset"
+        message = f"""
+Hi,
+
+Your One-Time Password (OTP) is: {otp}
+
+This OTP is valid for a short time. Do not share it with anyone.
+
+If you didn’t request this, please ignore this email.
+
+Thanks,
+Your App Team
+"""
+
+        # Send email
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [email],
+            fail_silently=False,
+        )
+
+        return HttpResponse("OTP sent to your email!")
+
+    return render(request, "forgot_password.html")
+Simple Form (Reuse forgot_password.html)
+<form method="POST">
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="Enter your email" required>
+    <button type="submit">Send OTP</button>
+</form>
+Email Settings (settings.py)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+OR Gmail SMTP:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your_email@gmail.com'
+EMAIL_HOST_PASSWORD = 'your_app_password'
+http://127.0.0.1:8000/forgot-password/
+
+3.Build a Django form where the user enters the OTP they received via email; validate the OTP by comparing it with the value stored in the session, and display a success or error message accordingly.
+ANswer :
+View to Verify OTP (views.py)
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+
+def verify_otp_view(request):
+    if request.method == "POST":
+        entered_otp = request.POST.get("otp")
+
+        # Get OTP from session
+        session_otp = request.session.get("otp")
+
+        if session_otp and str(entered_otp) == str(session_otp):
+            messages.success(request, "✅ OTP verified successfully!")
+
+            # Optional: clear OTP after success
+            del request.session['otp']
+
+            return redirect('success_page')  # create this URL
+        else:
+            messages.error(request, "❌ Invalid OTP. Please try again.")
+
+    return render(request, "verify_otp.html")
+OTP Form Template (verify_otp.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify OTP</title>
+</head>
+<body>
+
+<h2>Enter OTP</h2>
+
+<!-- Messages -->
+{% if messages %}
+    {% for message in messages %}
+        <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+            {{ message }}
+        </p>
+    {% endfor %}
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>OTP:</label><br>
+    <input type="text" name="otp" maxlength="6" required><br><br>
+
+    <button type="submit">Verify OTP</button>
+</form>
+
+</body>
+</html>
+URL Configuration (urls.py)
+from django.urls import path
+from .views import verify_otp_view
+
+urlpatterns = [
+    path('verify-otp/', verify_otp_view, name='verify_otp'),
+]
+http://127.0.0.1:8000/verify-otp/
+4.Set a session expiry time of 5 minutes for the OTP in your Django app so that the OTP becomes invalid after that period.<br><br><em><strong>Hint:</strong> Use request.session.set_expiry(300) after setting the OTP.</em>
+Answer :
+Update Your OTP Sending View
+Just add request.session.set_expiry(300) right after storing the OTP.
+import random
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import render
+from django.http import HttpResponse
+
+def send_otp_view(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+
+        # Generate OTP
+        otp = random.randint(100000, 999999)
+
+        # Store in session
+        request.session['otp'] = otp
+        request.session['otp_email'] = email
+
+        # ⏱️ Set session expiry to 5 minutes (300 seconds)
+        request.session.set_expiry(300)
+
+        # Send email
+        send_mail(
+            subject="Your OTP Code",
+            message=f"Your OTP is {otp}. It is valid for 5 minutes.",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[email],
+        )
+
+        return HttpResponse("OTP sent successfully!")
+
+    return render(request, "forgot_password.html")
+How It Works
+set_expiry(300) → session expires in 300 seconds (5 minutes)
+After 5 minutes:
+Session data (including OTP) is deleted
+OTP becomes invalid automatically
+Update OTP Verification (Optional Safety Check)
+session_otp = request.session.get('otp')
+
+if not session_otp:
+    messages.error(request, "OTP expired. Please request a new one.")
+5.Create a custom Django middleware called BlockExpiredOTPAccessMiddleware that checks if the OTP session key is missing or expired, and if so, redirects users trying to access the OTP verification page back to the forgot password form.
+Answer :
+Create Middleware (middleware.py)
+Create a new file in your app (if not already):
+from django.shortcuts import redirect
+from django.urls import reverse
+
+class BlockExpiredOTPAccessMiddleware:
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Get current path
+        path = request.path
+
+        # Define OTP verification URL
+        otp_verify_url = reverse('verify_otp')
+
+        # Check if user is accessing OTP verification page
+        if path == otp_verify_url:
+            otp = request.session.get('otp')
+
+            # If OTP is missing (expired or not generated)
+            if not otp:
+                return redirect('forgot_password')
+
+        response = self.get_response(request)
+        return response
+Register Middleware (settings.py)
+Add it to MIDDLEWARE:
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
+    # 👇 Add your custom middleware here
+    'your_app.middleware.BlockExpiredOTPAccessMiddleware',
+
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+]
+3. Ensure URL Names Exist (urls.py)
+path('forgot-password/', forgot_password_view, name='forgot_password'),
+path('verify-otp/', verify_otp_view, name='verify_otp'),
+Go to /verify-otp/
+
+------------------------------------------------------------------------------
+SESSION 11 - Working With Media Files &amp; User ProfileTopicsMEDIA_ROOT and MEDIA_URLUpload profile pictureServing uploaded filesActivitiesProfile edit page (update photo, name, phone)

@@ -1896,5 +1896,275 @@ path('forgot-password/', forgot_password_view, name='forgot_password'),
 path('verify-otp/', verify_otp_view, name='verify_otp'),
 Go to /verify-otp/
 
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 SESSION 11 - Working With Media Files &amp; User ProfileTopicsMEDIA_ROOT and MEDIA_URLUpload profile pictureServing uploaded filesActivitiesProfile edit page (update photo, name, phone)
+1.Set up MEDIA_ROOT and MEDIA_URL in your Django project's settings.py so that uploaded media files are stored in a folder named 'user_uploads' and can be accessed via '/media/'
+Answer :
+Update settings.py
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'user_uploads')
+Update urls.py
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # your existing URLs
+]
+
+# Serve media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+Use in Models (Example)
+from django.db import models
+
+class Profile(models.Model):
+    profile_image = models.ImageField(upload_to='profiles/')
+Access in Templates
+<img src="{{ user.profile.profile_image.url }}" alt="Profile Image">
+pip install Pillow
+
+
+2.Create a Django model called InfluencerProfile with fields: user (OneToOneField), display_name (CharField), bio (TextField), and profile_pic (ImageField). Ensure profile_pic uploads to 'profile_pics/'.
+Answer :
+Define Model in models.py
+from django.db import models
+from django.contrib.auth.models import User
+
+class InfluencerProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    display_name = models.CharField(max_length=100)
+    bio = models.TextField()
+    profile_pic = models.ImageField(upload_to='profile_pics/')
+
+    def __str__(self):
+        return self.display_name
+python manage.py makemigrations
+python manage.py migrate
+Register in Admin (Optional but Useful)
+from django.contrib import admin
+from .models import InfluencerProfile
+
+admin.site.register(InfluencerProfile)
+3.Build a profile edit page where users can update their display name, bio, and upload a new profile picture, similar to editing your Instagram profile.
+Answer :
+Create a ModelForm : In forms.py:
+from django import forms
+from .models import InfluencerProfile
+
+class InfluencerProfileForm(forms.ModelForm):
+    class Meta:
+        model = InfluencerProfile
+        fields = ['display_name', 'bio', 'profile_pic']
+. Create the View
+views.py:
+from django.shortcuts import render, redirect
+from .models import InfluencerProfile
+from .forms import InfluencerProfileForm
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def edit_profile(request):
+    profile, created = InfluencerProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = InfluencerProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # redirect to profile page
+    else:
+        form = InfluencerProfileForm(instance=profile)
+
+    return render(request, 'edit_profile.html', {'form': form})
+Create Template (edit_profile.html)
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+    <style>
+        body { font-family: Arial; background:#fafafa; }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #ccc;
+        }
+        input, textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
+        }
+        button {
+            background: #3897f0;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+        }
+        img {
+            width: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Edit Profile</h2>
+
+    {% if form.instance.profile_pic %}
+        <img src="{{ form.instance.profile_pic.url }}">
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.display_name.label }}
+        {{ form.display_name }}
+
+        {{ form.bio.label }}
+        {{ form.bio }}
+
+        {{ form.profile_pic.label }}
+        {{ form.profile_pic }}
+
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+
+</body>
+</html>
+Add URL:In urls.py:
+from django.urls import path
+from .views import edit_profile
+
+urlpatterns = [
+    path('edit-profile/', edit_profile, name='edit_profile'),
+]
+Important Settings Reminder
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'user_uploads')
+And in main urls.py:
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+4.Display the uploaded profile picture on the user's profile page, falling back to a default image if no picture is uploaded.<br><br><em><strong>Hint:</strong> Use the MEDIA_URL setting and check if profile_pic exists for the user.</em>
+Answer :
+Update Your Profile View
+from django.shortcuts import render
+from .models import InfluencerProfile
+
+def profile_view(request):
+    profile = InfluencerProfile.objects.get(user=request.user)
+    return render(request, 'profile.html', {'profile': profile})
+Add Default Image
+static/images/default_profile.png
+project/
+│
+├── static/
+│   └── images/
+│       └── default_profile.png
+Load Static in Template
+{% load static %}
+Display Profile Picture with Fallback
+<img
+    src="{% if profile.profile_pic %}{{ profile.profile_pic.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}"
+    alt="Profile Picture"
+    width="150"
+    height="150"
+    style="border-radius:50%; object-fit:cover;"
+>
+Full Example (profile.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+</head>
+<body>
+
+{% load static %}
+
+<h2>{{ profile.display_name }}</h2>
+
+<img
+    src="{% if profile.profile_pic %}{{ profile.profile_pic.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}"
+    alt="Profile Picture"
+    width="150"
+    height="150"
+    style="border-radius:50%;"
+>
+
+<p>{{ profile.bio }}</p>
+
+<a href="{% url 'edit_profile' %}">Edit Profile</a>
+
+</body>
+</html>
+5.Add a phone number field to your InfluencerProfile model, update the edit form to allow changing it, and validate that the phone number is exactly 10 digits.<br><br><em><strong>Constraint:</strong> Show an error message if the phone number is invalid.</em>
+ANswer :
+Update Model (models.py) :Add a phone_number field:
+from django.db import models
+from django.contrib.auth.models import User
+
+class InfluencerProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    display_name = models.CharField(max_length=100)
+    bio = models.TextField()
+    profile_pic = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    phone_number = models.CharField(max_length=10, blank=True)
+
+    def __str__(self):
+        return self.display_name
+python manage.py makemigrations
+python manage.py migrate
+
+Update Form with Validation (forms.py)
+from django import forms
+from .models import InfluencerProfile
+import re
+
+class InfluencerProfileForm(forms.ModelForm):
+    class Meta:
+        model = InfluencerProfile
+        fields = ['display_name', 'bio', 'profile_pic', 'phone_number']
+
+    def clean_phone_number(self):
+        phone = self.cleaned_data.get('phone_number')
+
+        if phone:  # Only validate if user entered something
+            if not re.fullmatch(r'\d{10}', phone):
+                raise forms.ValidationError("Phone number must be exactly 10 digits.")
+
+        return phone
+Update Template (edit_profile.html)
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.display_name.label }}
+    {{ form.display_name }}
+
+    {{ form.bio.label }}
+    {{ form.bio }}
+
+    {{ form.phone_number.label }}
+    {{ form.phone_number }}
+    {% if form.phone_number.errors %}
+        <p style="color:red;">{{ form.phone_number.errors.0 }}</p>
+    {% endif %}
+
+    {{ form.profile_pic.label }}
+    {{ form.profile_pic }}
+
+    <button type="submit">Save Changes</button>
+</form>
+---------------------------------------------------------------------------------------------
+

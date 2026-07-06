@@ -4,4 +4,1611 @@ SESSION 1 - Introduction to REST & DRF SetupTopics CoveredWhat is an API?What is
  apiSerializer vs ModelSerializer overviewFirst test API endpointTrainer DemonstrationCreate
  project folder /apiCreate simple “Hello API” endpoint using APIView or function-base
 
- Answer : 
+1.Install Django and Django REST Framework in a new virtual environment, then create a Django project named foodiehub and an app named api.
+Answer :
+python3 -m venv env
+source env/bin/activate
+pip install django djangorestframework
+django-admin startproject foodiehub
+cd foodiehub
+python manage.py startapp api
+2.Add 'rest_framework' to the INSTALLED_APPS list in your foodiehub/settings.py file and verify the app runs without errors by starting the development server.
+Answer :
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'rest_framework',
+    'api',
+]
+python manage.py runserver
+http://127.0.0.1:8000/
+3.Create a new file views.py inside your api app and build a function-based API endpoint hello_spotify that returns JSON: {"message": "Hello, Spotify Fans!"} when accessed at /api/hello_spotify/.
+Answer:
+api/views.py
+from django.http import JsonResponse
+
+def hello_spotify(request):
+return JsonResponse({"message": "Hello, Spotify Fans!"})
+api/urls.py
+from django.urls import path
+from .views import hello_spotify
+
+urlpatterns = [
+    path('hello_spotify/', hello_spotify),
+]
+Connect API to Main Project :foodiehub/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
+]
+python manage.py runserver
+Test Your API
+http://127.0.0.1:8000/api/hello_spotify/
+{"message": "Hello, Spotify Fans!"}
+4.Compare JSON and XML by writing a short comment in your views.py file: show a sample response for each format representing a Flipkart product with name and price
+Answer:
+# JSON vs XML Comparison (Flipkart Product Example)
+
+# JSON Format (Lightweight, easy to read and use in APIs)
+
+# {
+
+# "name": "Samsung Galaxy S23",
+
+# "price": 74999
+
+# }
+
+# XML Format (More structured, uses tags)
+
+# <product>
+
+# <name>Samsung Galaxy S23</name>
+
+# <price>74999</price>
+
+# </product>
+JSON → simpler, faster, commonly used in APIs
+XML → more verbose, used in older systems
+
+5.Use ChatGPT or Copilot to help you write a basic Serializer class in serializers.py for a Zomato-style Restaurant object with fields: name and cuisine.<br><br><em><strong>Hint:</strong> Paste your serializer code and mention what prompt you gave the AI tool.</em>
+Answer :
+# api/serializers.py
+
+from rest_framework import serializers
+
+class RestaurantSerializer(serializers.Serializer):
+name = serializers.CharField(max_length=100)
+cuisine = serializers.CharField(max_length=100)
+
+# Prompt used with AI tool (ChatGPT/Copilot):
+
+# "Create a basic Django REST Framework serializer for a Restaurant object with fields name and cuisine."
+------------------------------------------------------------------------------------------
+SESSION 2 - Serializers + CRUD API DevelopmentTopics CoveredCreating models for APIWriting
+serializers (Serializer + ModelSerializer)Creating CRUD endpoints:Create (POST)Read
+(GET)Update (PUT/PATCH)Delete (DELETE)Using APIView / GenericAPIView / MixinsJSON responsesStatus codes (HTTP_200, 201, 404, 400)
+Trainer DemonstrationBuild CRUD API for Doctor model:/api/doctors//api/doctors/&lt;id&gt;/
+1.Create a Django model called Restaurant with fields name, cuisine, and rating, then register it in the admin panel.
+ANswer :
+# api/models.py
+
+from django.db import models
+
+class Restaurant(models.Model):
+name = models.CharField(max_length=100)
+cuisine = models.CharField(max_length=100)
+rating = models.FloatField()
+
+```
+def __str__(self):
+    return self.name
+```
+
+# -----------------------------------
+
+# api/admin.py
+
+from django.contrib import admin
+from .models import Restaurant
+
+admin.site.register(Restaurant)
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+http://127.0.0.1:8000/admin/
+Create superuser if needed using python manage.py createsuperuser)
+
+2.Write a ModelSerializer named RestaurantSerializer for the Restaurant model to convert model instances to JSON and vice versa.<br><br><em><strong>Hint:</strong> Use serializers.ModelSerializer and define the Meta class inside your serializer.</em>
+Answer:
+# api/serializers.py
+
+from rest_framework import serializers
+from .models import Restaurant
+
+class RestaurantSerializer(serializers.ModelSerializer):
+
+```
+class Meta:
+    model = Restaurant
+    fields = ['id', 'name', 'cuisine', 'rating']
+```
+ModelSerializer automatically maps model fields
+Meta class tells DRF:
+which model to use → Restaurant
+which fields to include → id, name, cuisine, rating
+3.Build CRUD API endpoints for the Restaurant model using Django REST Framework's APIView class: implement POST to add a new restaurant, GET to list all restaurants, PUT/PATCH to update a restaurant by id, and DELETE to remove a restaurant by id.
+Answer:
+# api/views.py
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+# GET (list all) + POST (create)
+
+class RestaurantListCreateAPIView(APIView):
+
+```
+def get(self, request):
+    restaurants = Restaurant.objects.all()
+    serializer = RestaurantSerializer(restaurants, many=True)
+    return Response(serializer.data)
+
+def post(self, request):
+    serializer = RestaurantSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+```
+
+# GET (single) + PUT/PATCH (update) + DELETE
+
+class RestaurantDetailAPIView(APIView):
+
+```
+def get_object(self, pk):
+    try:
+        return Restaurant.objects.get(pk=pk)
+    except Restaurant.DoesNotExist:
+        return None
+
+def get(self, request, pk):
+    restaurant = self.get_object(pk)
+    if not restaurant:
+        return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = RestaurantSerializer(restaurant)
+    return Response(serializer.data)
+
+def put(self, request, pk):
+    restaurant = self.get_object(pk)
+    if not restaurant:
+        return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = RestaurantSerializer(restaurant, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def patch(self, request, pk):
+    restaurant = self.get_object(pk)
+    if not restaurant:
+        return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = RestaurantSerializer(restaurant, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def delete(self, request, pk):
+    restaurant = self.get_object(pk)
+    if not restaurant:
+        return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    restaurant.delete()
+    return Response({"message": "Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+```
+
+# --------------------------------------
+
+# api/urls.py
+
+from django.urls import path
+from .views import RestaurantListCreateAPIView, RestaurantDetailAPIView
+
+urlpatterns = [
+path('restaurants/', RestaurantListCreateAPIView.as_view()),
+path('restaurants/[int:pk](int:pk)/', RestaurantDetailAPIView.as_view()),
+]
+4.Return appropriate HTTP status codes (HTTP_201_CREATED, HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST) in your Restaurant API views based on the operation result.<br><br><em><strong>Hint:</strong> Use DRF's Response and status modules to set status codes.</em>
+Answer:
+# api/views.py
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+# GET (list all) + POST (create)
+
+class RestaurantListCreateAPIView(APIView):
+
+```
+def get(self, request):
+    restaurants = Restaurant.objects.all()
+    serializer = RestaurantSerializer(restaurants, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+def post(self, request):
+    serializer = RestaurantSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+```
+
+# GET (single) + PUT/PATCH (update) + DELETE
+
+class RestaurantDetailAPIView(APIView):
+
+```
+def get_object(self, pk):
+    try:
+        return Restaurant.objects.get(pk=pk)
+    except Restaurant.DoesNotExist:
+        return None
+
+def get(self, request, pk):
+    restaurant = self.get_object(pk)
+    if not restaurant:
+        return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = RestaurantSerializer(restaurant)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+def put(self, request, pk):
+    restaurant = self.get_object(pk)
+    if not restaurant:
+        return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = RestaurantSerializer(restaurant, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def patch(self, request, pk):
+    restaurant = self.get_object(pk)
+    if not restaurant:
+        return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = RestaurantSerializer(restaurant, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def delete(self, request, pk):
+    restaurant = self.get_object(pk)
+    if not restaurant:
+        return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    restaurant.delete()
+    return Response({"message": "Deleted successfully"}, status=status.HTTP_200_OK)
+```
+200 OK → Successful GET, PUT, PATCH, DELETE
+201 CREATED → Successful POST
+400 BAD REQUEST → Validation errors
+404 NOT FOUND → Resource doesn’t exist
+
+5 Use the GenericAPIView and mixins to refactor your Restaurant API so that listing, creating, updating, and deleting restaurants require less boilerplate code.
+answer :
+# api/views.py
+
+from rest_framework import generics, mixins
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+# LIST + CREATE
+
+class RestaurantListCreateAPIView(
+mixins.ListModelMixin,
+mixins.CreateModelMixin,
+generics.GenericAPIView
+):
+queryset = Restaurant.objects.all()
+serializer_class = RestaurantSerializer
+
+```
+def get(self, request, *args, **kwargs):
+    return self.list(request, *args, **kwargs)   # GET → List all
+
+def post(self, request, *args, **kwargs):
+    return self.create(request, *args, **kwargs) # POST → Create
+```
+
+# RETRIEVE + UPDATE + DELETE
+
+class RestaurantDetailAPIView(
+mixins.RetrieveModelMixin,
+mixins.UpdateModelMixin,
+mixins.DestroyModelMixin,
+generics.GenericAPIView
+):
+queryset = Restaurant.objects.all()
+serializer_class = RestaurantSerializer
+lookup_field = 'pk'
+
+```
+def get(self, request, *args, **kwargs):
+    return self.retrieve(request, *args, **kwargs)   # GET → Single
+
+def put(self, request, *args, **kwargs):
+    return self.update(request, *args, **kwargs)     # PUT → Full update
+
+def patch(self, request, *args, **kwargs):
+    return self.partial_update(request, *args, **kwargs) # PATCH → Partial
+
+def delete(self, request, *args, **kwargs):
+    return self.destroy(request, *args, **kwargs)    # DELETE
+```
+URLs (same as before)
+# api/urls.py
+
+from django.urls import path
+from .views import RestaurantListCreateAPIView, RestaurantDetailAPIView
+
+urlpatterns = [
+    path('restaurants/', RestaurantListCreateAPIView.as_view()),
+    path('restaurants/<int:pk>/', RestaurantDetailAPIView.as_view()),
+]
+Why This Is Better
+✔ Less code (mixins handle logic internally)
+✔ Cleaner & reusable
+✔ Built-in validation + status codes
+✔ Industry standard DRF approach
+-------------------------------------------------------------------------------------------
+SESSION 3 - ViewSets, Routers &amp; PaginationTopics CoveredViewSets (ModelViewSet)Routers
+&amp; automatically generated URLsDefault Router vs SimpleRouterPagination types:
+PageNumberPaginationLimitOffsetPaginationCursorPaginationOrdering and filtering basicsTrainer
+DemonstrationConvert CRUD API to ModelViewSetImplement pagination /api/doctors/?page=2PracticeAdd ordering by name or specialization.
+1.Create a ModelViewSet for a Restaurant model (fields: name, cuisine, location) and register it with a DefaultRouter in your Django REST Framework project so that the API endpoints are automatically generated.
+Answer:
+# api/models.py
+
+from django.db import models
+
+class Restaurant(models.Model):
+name = models.CharField(max_length=100)
+cuisine = models.CharField(max_length=100)
+location = models.CharField(max_length=150)
+
+```
+def __str__(self):
+    return self.name
+```
+
+# -------------------------------------
+
+# api/serializers.py
+
+from rest_framework import serializers
+from .models import Restaurant
+
+class RestaurantSerializer(serializers.ModelSerializer):
+class Meta:
+model = Restaurant
+fields = ['id', 'name', 'cuisine', 'location']
+
+# -------------------------------------
+
+# api/views.py
+
+from rest_framework.viewsets import ModelViewSet
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+class RestaurantViewSet(ModelViewSet):
+queryset = Restaurant.objects.all()
+serializer_class = RestaurantSerializer
+
+# -------------------------------------
+
+# api/urls.py
+
+from rest_framework.routers import DefaultRouter
+from .views import RestaurantViewSet
+
+router = DefaultRouter()
+router.register(r'restaurants', RestaurantViewSet)
+
+urlpatterns = router.urls
+
+# -------------------------------------
+
+# foodiehub/urls.py
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+path('admin/', admin.site.urls),
+path('api/', include('api.urls')),
+]
+2.Implement PageNumberPagination for your RestaurantViewSet so that the /api/restaurants/ endpoint returns only 3 restaurants per page.<br><br><em><strong>Hint:</strong> Set the pagination class and page size in your Django settings or directly in the viewset.</em>
+Answer:
+Set Globally in settings.py (Recommended)
+# foodiehub/settings.py
+
+REST_FRAMEWORK = {
+'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+'PAGE_SIZE': 3
+}
+
+Set Pagination Only for This ViewSet
+# api/views.py
+
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.pagination import PageNumberPagination
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+class CustomPagination(PageNumberPagination):
+page_size = 3
+
+class RestaurantViewSet(ModelViewSet):
+queryset = Restaurant.objects.all()
+serializer_class = RestaurantSerializer
+pagination_class = CustomPagination
+You’ll get response like:
+
+{
+  "count": 10,
+  "next": "http://127.0.0.1:8000/api/restaurants/?page=2",
+  "previous": null,
+  "results": [
+    { "id": 1, "name": "...", "cuisine": "...", "location": "..." },
+    { "id": 2, "name": "...", "cuisine": "...", "location": "..." },
+    { "id": 3, "name": "...", "cuisine": "...", "location": "..." }
+  ]
+}
+3.Switch your pagination to LimitOffsetPagination for the RestaurantViewSet and test the /api/restaurants/?limit=2&offset=2 endpoint to verify it returns the correct slice of restaurants.
+Answer:
+Update Pagination in ViewSet
+# api/views.py
+
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.pagination import LimitOffsetPagination
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+class CustomLimitOffsetPagination(LimitOffsetPagination):
+default_limit = 2   # number of records per request (if limit not provided)
+max_limit = 10      # optional safety limit
+
+class RestaurantViewSet(ModelViewSet):
+queryset = Restaurant.objects.all()
+serializer_class = RestaurantSerializer
+pagination_class = CustomLimitOffsetPagination
+
+Open in browser or Postman:
+/api/restaurants/?limit=2&offset=2
+
+4.Add ordering support to your RestaurantViewSet so users can order restaurants by name or cuisine using the ordering query parameter (e.g., /api/restaurants/?ordering=name or /api/restaurants/?ordering=-cuisine).
+Answer:
+Update Your ViewSet
+# api/views.py
+
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.filters import OrderingFilter
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+class RestaurantViewSet(ModelViewSet):
+queryset = Restaurant.objects.all()
+serializer_class = RestaurantSerializer
+
+```
+# Add ordering filter
+filter_backends = [OrderingFilter]
+
+# Allow ordering by these fields
+ordering_fields = ['name', 'cuisine']
+
+# Optional: default ordering
+ordering = ['name']
+```
+5.Add a filter to your RestaurantViewSet so users can filter restaurants by cuisine type (e.g., /api/restaurants/?cuisine=Italian), and test it by creating at least two different cuisine types.<br><br><em><strong>Hint:</strong> Use DjangoFilterBackend and specify filterset_fields in your viewset.</em>
+Answer:
+Install django-filter (if not installed)
+pip install django-filter
+Add to settings.py
+# foodiehub/settings.py
+
+INSTALLED_APPS = [
+...
+'django_filters',
+]
+
+REST_FRAMEWORK = {
+'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+# api/views.py
+
+from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+class RestaurantViewSet(ModelViewSet):
+queryset = Restaurant.objects.all()
+serializer_class = RestaurantSerializer
+
+```
+# Add filtering + ordering
+filter_backends = [DjangoFilterBackend, OrderingFilter]
+
+# Filter by cuisine
+filterset_fields = ['cuisine']
+
+# Ordering support
+ordering_fields = ['name', 'cuisine']
+```
+Add Test Data
+
+Create at least 2 restaurants with different cuisines (via admin or POST API):
+
+Example:Italian,Indian
+Test the Filter
+Get only Italian restaurants: /api/restaurants/?cuisine=Italian
+Get only Indian restaurants: /api/restaurants/?cuisine=Indian
+------------------------------------------------------------------------------------------
+SESSION 4 - Authentication &amp; PermissionsTopics CoveredBasic AuthenticationTokenAuthenticationSession
+AuthenticationPermissions :AllowAnyIsAuthenticatedIsAdminUserCustom PermissionsJWT Overview
+(Optional light introduction)Trainer DemonstrationProtect /api/doctors/ using authenticationGenerate auth token for
+user (using rest_framework.authtoken)AI IntegrationChatGPT ? Explain “Token vs Session Auth” for interview prep.
+
+1.Create a Django REST Framework API endpoint /api/playlists/ for a music app that is protected using BasicAuthentication. Only authenticated users should be able to view the list of playlists.
+Answer:
+Create Playlist Model(optional if not already)
+# api/models.py
+
+from django.db import models
+
+class Playlist(models.Model):
+name = models.CharField(max_length=100)
+genre = models.CharField(max_length=100)
+
+```
+def __str__(self):
+    return self.name
+```
+Create Serializer
+# api/serializers.py
+
+from rest_framework import serializers
+from .models import Playlist
+
+class PlaylistSerializer(serializers.ModelSerializer):
+class Meta:
+model = Playlist
+fields = ['id', 'name', 'genre']
+Create Protected API View
+# api/views.py
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from .models import Playlist
+from .serializers import PlaylistSerializer
+
+class PlaylistAPIView(APIView):
+authentication_classes = [BasicAuthentication]
+permission_classes = [IsAuthenticated]
+
+```
+def get(self, request):
+    playlists = Playlist.objects.all()
+    serializer = PlaylistSerializer(playlists, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+```
+Add URL
+# api/urls.py
+
+from django.urls import path
+from .views import PlaylistAPIView
+
+urlpatterns = [
+    path('playlists/', PlaylistAPIView.as_view()),
+]
+Create Superuser (for login):python manage.py createsuperuser
+Test the API
+Without Authentication
+/api/playlists/
+Response: 401 Unauthorized
+With Basic Authentication
+
+Use Postman / browser:
+
+Username: your superuser
+Password: your password
+
+Response: List of playlists
+
+2.Implement TokenAuthentication for a /api/orders/ endpoint in a Zomato-style food ordering app. Generate an auth token for a user using rest_framework.authtoken and test accessing the endpoint with and without the token.
+Answer:
+Install & Enable Token Auth
+pip install djangorestframework
+# foodiehub/settings.py
+
+INSTALLED_APPS = [
+...
+'rest_framework',
+'rest_framework.authtoken',
+]
+
+REST_FRAMEWORK = {
+'DEFAULT_AUTHENTICATION_CLASSES': [
+'rest_framework.authentication.TokenAuthentication',
+],
+}
+python manage.py migrate
+Create Order Model
+# api/models.py
+
+from django.db import models
+from django.contrib.auth.models import User
+
+class Order(models.Model):
+user = models.ForeignKey(User, on_delete=models.CASCADE)
+item = models.CharField(max_length=100)
+quantity = models.IntegerField()
+
+```
+def __str__(self):
+    return f"{self.user.username} - {self.item}"
+```
+Create Serializer
+# api/serializers.py
+
+from rest_framework import serializers
+from .models import Order
+
+class OrderSerializer(serializers.ModelSerializer):
+class Meta:
+model = Order
+fields = ['id', 'user', 'item', 'quantity']
+Create Protected API Endpoint
+# api/views.py
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from .models import Order
+from .serializers import OrderSerializer
+
+class OrderAPIView(APIView):
+authentication_classes = [TokenAuthentication]
+permission_classes = [IsAuthenticated]
+
+```
+def get(self, request):
+    orders = Order.objects.filter(user=request.user)
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+```
+
+Add URL
+# api/urls.py
+
+from django.urls import path
+from .views import OrderAPIView
+
+urlpatterns = [
+    path('orders/', OrderAPIView.as_view()),
+]
+Generate Token for User
+python manage.py drf_create_token <username>
+
+Example output: Generated token 123abc456xyz for user admin
+OR use Django shell:
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+
+user = User.objects.get(username='admin')
+token, created = Token.objects.get_or_create(user=user)
+print(token.key)
+Test the API
+Without Token : 401 Unauthorized
+With Token
+Add header:Authorization: Token 123abc456xyz
+
+3.Set up SessionAuthentication for a /api/cart/ endpoint in a Flipkart-style shopping app. Allow only logged-in users to add items to their cart, and return a 403 Forbidden error for unauthenticated users.<br><br><em><strong>Hint:</strong> Use the IsAuthenticated permission class.</em>
+Answer:
+Create Cart Model
+# shop/models.py
+
+from django.db import models
+from django.contrib.auth.models import User
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product_name = models.CharField(max_length=200)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.product_name} ({self.user.username})"
+Create Serializer
+# shop/serializers.py
+
+from rest_framework import serializers
+from .models import Cart
+
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ['id', 'product_name', 'quantity']
+Create API View (SessionAuthentication)
+# shop/views.py
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
+from .models import Cart
+from .serializers import CartSerializer
+
+class CartAPIView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        cart_items = Cart.objects.filter(user=request.user)
+        serializer = CartSerializer(cart_items, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = CartSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+Add URL
+# shop/urls.py
+
+from django.urls import path
+from .views import CartAPIView
+
+urlpatterns = [
+    path('cart/', CartAPIView.as_view()),
+]
+Enable Session Authentication in Settings
+# settings.py
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+Login Required (Very Important)
+SessionAuthentication works only when user is logged in via Django session.
+Use Django login page:/admin/login/
+
+After Login (Session Created)
+Login via browser/admin
+Then call:
+GET /api/cart/ → returns user cart
+POST /api/cart/ → adds item
+
+4.Create a custom permission class IsPremiumUser for a BookMyShow-style ticket booking API. Only users with is_premium=True should be able to access /api/tickets/. Apply this permission to the view and test with both premium and non-premium users.
+Answer:
+Add is_premium field to User
+# users/models.py
+
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+class CustomUser(AbstractUser):
+    is_premium = models.BooleanField(default=False)
+
+Update settings
+AUTH_USER_MODEL = 'users.CustomUser'
+Run migrations
+python manage.py makemigrations
+python manage.py migrate
+
+Create Ticket Model
+# bookings/models.py
+
+from django.db import models
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
+
+class Ticket(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie_name = models.CharField(max_length=200)
+    seats = models.IntegerField()
+
+    def __str__(self):
+        return self.movie_name
+Create Serializer
+# bookings/serializers.py
+
+from rest_framework import serializers
+from .models import Ticket
+
+class TicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ['id', 'movie_name', 'seats']
+Create Custom Permission
+# bookings/permissions.py
+
+from rest_framework.permissions import BasePermission
+
+class IsPremiumUser(BasePermission):
+    message = "Only premium users can access this resource."
+
+    def has_permission(self, request, view):
+        return request.user and request.user.is_authenticated and request.user.is_premium
+Apply Permission to View
+# bookings/views.py
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsPremiumUser
+from .models import Ticket
+from .serializers import TicketSerializer
+
+class TicketAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsPremiumUser]
+
+    def get(self, request):
+        tickets = Ticket.objects.filter(user=request.user)
+        serializer = TicketSerializer(tickets, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = TicketSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+Add URL
+# bookings/urls.py
+
+from django.urls import path
+from .views import TicketAPIView
+
+urlpatterns = [
+    path('tickets/', TicketAPIView.as_view()),
+]
+python manage.py createsuperuser
+python shell
+from users.models import CustomUser
+
+# Premium user
+CustomUser.objects.create_user(username='premium_user', password='1234', is_premium=True)
+
+# Non-premium user
+CustomUser.objects.create_user(username='normal_user', password='1234', is_premium=False)
+
+5.Use ChatGPT to explain the difference between TokenAuthentication and SessionAuthentication as if you are answering an interview question. Paste your answer in a text file named auth_comparison.txt.
+ANswer:
+TokenAuthentication vs SessionAuthentication (Interview Answer)
+
+TokenAuthentication and SessionAuthentication are two commonly used
+authentication methods in Django REST Framework, and they differ mainly
+in how they manage user identity and state.
+
+SessionAuthentication: SessionAuthentication is stateful and relies on
+Django’s built-in session framework. When a user logs in, the server
+creates a session and stores session data. The client (usually a
+browser) stores a session ID in cookies and sends it with every request.
+The server uses this session ID to identify the user. It also requires
+CSRF protection, making it more suitable for web applications.
+
+TokenAuthentication: TokenAuthentication is stateless. Instead of
+sessions, the server generates a unique token for each user. The client
+stores this token and sends it in the Authorization header with every
+request. The server validates the token to authenticate the user. It
+does not require CSRF protection and is ideal for APIs, mobile apps, and
+third-party integrations.
+
+Key Differences: - SessionAuthentication is stateful;
+TokenAuthentication is stateless. - Session uses cookies; Token uses
+headers. - Session requires CSRF protection; Token does not. - Session
+is best for web apps; Token is best for APIs and mobile apps. - Session
+stores data on the server; Token stores minimal info and is scalable.
+
+In summary, use SessionAuthentication for traditional web applications
+and TokenAuthentication for REST APIs and distributed systems.
+---------------------------------------------------------------------------------------------
+SESSION 5 - Third-Party API IntegrationsTopics CoveredIntegrating Popular External APIs:
+OpenWeatherMap APIGoogle Maps Geocoding APIREST Countries APIGitHub APITwitter API
+(theoretical due to OAuth limits)Trainer DemonstrationCreate endpoint /api/weather/&lt;
+city&gt;/DRF view calls external weather APIShow JSON response to frontendAI Tool
+IntegrationPostman AI ? test API endpointsChatGPT ? generate Python requests code snippet.
+
+1.Create a Django REST Framework endpoint /api/music-weather/<city>/ that fetches the current weather for the given city using the OpenWeatherMap API and returns the temperature and weather description as JSON, as if you are showing weather info for a music festival app.
+ANswer:
+pip install requests
+Get OpenWeatherMap API Key
+Go to: https://openweathermap.org/api : Sign up and get your API key
+# api/views.py
+
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+class MusicWeatherAPIView(APIView):
+
+    def get(self, request, city):
+        API_KEY = "YOUR_API_KEY"
+
+        url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+
+        response = requests.get(url)
+
+        if response.status_code != 200:
+            return Response(
+                {"error": "City not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        data = response.json()
+
+        temperature = data['main']['temp']
+        description = data['weather'][0]['description']
+
+        return Response({
+            "city": city,
+            "festival_weather": {
+                "temperature": f"{temperature}°C",
+                "description": description
+            },
+            "message": f"Enjoy your music festival in {city}! 🎶"
+        })
+Add URL
+# api/urls.py
+
+from django.urls import path
+from .views import MusicWeatherAPIView
+
+urlpatterns = [
+    path('music-weather/<str:city>/', MusicWeatherAPIView.as_view()),
+]
+Example API Calls:GET /api/music-weather/mumbai/
+2.Build a /api/food-location/ endpoint that takes a restaurant name as a query parameter, uses the Google Maps Geocoding API to find its latitude and longitude, and returns the coordinates in JSON.<br><br><em><strong>Hint:</strong> Use the requests library to call the external API and handle cases where the restaurant is not found.</em>
+Answer:
+pip install requests
+Get Google Maps API Key
+Go to: https://console.cloud.google.com/
+Enable Geocoding API
+Copy your API KEY
+# api/views.py
+
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+class FoodLocationAPIView(APIView):
+
+    def get(self, request):
+        restaurant = request.GET.get('restaurant')
+
+        if not restaurant:
+            return Response(
+                {"error": "Please provide a restaurant name"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        API_KEY = "YOUR_GOOGLE_MAPS_API_KEY"
+
+        url = "https://maps.googleapis.com/maps/api/geocode/json"
+
+        params = {
+            "address": restaurant,
+            "key": API_KEY
+        }
+
+        response = requests.get(url, params=params)
+
+        if response.status_code != 200:
+            return Response(
+                {"error": "Failed to fetch data from Google Maps"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        data = response.json()
+
+        if data['status'] != "OK" or not data['results']:
+            return Response(
+                {"error": "Restaurant not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        location = data['results'][0]['geometry']['location']
+
+        return Response({
+            "restaurant": restaurant,
+            "location": {
+                "latitude": location['lat'],
+                "longitude": location['lng']
+            }
+        })
+Add URL
+# api/urls.py
+
+from django.urls import path
+from .views import FoodLocationAPIView
+
+urlpatterns = [
+    path('food-location/', FoodLocationAPIView.as_view()),
+]
+GET /api/food-location/?restaurant=Dominos Mumbai
+
+3.Create a /api/country-info/<country_name>/ endpoint that uses the REST Countries API to fetch and return the population and capital of the given country, formatted as JSON, similar to how travel apps show quick country facts.
+Answer:
+pip install requests
+# api/views.py
+
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+class CountryInfoAPIView(APIView):
+
+    def get(self, request, country_name):
+        url = f"https://restcountries.com/v3.1/name/{country_name}"
+
+        try:
+            response = requests.get(url, timeout=5)
+        except requests.exceptions.RequestException:
+            return Response(
+                {"error": "Failed to connect to external service"},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+
+        if response.status_code != 200:
+            return Response(
+                {"error": "Country not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        data = response.json()
+
+        if not data or isinstance(data, dict):
+            return Response(
+                {"error": "Country not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        country_data = data[0]
+
+        capital = country_data.get('capital', ["N/A"])[0]
+        population = country_data.get('population', "N/A")
+
+        return Response({
+            "country": country_name,
+            "facts": {
+                "capital": capital,
+                "population": population
+            },
+            "message": f"Quick travel facts for {country_name} ✈️"
+        })
+# api/urls.py
+
+from django.urls import path
+from .views import CountryInfoAPIView
+
+urlpatterns = [
+    path('country-info/<str:country_name>/', CountryInfoAPIView.as_view()),
+]
+GET /api/country-info/india/
+4.Use ChatGPT to generate a Python code snippet that sends a GET request to the GitHub API to fetch public repositories for a given username, then copy and adapt that code into a DRF view called /api/github-repos/<username>/ that returns the list of repository names as JSON.
+Answer:
+Basic Python Code (using requests)
+
+This is the simple snippet to fetch public repositories from the GitHub API:
+import requests
+
+username = "octocat"
+url = f"https://api.github.com/users/{username}/repos"
+
+response = requests.get(url)
+
+if response.status_code == 200:
+    repos = response.json()
+    repo_names = [repo['name'] for repo in repos]
+    print(repo_names)
+else:
+    print("User not found")
+Convert into DRF API View
+# api/views.py
+
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+class GithubReposAPIView(APIView):
+
+    def get(self, request, username):
+        url = f"https://api.github.com/users/{username}/repos"
+
+        try:
+            response = requests.get(url, timeout=5)
+        except requests.exceptions.RequestException:
+            return Response(
+                {"error": "Failed to connect to GitHub"},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+
+        if response.status_code != 200:
+            return Response(
+                {"error": "GitHub user not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        repos = response.json()
+
+        repo_names = [repo['name'] for repo in repos]
+
+        return Response({
+            "username": username,
+            "repositories": repo_names
+        })
+# api/urls.py
+
+from django.urls import path
+from .views import GithubReposAPIView
+
+urlpatterns = [
+    path('github-repos/<str:username>/', GithubReposAPIView.as_view()),
+]
+GET /api/github-repos/octocat/
+
+5.Open your /api/music-weather/<city>/ endpoint in Postman and use Postman AI to generate and run a test that checks if the response contains both 'temperature' and 'description' keys.
+Answer:
+Send the Request
+Open Postman
+Create a new request:GET http://localhost:8000/api/music-weather/London/
+Click Send
+Confirm you get a JSON response like:
+{
+  "temperature": 22,
+  "description": "clear sky",
+  "song": "..."
+}
+Use Postman AI (Optional)
+If you have Postman AI enabled:
+
+Go to the Tests tab
+Click “Generate Tests” (AI button)
+
+Prompt it with:
+
+Write a test to check that the response JSON contains 'temperature' and 'description'
+It will generate something similar to the code below
+Add the Test Script Manually (or edit AI output)
+pm.test("Response contains temperature and description", function () {
+    const jsonData = pm.response.json();
+
+    pm.expect(jsonData).to.have.property("temperature");
+    pm.expect(jsonData).to.have.property("description");
+});
+Run the Test
+Click Send again
+Scroll down to Test Results
+You should see:
+Response contains temperature and description
+---------------------------------------------------------------------------------------------
+SESSION 6 - Advanced Features + DeploymentTopics CoveredEmail Sending API (MailChimp,
+ Mailgun)SMS API (Twilio)Payment APIs (Stripe/PayPal)Social Authentication (Google Login)
+ Custom Response FormattingException Handling in DRFDeploying REST API on
+ PythonAnywhereVersioning your API (v1, v2)Trainer DemonstrationIntegrate sample
+ Twilio SMS API (demo level)Deploy REST API liveTest endpoints using Postman
+
+1.Set up a Django REST Framework endpoint called /api/send-email/ that sends a welcome email to a user using the Mailgun API when a POST request is made with the user's email address.<br><br><em><strong>Hint:</strong> Use the requests library to call Mailgun's API from your Django view.</em>
+Answer:
+Install dependency
+pip install requests
+In your settings.py:
+MAILGUN_API_KEY = "your-mailgun-api-key"
+MAILGUN_DOMAIN = "your-domain.mailgun.org"
+MAILGUN_BASE_URL = f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}"
+DEFAULT_FROM_EMAIL = "Welcome <mailgun@your-domain.mailgun.org>"
+
+Create the DRF View
+In views.py:
+import requests
+from django.conf import settings
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+
+@api_view(['POST'])
+def send_email(request):
+    email = request.data.get('email')
+
+    if not email:
+        return Response(
+            {"error": "Email is required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        response = requests.post(
+            f"{settings.MAILGUN_BASE_URL}/messages",
+            auth=("api", settings.MAILGUN_API_KEY),
+            data={
+                "from": settings.DEFAULT_FROM_EMAIL,
+                "to": [email],
+                "subject": "Welcome!",
+                "text": "Thanks for signing up! We're glad to have you."
+            }
+        )
+
+        if response.status_code == 200:
+            return Response(
+                {"message": "Email sent successfully"},
+                status=status.HTTP_200_OK
+            )
+        else:
+            return Response(
+                {"error": "Failed to send email", "details": response.text},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    except Exception as e:
+        return Response(
+            {"error": str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+Add URL route : In urls.py:
+from django.urls import path
+from .views import send_email
+
+urlpatterns = [
+    path('api/send-email/', send_email, name='send-email'),
+]
+Test with Postman : POST http://localhost:8000/api/send-email/
+Body (JSON):
+{
+  "email": "user@example.com"
+}
+Expected Response
+{
+  "message": "Email sent successfully"
+}
+2.Create a /api/send-sms/ endpoint that accepts a phone number and message, then sends the SMS using Twilio's API.<br><br><em><strong>Hint:</strong> Register for a free Twilio account to get test credentials and use the twilio Python package.</em>
+Answer:
+pip install twilio
+In your settings.py (use environment variables in real projects):
+TWILIO_ACCOUNT_SID = "your_account_sid"
+TWILIO_AUTH_TOKEN = "your_auth_token"
+TWILIO_PHONE_NUMBER = "+1234567890"  # your Twilio number
+
+Create the DRF View:In views.py:
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from django.conf import settings
+from twilio.rest import Client
+
+
+@api_view(['POST'])
+def send_sms(request):
+    phone_number = request.data.get("phone")
+    message_body = request.data.get("message")
+
+    if not phone_number or not message_body:
+        return Response(
+            {"error": "Phone number and message are required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        client = Client(
+            settings.TWILIO_ACCOUNT_SID,
+            settings.TWILIO_AUTH_TOKEN
+        )
+
+        message = client.messages.create(
+            body=message_body,
+            from_=settings.TWILIO_PHONE_NUMBER,
+            to=phone_number
+        )
+
+        return Response(
+            {
+                "message": "SMS sent successfully",
+                "sid": message.sid
+            },
+            status=status.HTTP_200_OK
+        )
+
+    except Exception as e:
+        return Response(
+            {"error": str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+In urls.py:
+from django.urls import path
+from .views import send_sms
+
+urlpatterns = [
+    path('api/send-sms/', send_sms, name='send-sms'),
+]
+Test with Postman
+POST http://localhost:8000/api/send-sms/
+Body (JSON):
+{
+  "phone": "+15551234567",
+  "message": "Hello from Django + Twilio!"
+}
+o/p
+{
+  "message": "SMS sent successfully",
+  "sid": "SMxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+
+3.Add a /api/pay/ endpoint that simulates a payment using Stripe's test API keys — accept amount and currency in the POST body and return a custom JSON response with payment status and transaction ID.
+Answer:
+pip install stripe
+In your settings.py:STRIPE_SECRET_KEY = "sk_test_your_test_key_here"
+In views.py:
+import stripe
+from django.conf import settings
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+# Initialize Stripe
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+@api_view(['POST'])
+def process_payment(request):
+    amount = request.data.get("amount")
+    currency = request.data.get("currency")
+
+    if not amount or not currency:
+        return Response(
+            {"error": "Amount and currency are required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        # Stripe expects amount in smallest currency unit (e.g., cents)
+        amount_in_cents = int(float(amount) * 100)
+
+        intent = stripe.PaymentIntent.create(
+            amount=amount_in_cents,
+            currency=currency,
+            payment_method_types=["card"],
+        )
+
+        return Response(
+            {
+                "status": "success",
+                "transaction_id": intent.id,
+                "amount": amount,
+                "currency": currency
+            },
+            status=status.HTTP_200_OK
+        )
+
+    except Exception as e:
+        return Response(
+            {
+                "status": "failed",
+                "error": str(e)
+            },
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+In urls.py:
+from django.urls import path
+from .views import process_payment
+
+urlpatterns = [
+    path('api/pay/', process_payment, name='process-payment'),
+]
+Test with Postman:POST http://localhost:8000/api/pay/
+Body (JSON):
+{
+  "amount": 49.99,
+  "currency": "usd"
+}
+Example Success Response
+{
+  "status": "success",
+  "transaction_id": "pi_3Nxxxxxxx",
+  "amount": 49.99,
+  "currency": "usd"
+}
+
+4.Implement Google Login for your Django REST API so users can authenticate using their Google account and receive a JWT token.<br><br><em><strong>Hint:</strong> Use the django-allauth or social-auth-app-django package for social authentication integration.</em>
+Answer:
+Install dependencies
+pip install django-allauth dj-rest-auth djangorestframework-simplejwt
+Update settings.py
+INSTALLED_APPS = [
+    'django.contrib.sites',
+
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+]
+SITE_ID = 1
+Authentication backends
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+REST Framework + JWT
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+SimpleJWT config
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
+Enable JWT in dj-rest-auth :REST_USE_JWT = True
+
+Configure Google OAuth
+Go to Google Cloud Console:
+
+Create OAuth credentials
+Add redirect URI:
+http://localhost:8000/accounts/google/login/callback/
+
+Add to settings.py:
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': 'YOUR_GOOGLE_CLIENT_ID',
+            'secret': 'YOUR_GOOGLE_CLIENT_SECRET',
+            'key': ''
+        }
+    }
+}
+Add URLs : In your main urls.py:
+from django.urls import path, include
+
+urlpatterns = [
+    path('api/auth/', include('dj_rest_auth.urls')),
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('accounts/', include('allauth.urls')),
+]
+Google Login Endpoint (JWT Response)
+dj-rest-auth provides a ready endpoint: POST /api/auth/google/
+Create Custom Google Login View (Important)
+views.py
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
+
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+
+Add URL:
+from django.urls import path
+from .views import GoogleLogin
+
+urlpatterns = [
+    path('api/auth/google/', GoogleLogin.as_view(), name='google_login'),
+]
+How to Authenticate
+Step 1: Get Google access_token
+From frontend (Google Sign-In)
+Send to your API :POST /api/auth/google/
+Body:
+{
+  "access_token": "google-access-token"
+}
+
+Example Response
+{
+  "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIs...",
+  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIs...",
+  "user": {
+    "id": 1,
+    "email": "user@gmail.com"
+  }
+}
+5.Deploy your Django REST API to PythonAnywhere and verify that the /api/send-email/ endpoint works live by testing it with Postman.<br><br><em><strong>Constraint:</strong> Include a screenshot of your live endpoint response in your submission.</em>
+Answer:
+Deploy Django to PythonAnywhere
+Upload your project
+Go to PythonAnywhere Dashboard
+Open a Bash console
+Clone or upload your project:
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
+Create virtual environment
+mkvirtualenv myenv --python=python3.10
+pip install -r requirements.txt
+
+Configure WSGI
+Go to Web → WSGI configuration file
+Edit:
+import sys
+path = '/home/yourusername/your-repo'
+if path not in sys.path:
+    sys.path.append(path)
+
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
+Set environment variables (for Mailgun)
+
+In the Web tab → Environment variables:
+
+MAILGUN_API_KEY=your_key
+MAILGUN_DOMAIN=your_domain
+
+Update settings.py
+ALLOWED_HOSTS = ['yourusername.pythonanywhere.com']
+python manage.py migrate
+Click Reload in PythonAnywhere
+
+Your Live Endpoint
+
+Your API will be available at: https://yourusername.pythonanywhere.com/api/send-email/
+Test with Postman
+Request:
+POST https://yourusername.pythonanywhere.com/api/send-email/
+Body:
+{
+  "email": "test@example.com"
+}
+Expected Response
+{
+  "message": "Email sent successfully"
+}

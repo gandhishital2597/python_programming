@@ -1,0 +1,14 @@
+Session 2: Variables &amp; Data TypesCoverage Depth:var, let, const-scope &amp;
+reassignment.Primitive vs Reference types.Dynamic typing in JS.Demo:Create variables:
+let userName="Aarya", let followers=1500.Display in console.Link to App: Represent profile
+details in JS variables.
+
+1.Create three variables using let to represent an Instagram user's profile: userName, followers, and isVerified. Assign your own name, a number for followers, and a boolean for verification status, then display all three in the console.
+let userName = "Shital"
+let followers = 1200
+let isVerified = true
+
+console.log("User Name:", userName)
+console.log("Followers:", followers)
+console.log("Verified:", isVerified)
+

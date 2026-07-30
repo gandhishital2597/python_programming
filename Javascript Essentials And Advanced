@@ -533,6 +533,152 @@ console.log(canOrderFood(false, false)); // false
 ---------------------------------------------------------------------------------------
 Session 4: Loops &amp; IterationCoverage Depth:For, While, Do-While, For-of, ForEach.Difference between indexed and iterable loops.Demo:Loop through an array of social links and print each in console.Learning Goal: Understand repetition and dynamic rendering concept.
 
+Question 1,2.
+Create an array called favApps with the names of 5 apps you use daily (like Instagram, Zomato, Paytm, etc.) and use a for loop to print each app name in the console.
+
+Answer:
+favApps = ['Instagram', 'Zomato', 'Paytm','Pinterest','amazon']
+for(let i = 0;i<favApps.length;i++){
+    console.log(favApps[i])
+}
+
+Question 3.
+Create an array called playlist containing 5 of your favorite song names and use a for loop to print each song name in the console.
+
+Answer :
+let playlist =['song1','song2','song3','song4','song5']
+for(let i = 0;i<playlist.length;i++){
+    console.log(playlist[i])
+}
+Question 4,5.
+Given an array of cricket team names for IPL, use a while loop to print each team name in uppercase.
+Answer:
+let iplTeams = [
+  "Mumbai Indians",
+  "Chennai Super Kings",
+  "Royal Challengers Bangalore",
+  "Kolkata Knight Riders",
+  "Sunrisers Hyderabad"
+];
+
+
+let i = 0;
+
+while (i < iplTeams.length) {
+  console.log(iplTeams[i].toUpperCase());
+  i++;
+}
+
+Question 6.
+Given an array of Instagram usernames, use a while loop to print each username in uppercase.
+Answer :
+let usernames =['kian','griva','dhruvit','shital']
+let j = 0;
+while( j <usernames.length){
+    console.log(usernames[j].toUpperCase());
+    j++;
+}
+
+Question 7,8.
+Create an array called playlist with 4 song names (strings). Use a do-while loop to print each song name along with its index (e.g., '0: Kesariya') in the console.
+
+
+Answer:
+// Create playlist array
+let playlist = [
+  "Kesariya",
+  "Apna Bana Le",
+  "Tum Hi Ho",
+  "Raataan Lambiyan"
+];
+
+let i = 0;
+
+// Use do-while loop to print song name with index
+do {
+  console.log(i + ": " + playlist[i]);
+  i++;
+} while (i < playlist.length);
+
+Question 9.
+Use a do-while loop to simulate a Zomato order tracker that prints 'Order status: Preparing', 'Order status: Out for delivery', and 'Order status: Delivered' in sequence, stopping after the last status.
+
+ANswer :
+// Zomato order statuses
+let orderStatus = [
+  "Order status: Preparing",
+  "Order status: Out for delivery",
+  "Order status: Delivered"
+];
+
+let l = 0;
+
+// Use do-while loop
+do {
+  console.log(orderStatus[l]);
+  l++;
+} while (l < orderStatus.length);
+
+Question 10,11.
+Given an array of objects representing Flipkart products (each with name and price), use a for-of loop to print only the product names
+
+Answer:
+let flipcart = [
+    {name : 'tv',price : 20000},
+    {name : 'watch',price : 4000},
+    {name : 'mobile',price : 40000}
+]
+for(let i = 0;i<flipcart.length;i++){
+    console.log(flipcart[i].name,flipcart[i].price)
+}
+
+Question 12.
+Given an array of Flipkart product prices, use a for-of loop to calculate and print the total price of all products.
+Answer:
+// Array of Flipkart product prices
+let productPrices = [499, 1299, 799, 1999];
+
+let totalPrice = 0;
+
+// Use for-of loop to calculate total
+for (let price of productPrices) {
+    totalPrice += price;
+}
+
+// Print total price
+console.log("Total Price: ₹" + totalPrice);
+
+Question 13,14.
+Create an array of your 5 most-used WhatsApp contacts (just names as strings). Use the forEach method to print a message for each: 'Sending hi to [name] on WhatsApp!'.<br><br><em><strong>Hint:</strong> Use an arrow function as the callback for forEach.</em>
+
+Answer:
+// Array of WhatsApp contacts
+let whatsappContacts = [
+  "Kian",
+  "Griva",
+  "Dhruvit",
+  "Shital",
+  "Priya"
+];
+
+// Use forEach with arrow function
+whatsappContacts.forEach((name) => {
+  console.log(`Sending hi to ${name} on WhatsApp!`);
+});
+
+Question 15.
+Use the forEach method to loop through an array of cricket team names (e.g., 'MI', 'CSK', 'RCB', 'GT') and print 'Go [team]!' for each.<br><br><em><strong>Hint:</strong> forEach takes a callback function with the current element as a parameter.</em>
+
+Answer:
+// Array of cricket team names
+let teams = ["MI", "CSK", "RCB", "GT"];
+
+// Use forEach with callback function
+teams.forEach((team) => {
+    console.log(`Go ${team}!`);
+});
+--------------------------------------------------------------------
+
 
 
 

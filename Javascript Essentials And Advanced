@@ -678,6 +678,895 @@ teams.forEach((team) => {
     console.log(`Go ${team}!`);
 });
 --------------------------------------------------------------------
+Session 5: Functions &amp; ReusabilityCoverage Depth:Function declaration vs expression vs arrow function.Parameters and return values.Demo:Function createButton(label,color) that returns a styled HTML button.
+
+Question 1,2.
+Create a function declaration called createSpotifyButton(label, color) that returns an HTML button element with the given label and background color, and display it on the page.
+
+Answer :
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function createSpotifyButton(label, color){
+        let button = document.createElement("button")
+        button.textContent = label;
+        button.style.backgroundColor = color;
+        button.style.color = "white";
+        button.style.padding = "10px,20px";
+        button.style.border = "none";
+        button.style.borderRadius = "5px";
+        button.style.cursor = "pointer";
+
+        return button;
+      
+    }
+    let spotifyBtn = createSpotifyButton("Play on Spotify", "green");
+    document.body.appendChild(spotifyBtn)
+</script>
+
+</html>
+
+Question 3.
+Declare a function expression called getGreeting that takes a user's name as a parameter and returns a message like 'Hello, Rahul!'.
+
+
+Answer :
+const getGreeting = function(name){
+    return `hello, ${name} !`
+};
+console.log(getGreeting('shital'));
+
+Question 4,5.
+Write a function expression named getDiscountedPrice that takes a price and a discount percent, and returns the final price after applying the discount (e.g., for Flipkart-style sale banners).
+
+Answer:
+const getDiscountedPrice = function(price,discountPercent){
+    const discountAmount = (price * discountPercent) / 100;
+    const finalPrice = price - discountAmount;
+    return finalPrice;
+}
+console.log(getDiscountedPrice(1000, 20)); 
+
+Question 6.
+Write an arrow function called formatFollowers that takes a number and returns it formatted as '1.5K' for 1500 or '2M' for 2000000, similar to how Instagram displays follower counts.<br><br><em><strong>Hint:</strong> Use conditional logic to check the number's size and format accordingly.</em>
+
+Answer:
+const formatFollowers = (count) => {
+  if (count >= 1000000) {
+    return (count / 1000000).toFixed(count % 1000000 === 0 ? 0 : 1) + "M";
+  } else if (count >= 1000) {
+    return (count / 1000).toFixed(count % 1000 === 0 ? 0 : 1) + "K";
+  } else {
+    return count.toString();
+  }
+};
+
+// Example usage
+console.log(formatFollowers(1500));     // 1.5K
+console.log(formatFollowers(2000000));  // 2M
+console.log(formatFollowers(980));      // 980
+
+
+Question 7,8.
+Rewrite the following function as an arrow function: function formatFollowers(count) { if(count >= 1000) { return (count/1000).toFixed(1) + 'K'; } return count; }
+
+Answer:
+const formatFollowers=(count)=>{
+    if(count>=1000){
+        return (count/1000).toFixed(1) + 'K';
+    }
+    return count;
+}
+
+Question 9.
+Create a function declaration called createLikeButton(label, color) that returns a styled HTML button element with the given label and background color. Append the button to the document body.
+
+Answer:
+// Function declaration
+function createLikeButton(label, color) {
+    // Create button element
+    const button = document.createElement("button");
+
+    // Set text
+    button.textContent = label;
+
+    // Apply styles
+    button.style.backgroundColor = color;
+    button.style.color = "white";
+    button.style.border = "none";
+    button.style.padding = "10px 16px";
+    button.style.borderRadius = "6px";
+    button.style.cursor = "pointer";
+    button.style.fontSize = "14px";
+
+    // Append to document body
+    document.body.appendChild(button);
+
+    // Return the button element
+    return button;
+}
+
+// Example usage
+createLikeButton("Like", "crimson");
+
+Question 10,11.
+Build a mini Zomato-style feature: write a function showMenuItem(name, price) that returns a styled HTML div with the food item's name and price, then call it for three different items and display them on the page.<br><br><em><strong>Hint:</strong> Use template literals and document.body.appendChild or innerHTML to add the divs.</em>
+
+Answer:
+// Function to create and display a menu item
+function showMenuItem(name, price) {
+    // Create a div
+    const itemDiv = document.createElement("div");
+
+    // Add content using template literals
+    itemDiv.innerHTML = `
+        <h3>${name}</h3>
+        <p>₹${price}</p>
+    `;
+
+    // Style the div
+    itemDiv.style.border = "1px solid #ddd";
+    itemDiv.style.padding = "10px";
+    itemDiv.style.margin = "10px";
+    itemDiv.style.borderRadius = "8px";
+    itemDiv.style.width = "200px";
+    itemDiv.style.backgroundColor = "#fff8f0";
+    itemDiv.style.boxShadow = "0 2px 5px rgba(0,0,0,0.1)";
+
+    // Append to body
+    document.body.appendChild(itemDiv);
+
+    return itemDiv;
+}
+
+// Call function for 3 items
+showMenuItem("Paneer Butter Masala", 250);
+showMenuItem("Veg Biryani", 180);
+showMenuItem("Chocolate Shake", 120);
+
+Question 12.
+Refactor the following code to use an arrow function instead of a function declaration: <br><br>function double(x) { return x * 2; }
+
+Answer:const double = (x) => x * 2;
+
+Question 13.
+Build a reusable function called createPlaylistButton(songName, themeColor) that returns a button element styled with the given color and displaying the song name. Use this function to create and display three buttons for your favorite Spotify tracks.
+
+Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       // Function to create a styled button
+function createPlaylistButton(songName, themeColor) {
+    const button = document.createElement("button");
+
+    // Set button text
+    button.textContent = songName;
+
+    // Style the button
+    button.style.backgroundColor = themeColor;
+    button.style.color = "white";
+    button.style.border = "none";
+    button.style.padding = "10px 15px";
+    button.style.margin = "10px";
+    button.style.borderRadius = "20px";
+    button.style.cursor = "pointer";
+    button.style.fontSize = "14px";
+
+    return button;
+}
+
+// Create and display 3 buttons
+const btn1 = createPlaylistButton("Kesariya", "#1DB954"); // Spotify green
+const btn2 = createPlaylistButton("Blinding Lights", "#ff4d4d");
+const btn3 = createPlaylistButton("Shape of You", "#6a5acd");
+
+document.body.appendChild(btn1);
+document.body.appendChild(btn2);
+document.body.appendChild(btn3);
+    </script>
+</body>
+</html>
+
+----------------------------------------------------------------------------
+Session 6: DOM Manipulation – Selecting ElementsCoverage Depth:getElementById, querySelector, innerHTML, style.Reading &amp; updating content dynamically.Demo:Add new link element dynamically from input form.Trainer Note: Show real-time DOM change in browser.
+
+Question 1,2.
+Create an HTML page with a <div id="greeting"></div> and use getElementById in your script to set its innerHTML to 'Welcome to the IPL Fan Zone!'.
+
+Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "greeting">   </div>
+</body>
+<script>
+    let greetingDiv = document.getElementById("greeting");
+    greetingDiv.innerHTML = "'Welcome to the IPL Fan Zone!'."
+</script>
+</html>
+
+Question 3 Create an HTML file with a <div id="greeting"></div> and use getElementById in a script to set its innerHTML to 'Hello, welcome to your playlist!'
+
+Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "greeting">   </div>
+
+</body>
+<script>
+    
+
+    let greetingDiv = document.getElementById("greeting1");
+    greetingDi.innerHTML = "'Hello, welcome to your playlist!'"
+
+
+</script>
+</html>
+
+Question 4,5.
+Build a small form with an input box and a button labeled 'Add Song'. When the button is clicked, use querySelector to get the input value and dynamically add a new <li> element with the song name to a <ul id="playlist"> on the page.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Playlist Builder</title>
+</head>
+<body>
+
+    <h2>My Playlist 🎵</h2>
+
+    <!-- Input and Button -->
+    <input type="text" id="songInput" placeholder="Enter song name" />
+    <button id="addBtn">Add Song</button>
+
+    <!-- Playlist -->
+    <ul id="playlist"></ul>
+
+    <script>
+        // Select elements using querySelector
+        const input = document.querySelector("#songInput");
+        const button = document.querySelector("#addBtn");
+        const playlist = document.querySelector("#playlist");
+
+        // Add click event
+        button.addEventListener("click", function() {
+            const songName = input.value;
+
+            if (songName.trim() !== "") {
+                // Create new list item
+                const li = document.createElement("li");
+                li.textContent = songName;
+
+                // Add to playlist
+                playlist.appendChild(li);
+
+                // Clear input
+                input.value = "";
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+Question 6.
+Build a simple form with an input for a new friend's name and a button labeled 'Add Friend'; when the button is clicked, use querySelector to read the input value and dynamically add a new <li> with that name to a <ul id="friend-list">.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Friend List</title>
+</head>
+<body>
+
+    <h2>My Friends 👯</h2>
+
+    <!-- Input and Button -->
+    <input type="text" id="friendInput" placeholder="Enter friend's name" />
+    <button id="addFriendBtn">Add Friend</button>
+
+    <!-- Friend List -->
+    <ul id="friend-list"></ul>
+
+    <script>
+        // Select elements
+        const input = document.querySelector("#friendInput");
+        const button = document.querySelector("#addFriendBtn");
+        const list = document.querySelector("#friend-list");
+
+        // Add event listener
+        button.addEventListener("click", function() {
+            const friendName = input.value;
+
+            if (friendName.trim() !== "") {
+                // Create new list item
+                const li = document.createElement("li");
+                li.textContent = friendName;
+
+                // Append to list
+                list.appendChild(li);
+
+                // Clear input
+                input.value = "";
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+Question 7,8.
+Select an existing <h2> element with the id 'offer' and use JavaScript to change its text to 'Flat 50% Off on Zomato Today!' and set its color to red using the style property.<br><br><em><strong>Hint:</strong> Use getElementById to select and .style.color to update the color.</em>
+ANswer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Offer Update</title>
+</head>
+<body>
+
+    <!-- Existing Heading -->
+    <h2 id="offer">Special Offer</h2>
+
+    <script>
+        // Select the element using getElementById
+        const offerHeading = document.getElementById("offer");
+
+        // Change text
+        offerHeading.innerHTML = "Flat 50% Off on Zomato Today!";
+
+        // Change color to red
+        offerHeading.style.color = "red";
+    </script>
+
+</body>
+</html>
+
+Question 9.
+Create a 'Dark Mode' toggle button that, when clicked, uses getElementById to change the background color of the page and updates the button text to 'Light Mode'.<br><br><em><strong>Hint:</strong> Use the style property to change document.body's background color.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dark Mode Toggle</title>
+</head>
+<body id="pageBody">
+
+    <h2>Toggle Theme 🌙</h2>
+
+    <!-- Button -->
+    <button id="toggleBtn">Dark Mode</button>
+
+    <script>
+        const body = document.getElementById("pageBody");
+        const button = document.getElementById("toggleBtn");
+
+        let isDark = false;
+
+        button.addEventListener("click", function() {
+            if (!isDark) {
+                // Switch to Dark Mode
+                body.style.backgroundColor = "#121212";
+                body.style.color = "white";
+                button.textContent = "Light Mode";
+                isDark = true;
+            } else {
+                // Switch back to Light Mode
+                body.style.backgroundColor = "white";
+                body.style.color = "black";
+                button.textContent = "Dark Mode";
+                isDark = false;
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+Question 10,11.
+Create a function that updates the background color of a <div id="moodbox"></div> in real-time as the user types a color name (like 'pink' or 'yellow') into an input box.<br><br><em><strong>Hint:</strong> Listen for the input event and use .style.backgroundColor.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mood Color Box</title>
+</head>
+<body>
+
+    <h2>Type a Color 🎨</h2>
+
+    <!-- Input -->
+    <input type="text" id="colorInput" placeholder="e.g., pink, blue, yellow" />
+
+    <!-- Mood Box -->
+    <div id="moodbox" style="width:200px; height:200px; margin-top:20px; border:1px solid #ccc;">
+    </div>
+
+    <script>
+        // Function to update color
+        function updateMoodColor() {
+            const input = document.getElementById("colorInput");
+            const box = document.getElementById("moodbox");
+
+            // Change background color in real-time
+            box.style.backgroundColor = input.value;
+        }
+
+        // Listen for input event
+        document.getElementById("colorInput").addEventListener("input", updateMoodColor);
+    </script>
+
+</body>
+</html>
+
+Question 12.
+Build a mini 'Now Playing' display like Spotify: show a song title in a <span id="song-title"></span> and a button 'Change Song'; when the button is clicked, update the innerHTML of the span to a new song name from a predefined array.
+
+ANswer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Now Playing 🎧</title>
+</head>
+<body>
+
+    <h2>Now Playing:</h2>
+    <span id="song-title">Kesariya</span>
+
+    <br><br>
+    <button id="changeSongBtn">Change Song</button>
+
+    <script>
+        // Predefined song list
+        const songs = ["Kesariya", "Blinding Lights", "Shape of You", "Levitating"];
+
+        let index = 0;
+
+        const songTitle = document.getElementById("song-title");
+        const button = document.getElementById("changeSongBtn");
+
+        // Change song on button click
+        button.addEventListener("click", function() {
+            index = (index + 1) % songs.length; // loop through songs
+            songTitle.innerHTML = songs[index];
+        });
+    </script>
+
+</body>
+</html>
+
+---------------------------------------------------------------------------------------------
+Session 7: DOM Events &amp; InteractivityCoverage Depth:Event types: onclick, onchange, addEventListener.Event object basics.Demo:“Add Link” button creates new card instantly.Depth: Explain event flow concept (intro only).
+
+Question 1,2.
+Create an HTML file with a button labeled 'Add to Playlist' and use the onclick event to display an alert saying 'Song added!' when the button is clicked.
+
+ANswer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add to Playlist</title>
+</head>
+<body>
+
+    <h2>My Music App 🎵</h2>
+
+    <!-- Button with onclick -->
+    <button onclick="addToPlaylist()">Add to Playlist</button>
+
+    <script>
+        function addToPlaylist() {
+            alert("Song added!");
+        }
+    </script>
+
+</body>
+</html>
+
+Question 3.
+Create an HTML page with a button labeled 'Add Song' — when the button is clicked, use onclick to instantly add a new card below showing a random song title from your favorite playlist.
+
+ANswer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Song</title>
+    <style>
+        .card {
+            width: 200px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>My Playlist 🎵</h2>
+
+    <!-- Button -->
+    <button onclick="addSong()">Add Song</button>
+
+    <!-- Song cards will appear here -->
+    <div id="song-container"></div>
+
+    <script>
+        // Favorite playlist
+        const songs = [
+            "Kesariya",
+            "Apna Bana Le",
+            "Blinding Lights",
+            "Shape of You",
+            "Tum Hi Ho"
+        ];
+
+        function addSong() {
+            // Select random song
+            let randomIndex = Math.floor(Math.random() * songs.length);
+            let songName = songs[randomIndex];
+
+            // Create song card
+            let card = document.createElement("div");
+            card.className = "card";
+
+            // Add song title
+            card.innerHTML = `
+                <h3>🎵 ${songName}</h3>
+                <p>Added to Playlist</p>
+            `;
+
+            // Display card
+            document.getElementById("song-container").appendChild(card);
+        }
+    </script>
+
+</body>
+</html>
+
+Question 4,5.
+Build a mini form with an input for 'Username' and use the onchange event to log the entered username to the console every time the input changes.
+Answer:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Username Form</title>
+</head>
+<body>
+
+    <h2>Enter Username</h2>
+
+    <!-- Input field -->
+    <input 
+        type="text" 
+        id="username" 
+        placeholder="Enter your username"
+        onchange="showUsername()"
+    >
+
+    <script>
+        function showUsername() {
+            // Get input value
+            const username = document.getElementById("username").value;
+
+            // Print username in console
+            console.log("Username:", username);
+        }
+    </script>
+
+</body>
+</html>
+
+Question 6.
+Build a simple Zomato-style food order form with a dropdown for cuisine and an input for quantity — use the onchange event on the dropdown to display a message showing which cuisine was selected.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zomato Food Order</title>
+</head>
+<body>
+
+    <h2> Zomato Food Order</h2>
+
+    <!-- Cuisine Dropdown -->
+    <label>Select Cuisine:</label>
+    <select id="cuisine" onchange="showCuisine()">
+        <option value="">--Choose Cuisine--</option>
+        <option value="Indian">Indian</option>
+        <option value="Chinese">Chinese</option>
+        <option value="Italian">Italian</option>
+        <option value="Mexican">Mexican</option>
+    </select>
+
+    <br><br>
+
+    <!-- Quantity Input -->
+    <label>Quantity:</label>
+    <input type="number" id="quantity" placeholder="Enter quantity">
+
+    <p id="message"></p>
+
+    <script>
+        function showCuisine() {
+            // Get selected cuisine
+            const cuisine = document.getElementById("cuisine").value;
+
+            // Display message
+            document.getElementById("message").innerHTML =
+                "You selected " + cuisine + " cuisine 🍴";
+        }
+    </script>
+
+</body>
+</html>
+
+Question 7,8.
+Create a 'Like' button similar to Instagram's and use addEventListener to increment and display the like count each time the button is clicked.<br><br><em><strong>Hint:</strong> Use a variable to track the count and update the button text on each click.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Like Button</title>
+</head>
+<body>
+
+    <h2>Instagram Post ❤️</h2>
+
+    <p>Beautiful Photo 📸</p>
+
+    <!-- Like Button -->
+    <button id="likeBtn">❤️ Like 0</button>
+
+    <script>
+        // Variable to store like count
+        let likeCount = 0;
+
+        // Select button
+        const button = document.getElementById("likeBtn");
+
+        // Add click event
+        button.addEventListener("click", function() {
+            likeCount++;
+
+            // Update button text
+            button.innerHTML = `❤️ Like ${likeCount}`;
+        });
+    </script>
+
+</body>
+</html>
+
+Question 9.
+Write a function addToCart that adds a product name to a visible cart section when a 'Add to Cart' button is clicked, but attach the click event using addEventListener instead of the onclick attribute.<br><br><em><strong>Hint:</strong> Use document.querySelector and addEventListener to connect the button and function.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+</head>
+<body>
+
+    <h2>Flipkart Cart 🛒</h2>
+
+    <!-- Product Button -->
+    <button id="cartBtn">Add to Cart</button>
+
+    <!-- Cart Section -->
+    <h3>Your Cart:</h3>
+    <ul id="cart"></ul>
+
+    <script>
+        // Function to add product to cart
+        function addToCart() {
+            const productName = "Wireless Headphones";
+
+            // Create new list item
+            const li = document.createElement("li");
+            li.textContent = productName;
+
+            // Add product to cart list
+            document.querySelector("#cart").appendChild(li);
+        }
+
+        // Select button using querySelector
+        const button = document.querySelector("#cartBtn");
+
+        // Attach click event using addEventListener
+        button.addEventListener("click", addToCart);
+    </script>
+
+</body>
+</html>
+
+Question 10,11.
+Display a list of 3 movies (hardcoded) and add a 'Remove' button next to each. Use addEventListener to remove the movie card from the DOM when its button is clicked.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie List</title>
+    <style>
+        .movie-card {
+            width: 250px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>My Movies 🎬</h2>
+
+    <div id="movieList"></div>
+
+    <script>
+        // Hardcoded movie list
+        const movies = [
+            "Avengers: Endgame",
+            "Inception",
+            "Interstellar"
+        ];
+
+        const movieContainer = document.querySelector("#movieList");
+
+        // Display movies
+        movies.forEach((movie) => {
+
+            // Create movie card
+            const card = document.createElement("div");
+            card.className = "movie-card";
+
+            card.innerHTML = `
+                <h3>${movie}</h3>
+                <button class="removeBtn">Remove</button>
+            `;
+
+            // Add card to page
+            movieContainer.appendChild(card);
+
+            // Select remove button
+            const removeButton = card.querySelector(".removeBtn");
+
+            // Remove card on click
+            removeButton.addEventListener("click", function() {
+                card.remove();
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+Question 12.
+Display the X and Y coordinates of the mouse when you click anywhere inside a div by using the event object in your click event handler.<br><br><em><strong>Hint:</strong> Use event.clientX and event.clientY to get coordinates.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Coordinates</title>
+    <style>
+        #box {
+            width: 400px;
+            height: 250px;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Click Inside The Box 🖱️</h2>
+
+    <div id="box">
+        Click here
+    </div>
+
+    <p id="result"></p>
+
+    <script>
+        const box = document.querySelector("#box");
+        const result = document.querySelector("#result");
+
+        // Click event with event object
+        box.addEventListener("click", function(event) {
+
+            // Get mouse coordinates
+            let x = event.clientX;
+            let y = event.clientY;
+
+            // Display coordinates
+            result.innerHTML = `Mouse X: ${x}, Mouse Y: ${y}`;
+        });
+    </script>
+
+</body>
+</html>
+Question 13,14.
+Log the type and coordinates (clientX, clientY) of any mouse event (click, mouseover, etc.) when the user interacts with a Flipkart-style 'Add to Cart' button, using the event object.<br><br><em><strong>Hint:</strong> Access event.type, event.clientX, and event.clientY inside your event handler.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add to Cart Event</title>
+</head>
+<body>
+
+    <h2>Flipkart Style Cart 🛒</h2>
+
+    <button id="cartBtn">Add to Cart</button>
+
+    <script>
+        const button = document.querySelector("#cartBtn");
+
+        // Add mouse event listener
+        button.addEventListener("click", function(event) {
+
+            console.log("Event Type:", event.type);
+            console.log("Mouse X:", event.clientX);
+            console.log("Mouse Y:", event.clientY);
+
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+Question 15.
+Briefly explain (in 2-3 sentences) what event flow is in the DOM, and give one example of how event bubbling could affect a shopping cart app like Flipkart.
+
+Answer:
+Event flow describes how an event moves through the DOM when an action happens. It has three phases: capturing phase (top to target), target phase (actual element), and bubbling phase (target back to parent elements).
+
+Example: In a Flipkart-style shopping cart app, if a user clicks an "Add to Cart" button inside a product card, the click event can bubble up to the product card or parent container and accidentally trigger another click handler unless it is stopped using event.stopPropagation().
+
+---------------------------------------------------------------------------------------------------
+Session 8: Arrays &amp; Objects – Data StructuresCoverage Depth:Array creation, methods (push, pop, splice).Object literals and nested objects.Demo:let links=[{title:"Instagram",url:"..."},...]Loop to display all cards.Learning Goal: Represent app data as structured collections.
+
 
 
 

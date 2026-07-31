@@ -1566,7 +1566,4304 @@ Example: In a Flipkart-style shopping cart app, if a user clicks an "Add to Cart
 
 ---------------------------------------------------------------------------------------------------
 Session 8: Arrays &amp; Objects – Data StructuresCoverage Depth:Array creation, methods (push, pop, splice).Object literals and nested objects.Demo:let links=[{title:"Instagram",url:"..."},...]Loop to display all cards.Learning Goal: Represent app data as structured collections.
+Question1,2.
+Create an array called playlists containing three objects, each representing a Spotify playlist with properties: name, creator, and numberOfSongs. Log the entire array to the console.
 
+Answer:
+// Create an array containing playlist objects
+const playlists = [
+    {
+        name: "Chill Vibes",
+        creator: "Rahul",
+        numberOfSongs: 25
+    },
+    {
+        name: "Workout Hits",
+        creator: "Priya",
+        numberOfSongs: 40
+    },
+    {
+        name: "Top Bollywood Songs",
+        creator: "Shital",
+        numberOfSongs: 60
+    }
+];
+
+// Log entire array
+console.log(playlists);
+
+Question 3.
+Create an array called playlists with 3 objects, each representing a Spotify playlist with properties: name, numberOfSongs, and genre. Log the entire array to the console.
+
+Answer:
+// Create an array of playlist objects
+const playlists = [
+    {
+        name: "Chill Vibes",
+        numberOfSongs: 30,
+        genre: "Lo-Fi"
+    },
+    {
+        name: "Workout Energy",
+        numberOfSongs: 45,
+        genre: "Pop"
+    },
+    {
+        name: "Bollywood Hits",
+        numberOfSongs: 50,
+        genre: "Bollywood"
+    }
+];
+
+// Log entire array
+console.log(playlists); 
+
+Question 4,5.
+Add a new playlist object to your playlists array using the push() method. The new playlist should have a unique name, creator, and numberOfSongs. Print the updated array
+ Answer:
+ // Existing playlists array
+const playlists = [
+    {
+        name: "Chill Vibes",
+        creator: "Rahul",
+        numberOfSongs: 30
+    },
+    {
+        name: "Workout Energy",
+        creator: "Priya",
+        numberOfSongs: 45
+    },
+    {
+        name: "Bollywood Hits",
+        creator: "Shital",
+        numberOfSongs: 50
+    }
+];
+
+// Add new playlist object using push()
+playlists.push({
+    name: "Morning Motivation",
+    creator: "Kian",
+    numberOfSongs: 20
+});
+
+// Print updated array
+console.log(playlists);
+
+Question 6.
+Use the push() method to add a new playlist object to your playlists array with your favorite genre. Then, use pop() to remove the last playlist and log the updated array after each operation.
+
+Answer:
+// Create playlists array
+const playlists = [
+    {
+        name: "Chill Vibes",
+        creator: "Rahul",
+        numberOfSongs: 30,
+        genre: "Lo-Fi"
+    },
+    {
+        name: "Workout Energy",
+        creator: "Priya",
+        numberOfSongs: 45,
+        genre: "Pop"
+    },
+    {
+        name: "Bollywood Hits",
+        creator: "Shital",
+        numberOfSongs: 50,
+        genre: "Bollywood"
+    }
+];
+
+// Add new playlist using push()
+playlists.push({
+    name: "My Favorite Songs",
+    creator: "Kian",
+    numberOfSongs: 35,
+    genre: "Rock"
+});
+
+console.log("After push():");
+console.log(playlists);
+
+
+// Remove last playlist using pop()
+playlists.pop();
+
+console.log("After pop():");
+console.log(playlists);
+
+Question 7,8.
+Remove the last playlist from your playlists array using the pop() method and display the removed object in the console.
+
+Answer:
+// Create playlists array
+const playlists = [
+    {
+        name: "Chill Vibes",
+        creator: "Rahul",
+        numberOfSongs: 30
+    },
+    {
+        name: "Workout Energy",
+        creator: "Priya",
+        numberOfSongs: 45
+    },
+    {
+        name: "Bollywood Hits",
+        creator: "Shital",
+        numberOfSongs: 50
+    }
+];
+
+// Remove last playlist using pop()
+const removedPlaylist = playlists.pop();
+
+// Display removed object
+console.log("Removed Playlist:");
+console.log(removedPlaylist);
+
+// Display updated array
+console.log("Updated Playlists:");
+console.log(playlists);
+
+Question 9.
+Build an array called cart containing 4 objects, each representing a Flipkart product with properties: productName, price, and quantity. Write a loop to display each product's name and total price (price × quantity) in the console.
+
+Answer:
+// Create cart array with product objects
+const cart = [
+    {
+        productName: "Laptop",
+        price: 50000,
+        quantity: 1
+    },
+    {
+        productName: "Mobile Phone",
+        price: 20000,
+        quantity: 2
+    },
+    {
+        productName: "Headphones",
+        price: 1500,
+        quantity: 3
+    },
+    {
+        productName: "Smart Watch",
+        price: 3000,
+        quantity: 2
+    }
+];
+
+// Loop through cart and display total price
+for (let i = 0; i < cart.length; i++) {
+    let totalPrice = cart[i].price * cart[i].quantity;
+
+    console.log(
+        cart[i].productName + " Total Price: ₹" + totalPrice
+    );
+}
+
+
+
+Question 10,11.
+Use the splice() method to remove the second playlist from your playlists array and insert a new playlist at that position. Print the resulting array.<br><br><em><strong>Hint:</strong> splice(startIndex, deleteCount, newItem) can both remove and add in one call.</em
+
+Answer:
+// Create playlists array
+const playlists = [
+    {
+        name: "Chill Vibes",
+        creator: "Rahul",
+        numberOfSongs: 30
+    },
+    {
+        name: "Workout Energy",
+        creator: "Priya",
+        numberOfSongs: 45
+    },
+    {
+        name: "Bollywood Hits",
+        creator: "Shital",
+        numberOfSongs: 50
+    }
+];
+
+// Remove second playlist and add a new playlist at same position
+playlists.splice(1, 1, {
+    name: "Romantic Songs",
+    creator: "Kian",
+    numberOfSongs: 25
+});
+
+// Print updated array
+console.log(playlists);
+
+Question 12.
+Given an array of objects called movies, where each object has properties: title, year, and a nested object rating with keys imdb and rottenTomatoes, write code to print each movie's title and its IMDb rating.
+Answer:
+// Array of movie objects
+const movies = [
+    {
+        title: "Avengers: Endgame",
+        year: 2019,
+        rating: {
+            imdb: 8.4,
+            rottenTomatoes: 94
+        }
+    },
+    {
+        title: "Inception",
+        year: 2010,
+        rating: {
+            imdb: 8.8,
+            rottenTomatoes: 87
+        }
+    },
+    {
+        title: "Interstellar",
+        year: 2014,
+        rating: {
+            imdb: 8.7,
+            rottenTomatoes: 73
+        }
+    }
+];
+
+// Loop through movies and print title with IMDb rating
+movies.forEach((movie) => {
+    console.log(
+        movie.title + " - IMDb Rating: " + movie.rating.imdb
+    );
+});
+
+Question 13,14.
+Create an array called orders, where each order is an object with properties: orderId, items (an array of objects with itemName and price), and delivery (an object with address and status). Write a loop to display each order's orderId and total price of all items.<br><br><em><strong>Hint:</strong> Use a nested loop or array method to sum the prices inside each order.</em>
+
+Answer:
+// Create orders array
+const orders = [
+    {
+        orderId: 101,
+        items: [
+            { itemName: "Pizza", price: 250 },
+            { itemName: "Burger", price: 150 }
+        ],
+        delivery: {
+            address: "Vadodara",
+            status: "Delivered"
+        }
+    },
+    {
+        orderId: 102,
+        items: [
+            { itemName: "Biryani", price: 200 },
+            { itemName: "Cold Drink", price: 50 },
+            { itemName: "Ice Cream", price: 100 }
+        ],
+        delivery: {
+            address: "Ahmedabad",
+            status: "Preparing"
+        }
+    }
+];
+
+// Loop through orders
+orders.forEach((order) => {
+
+    let totalPrice = 0;
+
+    // Nested loop to calculate item prices
+    order.items.forEach((item) => {
+        totalPrice += item.price;
+    });
+
+    console.log(
+        "Order ID: " + order.orderId +
+        " | Total Price: ₹" + totalPrice
+    );
+});
+
+Question 15.
+Create an array called favApps with 5 objects, each having title and url. Use splice() to remove the third app and insert a new app object for your most-used app at that position. Log the final array.<br><br><em><strong>Hint:</strong> splice(index, deleteCount, newItem) lets you remove and add in one step.</em>
+Answer:
+// Create favApps array
+const favApps = [
+    {
+        title: "Instagram",
+        url: "https://www.instagram.com"
+    },
+    {
+        title: "Spotify",
+        url: "https://www.spotify.com"
+    },
+    {
+        title: "Facebook",
+        url: "https://www.facebook.com"
+    },
+    {
+        title: "YouTube",
+        url: "https://www.youtube.com"
+    },
+    {
+        title: "WhatsApp",
+        url: "https://www.whatsapp.com"
+    }
+];
+
+// Remove third app and insert most-used app at same position
+favApps.splice(2, 1, {
+    title: "Zomato",
+    url: "https://www.zomato.com"
+});
+
+// Print final array
+console.log(favApps);
+
+---------------------------------------------------------------------------
+Session 9: JSON &amp; LocalStorage (Persistence Basics)Coverage Depth:Converting data: JSON.stringify() ? JSON.parse().Using localStorage.setItem/getItem/removeItem.Demo:Save links to localStorage; reload page = data persists.Trainer Note: Relate this to database persistence later (JDBC concept preview).
+
+Question 1,2.
+Create a JavaScript object representing a Flipkart-style product with name, price, and rating fields, then convert it to a JSON string using JSON.stringify() and log the result.
+
+Answer:
+// Create Flipkart-style product object
+const product = {
+    name: "iPhone 15",
+    price: 70000,
+    rating: 4.8
+};
+
+// Convert object into JSON string
+const jsonProduct = JSON.stringify(product);
+
+// Log JSON string
+console.log(jsonProduct);
+
+Question 3.
+Create an array of your top 3 favorite food delivery apps (like Zomato, Swiggy, Domino's), convert it to a JSON string using JSON.stringify(), and log the result to the console.
+
+Answer:
+// Create array of favorite food delivery apps
+const favApps = [
+    "Zomato",
+    "Swiggy",
+    "Domino's"
+];
+
+// Convert array to JSON string
+const jsonApps = JSON.stringify(favApps);
+
+// Log JSON string
+console.log(jsonApps);
+
+Question 4,5.
+Write a function that takes a JSON string representing a list of favorite YouTube channels and returns an array of channel names using JSON.parse().
+
+Answer:
+// JSON string containing YouTube channels
+const jsonChannels = '["CodeWithHarry", "Apna College", "Traversy Media"]';
+
+// Function to convert JSON string into array
+function getChannels(jsonString) {
+    const channels = JSON.parse(jsonString);
+    return channels;
+}
+
+// Call function
+const favoriteChannels = getChannels(jsonChannels);
+
+// Print array
+console.log(favoriteChannels);
+
+Question 6.
+Build a function saveRecentSearch(query) that takes a search term (like 'Biryani' or 'Sneakers'), adds it to an array, converts the array to JSON, and saves it in localStorage under the key 'recentSearches'.
+Answer:
+
+// Function to save recent search
+function saveRecentSearch(query) {
+
+    // Get existing searches from localStorage
+    let searches = JSON.parse(localStorage.getItem("recentSearches")) || [];
+
+    // Add new search term
+    searches.push(query);
+
+    // Convert array to JSON and save in localStorage
+    localStorage.setItem("recentSearches", JSON.stringify(searches));
+
+    console.log("Saved Searches:", searches);
+}
+
+// Test function
+saveRecentSearch("Biryani");
+saveRecentSearch("Sneakers");
+saveRecentSearch("Pizza");
+
+Question 7,8.
+Build a simple web page where users can add their top 3 favorite Zomato restaurants to a list and save it to localStorage using localStorage.setItem(). When the page reloads, the list should automatically load from localStorage and display.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorite Zomato Restaurants</title>
+</head>
+<body>
+
+    <h2>My Favorite Zomato Restaurants 🍽️</h2>
+
+    <input type="text" id="restaurantName" placeholder="Enter restaurant name">
+    <button id="addBtn">Add Restaurant</button>
+
+    <ul id="restaurantList"></ul>
+
+    <script>
+        const input = document.querySelector("#restaurantName");
+        const button = document.querySelector("#addBtn");
+        const list = document.querySelector("#restaurantList");
+
+        // Load restaurants from localStorage when page loads
+        let restaurants = JSON.parse(localStorage.getItem("restaurants")) || [];
+
+        displayRestaurants();
+
+        // Add restaurant button click
+        button.addEventListener("click", function() {
+
+            if (restaurants.length < 3 && input.value !== "") {
+
+                restaurants.push(input.value);
+
+                // Save array into localStorage
+                localStorage.setItem(
+                    "restaurants",
+                    JSON.stringify(restaurants)
+                );
+
+                displayRestaurants();
+
+                input.value = "";
+
+            } else {
+                alert("You can add only top 3 restaurants!");
+            }
+        });
+
+
+        // Display restaurant list
+        function displayRestaurants() {
+
+            list.innerHTML = "";
+
+            restaurants.forEach(function(restaurant) {
+
+                const li = document.createElement("li");
+                li.textContent = restaurant;
+
+                list.appendChild(li);
+            });
+        }
+
+    </script>
+
+</body>
+</html>
+
+Question 9.
+Write a function getRecentSearches() that reads the 'recentSearches' item from localStorage, parses it from JSON, and returns the array. If nothing is saved yet, return an empty array.<br><br><em><strong>Hint:</strong> Check for null before parsing.</em>
+
+Answer:
+// Function to get recent searches
+function getRecentSearches() {
+
+    // Get data from localStorage
+    const savedSearches = localStorage.getItem("recentSearches");
+
+    // Check if data exists before parsing
+    if (savedSearches === null) {
+        return [];
+    }
+
+    // Convert JSON string back to array
+    return JSON.parse(savedSearches);
+}
+
+
+// Test the function
+const searches = getRecentSearches();
+
+console.log(searches);
+
+Question 10,11.
+Implement a 'Clear Favorites' button on your restaurant list page that removes the saved data from localStorage using localStorage.removeItem() and updates the UI accordingly.<br><br><em><strong>Hint:</strong> Use localStorage.removeItem('yourKey') and refresh the displayed list after clearing.</em>
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zomato Favorite Restaurants</title>
+</head>
+<body>
+
+    <h2>My Favorite Restaurants 🍽️</h2>
+
+    <input type="text" id="restaurantName" placeholder="Enter restaurant name">
+
+    <button id="addBtn">Add Restaurant</button>
+    <button id="clearBtn">Clear Favorites</button>
+
+    <ul id="restaurantList"></ul>
+
+
+    <script>
+        const input = document.querySelector("#restaurantName");
+        const addBtn = document.querySelector("#addBtn");
+        const clearBtn = document.querySelector("#clearBtn");
+        const list = document.querySelector("#restaurantList");
+
+        // Load saved restaurants
+        let restaurants = JSON.parse(localStorage.getItem("favorites")) || [];
+
+        displayRestaurants();
+
+
+        // Add restaurant
+        addBtn.addEventListener("click", function() {
+
+            if (input.value !== "") {
+
+                restaurants.push(input.value);
+
+                localStorage.setItem(
+                    "favorites",
+                    JSON.stringify(restaurants)
+                );
+
+                displayRestaurants();
+
+                input.value = "";
+            }
+        });
+
+
+        // Clear favorites
+        clearBtn.addEventListener("click", function() {
+
+            // Remove data from localStorage
+            localStorage.removeItem("favorites");
+
+            // Empty array
+            restaurants = [];
+
+            // Update UI
+            displayRestaurants();
+        });
+
+
+        // Display restaurants
+        function displayRestaurants() {
+
+            list.innerHTML = "";
+
+            restaurants.forEach(function(restaurant) {
+
+                const li = document.createElement("li");
+                li.textContent = restaurant;
+
+                list.appendChild(li);
+            });
+        }
+
+    </script>
+
+</body>
+</html>
+
+Question 12.
+Simulate a Flipkart-style wishlist: create an array of 3 products (each with name and price), save it in localStorage as 'wishlist', then reload the page and display the wishlist items by reading and parsing the data from localStorage.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wishlist</title>
+</head>
+<body>
+
+    <h2>My Flipkart Wishlist ❤️</h2>
+
+    <ul id="wishlist"></ul>
+
+    <script>
+
+        // Create wishlist array with products
+        const products = [
+            {
+                name: "iPhone 15",
+                price: 70000
+            },
+            {
+                name: "Laptop",
+                price: 55000
+            },
+            {
+                name: "Smart Watch",
+                price: 5000
+            }
+        ];
+
+
+        // Save wishlist data in localStorage
+        localStorage.setItem(
+            "wishlist",
+            JSON.stringify(products)
+        );
+
+
+        // Read wishlist data from localStorage
+        const savedWishlist = localStorage.getItem("wishlist");
+
+
+        // Convert JSON string back to array
+        const wishlistItems = JSON.parse(savedWishlist);
+
+
+        // Display wishlist items
+        const list = document.querySelector("#wishlist");
+
+        wishlistItems.forEach((product) => {
+
+            const li = document.createElement("li");
+
+            li.innerHTML = `
+                Product: ${product.name} - Price: ₹${product.price}
+            `;
+
+            list.appendChild(li);
+        });
+
+    </script>
+
+</body>
+</html>
+
+Question 13,14.
+Debug this code: It tries to save an array of movie names to localStorage, but after reloading, the list doesn't display correctly.<br><br>let movies = ['Jawan', 'Pathaan', 'Dunki'];<br>localStorage.setItem('movies', movies);<br>let saved = localStorage.getItem('movies');<br>let arr = JSON.parse(saved);<br>console.log(arr);<br><br><em><strong>Hint:</strong> Check how movies is being stored and what type localStorage expects.</em>
+
+Answer:
+let movies = ['Jawan', 'Pathaan', 'Dunki'];
+
+// Convert array into JSON string before saving
+localStorage.setItem('movies', JSON.stringify(movies));
+
+// Get data from localStorage
+let saved = localStorage.getItem('movies');
+
+// Convert JSON string back into array
+let arr = JSON.parse(saved);
+
+console.log(arr);
+
+Question 15.
+Add a 'Clear Wishlist' button to your wishlist code that removes the 'wishlist' key from localStorage and updates the display immediately.<br><br><em><strong>Constraint:</strong> Use localStorage.removeItem() for this action.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wishlist</title>
+</head>
+<body>
+
+    <h2>My Flipkart Wishlist ❤️</h2>
+
+    <button id="clearBtn">Clear Wishlist</button>
+
+    <ul id="wishlist"></ul>
+
+
+    <script>
+
+        const list = document.querySelector("#wishlist");
+        const clearBtn = document.querySelector("#clearBtn");
+
+
+        // Create wishlist data
+        let wishlist = [
+            {
+                name: "iPhone 15",
+                price: 70000
+            },
+            {
+                name: "Laptop",
+                price: 55000
+            },
+            {
+                name: "Smart Watch",
+                price: 5000
+            }
+        ];
+
+
+        // Save wishlist in localStorage
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+
+        // Function to display wishlist
+        function displayWishlist() {
+
+            list.innerHTML = "";
+
+            let savedWishlist = JSON.parse(
+                localStorage.getItem("wishlist")
+            ) || [];
+
+
+            savedWishlist.forEach((product) => {
+
+                const li = document.createElement("li");
+
+                li.textContent = `${product.name} - ₹${product.price}`;
+
+                list.appendChild(li);
+            });
+        }
+
+
+        // Display items when page loads
+        displayWishlist();
+
+
+        // Clear wishlist button
+        clearBtn.addEventListener("click", function() {
+
+            // Remove wishlist from localStorage
+            localStorage.removeItem("wishlist");
+
+            // Update UI immediately
+            list.innerHTML = "";
+
+            console.log("Wishlist cleared!");
+        });
+
+
+    </script>
+
+</body>
+</html>
+
+--------------------------------------------------------------------------------------------
+Session 10: ES6 Syntax &amp; Modern FeaturesCoverage Depth:Template literals, default params, destructuring, spread/rest.Arrow functions recap.Demo:console.log(\Hello ${userName}, you have ${followers} followers!`)`.Depth: Use modern syntax in all subsequent examples.
+
+Question 1,2.
+Create a function formatWelcomeMessage(userName, followers) that returns a string like 'Hello Rahul, you have 1200 followers!' using template literals. Call this function with your own name and any follower count, then log the result.
+
+Answer
+// Create function
+function formatWelcomeMessage(userName, followers) {
+
+    return `Hello ${userName}, you have ${followers} followers!`;
+
+}
+
+// Call function
+const message = formatWelcomeMessage("Shital", 1200);
+
+// Print result
+console.log(message);
+
+Question 3.
+Create a template literal that displays a welcome message like Spotify: 'Hello, ${userName}! You have ${playlistCount} playlists.' Assign userName and playlistCount variables and log the message to the console
+
+Answer:
+// Declare variables
+let userName = "Shital";
+let playlistCount = 5;
+
+// Create template literal message
+let message = `Hello, ${userName}! You have ${playlistCount} playlists.`;
+
+// Print message
+console.log(message);
+
+Question 4,5.
+Write a function getDeliveryDetails that takes two parameters: address (string) and paymentMethod (string), both with default values ('Ahmedabad' and 'UPI'). Log a message using template literals showing both values. Call the function once with no arguments and once with custom values.
+
+Answer:
+// Create function with default values
+function getDeliveryDetails(address = "Ahmedabad", paymentMethod = "UPI") {
+
+    console.log(`Delivery Address: ${address}, Payment Method: ${paymentMethod}`);
+
+}
+
+// Call function without arguments (uses default values)
+getDeliveryDetails();
+
+
+// Call function with custom values
+getDeliveryDetails("Vadodara", "Credit Card");
+
+Question 6.
+Write a function orderFood(item, quantity = 1) that returns a string like 'You ordered 2 Burgers.' Use default parameters so that if quantity is not passed, it defaults to 1.<br><br><em><strong>Hint:</strong> Try calling orderFood('Pizza') and orderFood('Burger', 2) to test both cases.</em>
+
+ANswer:
+// Create function with default quantity
+function orderFood(item, quantity = 1) {
+
+    return `You ordered ${quantity} ${item}s.`;
+
+}
+
+
+// Call function without quantity
+console.log(orderFood("Pizza"));
+
+
+// Call function with custom quantity
+console.log(orderFood("Burger", 2));
+
+Question 7,8.
+Given an object representing a Zomato order: const order = { item: 'Pizza', price: 350, user: 'Amit' }, use object destructuring to extract item and price into variables, then log a message like 'Amit ordered Pizza for ₹350'.
+Answer:
+
+// Zomato order object
+const order = {
+    item: "Pizza",
+    price: 350,
+    user: "Amit"
+};
+
+// Object destructuring
+const { item, price } = order;
+
+// Using template literal
+console.log(`${order.user} ordered ${item} for ₹${price}`);
+
+Question 9.
+Given this object: const movie = { title: 'Jawan', rating: 4.5, genre: 'Action' }, use object destructuring to extract title and rating into separate variables and log them as 'Movie: Jawan, Rating: 4.5'.
+
+Answer:
+// Create movie object
+const movie = {
+    title: "Jawan",
+    rating: 4.5,
+    genre: "Action"
+};
+
+// Extract title and rating using object destructuring
+const { title, rating } = movie;
+
+// Print message
+console.log(`Movie: ${title}, Rating: ${rating}`);
+
+Question 10,11.
+You have two arrays: const cricketFans = ['Virat', 'Rohit']; const footballFans = ['Messi', 'Ronaldo']; Use the spread operator to combine both arrays into a single array called allFans and log the result.<br><br><em><strong>Hint:</strong> Use [...cricketFans, ...footballFans]</em>
+
+Answer:
+
+// Create two arrays
+const cricketFans = ["Virat", "Rohit"];
+const footballFans = ["Messi", "Ronaldo"];
+
+// Combine arrays using spread operator
+const allFans = [...cricketFans, ...footballFans];
+
+// Print result
+console.log(allFans);
+
+Question 12.
+Use the spread operator to combine two arrays: your favorite Zomato dishes and your favorite Swiggy dishes, into a single array called allDishes, then log allDishes.<br><br><em><strong>Hint:</strong> Use [...array1, ...array2] syntax.</em>
+Answer
+// Create two arrays
+const zomatoDishes = ["Pizza", "Biryani", "Pasta"];
+
+const swiggyDishes = ["Burger", "Dosa", "Ice Cream"];
+
+// Combine both arrays using spread operator
+const allDishes = [...zomatoDishes, ...swiggyDishes];
+
+// Print combined array
+console.log(allDishes);
+
+Question 13,14.
+Refactor this function to use an arrow function and rest parameters: function addToCart() { let total = 0; for(let i=0; i<arguments.length; i++) { total += arguments[i]; } return total; } The new function should be called addToCartArrow and accept any number of prices as arguments, returning their sum.
+
+Answer:
+// Arrow function with rest parameter
+const addToCartArrow = (...prices) => {
+
+    let total = 0;
+
+    for (let i = 0; i < prices.length; i++) {
+        total += prices[i];
+    }
+
+    return total;
+};
+
+
+// Test function
+console.log(addToCartArrow(500, 300, 200));
+
+
+Question15.
+Write an arrow function called getFollowersSummary that takes any number of follower counts (using the rest operator), sums them, and returns a string like 'Total followers: 1200'. Call it with 3 sample numbers to test.
+Answer:
+// Arrow function with rest parameter
+const getFollowersSummary = (...followers) => {
+
+    let total = 0;
+
+    followers.forEach((count) => {
+        total += count;
+    });
+
+    return `Total followers: ${total}`;
+};
+
+
+// Test function
+console.log(getFollowersSummary(500, 400, 300));
+----------------------------------------------------------------------------------
+Session 11: Asynchronous JS – Callbacks, Promises, Async/Await (Part 1)Coverage Depth:Blocking vs non-blocking code.What are callbacks?Creating and resolving Promises.Demo:Simulate loading message using setTimeout.
+
+Question 1,2
+ Create an HTML file with a <script> tag and use setTimeout to display a 'Loading your feed...' message after 2 seconds, then replace it with 'Feed loaded!' after another 2 seconds.
+
+Answer:
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Feed Loading</title>
+</head>
+<body>
+
+    <h2 id="message">Please wait...</h2>
+
+    <script>
+        // Display "Loading your feed..." after 2 seconds
+        setTimeout(() => {
+            document.getElementById("message").innerHTML = "Loading your feed...";
+
+            // Replace with "Feed loaded!" after another 2 seconds
+            setTimeout(() => {
+                document.getElementById("message").innerHTML = "Feed loaded!";
+            }, 2000);
+
+        }, 2000);
+    </script>
+
+</body>
+</html>
+
+Question 3.
+Create an HTML file with a <script> tag that logs 'Loading...' to the console, then after 2 seconds logs 'Content loaded!' using setTimeout.
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Content Loading</title>
+</head>
+<body>
+
+    <h2>Check Console</h2>
+
+    <script>
+        // Display loading message immediately
+        console.log("Loading...");
+
+        // Display content loaded message after 2 seconds
+        setTimeout(() => {
+            console.log("Content loaded!");
+        }, 2000);
+    </script>
+
+</body>
+</html>
+
+
+Question 4,5.
+Simulate a Zomato order status updater using callbacks: write a function placeOrder that takes a food item and a callback, waits 1 second using setTimeout, then calls the callback with the message 'Your [item] is being prepared'.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zomato Order Status</title>
+</head>
+<body>
+
+    <h2>Check Console for Order Status</h2>
+
+    <script>
+
+        function placeOrder(item, callback) {
+            console.log("Order placed for " + item);
+
+            // Wait for 1 second
+            setTimeout(() => {
+                callback(`Your ${item} is being prepared`);
+            }, 1000);
+        }
+
+        function orderStatus(message) {
+            console.log(message);
+        }
+
+        // Calling function
+        placeOrder("Pizza", orderStatus);
+
+    </script>
+
+</body>
+</html>
+
+Question 6.
+Write a function fetchSongLyrics(song, callback) that simulates fetching lyrics from a server using setTimeout, then calls the callback with the lyrics string. Test it by logging the lyrics for any song title.
+Answer:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Song Lyrics Fetch</title>
+</head>
+<body>
+
+    <h2>Check Console for Lyrics</h2>
+
+    <script>
+
+        function fetchSongLyrics(song, callback) {
+            console.log("Fetching lyrics for: " + song);
+
+            // Simulate server request delay
+            setTimeout(() => {
+                let lyrics = `Lyrics of "${song}": 
+                You are my sunshine, my only sunshine...`;
+
+                callback(lyrics);
+
+            }, 2000);
+        }
+
+
+        function displayLyrics(lyrics) {
+            console.log(lyrics);
+        }
+
+
+        // Test function
+        fetchSongLyrics("You Are My Sunshine", displayLyrics);
+
+    </script>
+
+</body>
+</html>
+
+Question 7,8.
+Build a Promise called getFollowersCount that resolves after 1 second with a random number between 1000 and 5000, then use .then() to display 'You have X new followers' (like Instagram) in the console.
+
+Answer:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Followers</title>
+</head>
+<body>
+
+    <h2>Check Console for Followers</h2>
+
+    <script>
+
+        let getFollowersCount = new Promise((resolve) => {
+
+            // Simulate server delay of 1 second
+            setTimeout(() => {
+
+                // Generate random followers between 1000 and 5000
+                let followers = Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000;
+
+                resolve(followers);
+
+            }, 1000);
+
+        });
+
+
+        // Using .then() to handle resolved value
+        getFollowersCount.then((count) => {
+            console.log(`You have ${count} new followers`);
+        });
+
+    </script>
+
+</body>
+</html>
+
+Question 9.
+Build a function getOrderStatus(orderId) that returns a Promise. Simulate a 1.5 second delay using setTimeout, then resolve with 'Order delivered' if orderId is even, or reject with 'Order not found' if odd. Use .then() and .catch() to handle both cases and log the result.
+Answer:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Status</title>
+</head>
+<body>
+
+    <h2>Check Console for Order Status</h2>
+
+    <script>
+
+        function getOrderStatus(orderId) {
+
+            return new Promise((resolve, reject) => {
+
+                // Simulate 1.5 second delay
+                setTimeout(() => {
+
+                    if (orderId % 2 === 0) {
+                        resolve("Order delivered");
+                    } else {
+                        reject("Order not found");
+                    }
+
+                }, 1500);
+
+            });
+
+        }
+
+
+        // Testing even orderId
+        getOrderStatus(102)
+            .then((result) => {
+                console.log(result);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+
+        // Testing odd orderId
+        getOrderStatus(103)
+            .then((result) => {
+                console.log(result);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    </script>
+
+</body>
+</html>
+
+Question 10,11.
+Rewrite a Flipkart-style product search using both a callback version and a Promise version: given an array of products, simulate a 1 second delay before returning all products whose name includes the search term.<br><br><em><strong>Hint:</strong> Use setTimeout to simulate the delay in both approaches.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Search</title>
+</head>
+<body>
+
+    <h2>Check Console for Search Results</h2>
+
+    <script>
+
+        let products = [
+            { id: 1, name: "iPhone 15" },
+            { id: 2, name: "Samsung Galaxy S24" },
+            { id: 3, name: "Laptop HP" },
+            { id: 4, name: "iPhone 14" },
+            { id: 5, name: "OnePlus Mobile" }
+        ];
+
+
+        // 1. Callback Version
+        function searchProductsCallback(products, searchTerm, callback) {
+
+            setTimeout(() => {
+
+                let result = products.filter(product =>
+                    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+
+                callback(result);
+
+            }, 1000);
+
+        }
+
+
+        // Calling Callback Version
+        searchProductsCallback(products, "iphone", (result) => {
+            console.log("Callback Result:");
+            console.log(result);
+        });
+
+
+
+        // 2. Promise Version
+        function searchProductsPromise(products, searchTerm) {
+
+            return new Promise((resolve) => {
+
+                setTimeout(() => {
+
+                    let result = products.filter(product =>
+                        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+
+                    resolve(result);
+
+                }, 1000);
+
+            });
+
+        }
+
+
+        // Calling Promise Version
+        searchProductsPromise(products, "mobile")
+            .then((result) => {
+                console.log("Promise Result:");
+                console.log(result);
+            });
+
+
+    </script>
+
+</body
+</html>
+
+Question 12.
+Refactor the following callback-based code to use Promises instead: setTimeout(function() { console.log('Payment successful!'); }, 1000); Ensure the new function returns a Promise and logs the message after 1 second.<br><br><em><strong>Hint:</strong> Use new Promise((resolve, reject) => { ... }) and resolve inside setTimeout.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Promise</title>
+</head>
+<body>
+
+    <h2>Check Console for Payment Status</h2>
+
+    <script>
+
+        function makePayment() {
+
+            return new Promise((resolve, reject) => {
+
+                setTimeout(() => {
+
+                    resolve("Payment successful!");
+
+                }, 1000);
+
+            });
+
+        }
+
+
+        // Calling Promise function
+        makePayment()
+            .then((message) => {
+                console.log(message);
+            });
+
+    </script>
+
+</body>
+</html>
+
+
+---------------------------------------------------------------------------------
+Session 12: Asynchronous JS (Part 2) – Fetch APICoverage Depth:fetch() GET &amp; POST.Chaining Promises &amp; handling responses.Parsing JSON responses.Demo:Fetch mock user data from https://jsonplaceholder.typicode.com/users.Depth: Show network tab request ? response cycle.
+
+
+Question 1,2,3.
+Use fetch() to get a list of posts from https://jsonplaceholder.typicode.com/posts and display the first 5 post titles in the browser console.
+
+ANswer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fetch Posts</title>
+</head>
+<body>
+
+    <h2>Check Console for Post Titles</h2>
+
+    <script>
+
+        fetch("https://jsonplaceholder.typicode.com/posts")
+            .then((response) => {
+                return response.json();
+            })
+            .then((posts) => {
+
+                // Display first 5 post titles
+                posts.slice(0, 5).forEach((post) => {
+                    console.log(post.title);
+                });
+
+            })
+            .catch((error) => {
+                console.log("Error:", error);
+            });
+
+    </script>
+
+</body>
+</html>
+
+Question 4,5.
+Build a function fetchTopMovies() that uses fetch() to get movie data from https://jsonplaceholder.typicode.com/albums, parses the JSON response, and logs the titles of the first 3 items as if they were trending movies on BookMyShow.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trending Movies</title>
+</head>
+<body>
+
+    <h2>Check Console for Trending Movies</h2>
+
+    <script>
+
+        function fetchTopMovies() {
+
+            fetch("https://jsonplaceholder.typicode.com/albums")
+                .then((response) => {
+                    return response.json();
+                })
+                .then((movies) => {
+
+                    console.log("🎬 Trending Movies on BookMyShow:");
+
+                    // Display first 3 movie titles
+                    movies.slice(0, 3).forEach((movie, index) => {
+                        console.log(`${index + 1}. ${movie.title}`);
+                    });
+
+                })
+                .catch((error) => {
+                    console.log("Error fetching movies:", error);
+                });
+
+        }
+
+
+        // Calling function
+        fetchTopMovies();
+
+    </script>
+
+</body>
+</html>
+
+Question 6.
+Send a POST request using fetch() to https://jsonplaceholder.typicode.com/posts with a JSON body containing a title and body (your own text), then log the response object and check if the id property is present in the response.<br><br><em><strong>Hint:</strong> Set the Content-Type header to 'application/json' and use JSON.stringify() for the body.</em>
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>POST Request Example</title>
+</head>
+<body>
+
+    <h2>Check Console for Response</h2>
+
+    <script>
+
+        fetch("https://jsonplaceholder.typicode.com/posts", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                title: "Learning Fetch API",
+                body: "This is my first POST request using fetch in JavaScript.",
+                userId: 1
+            })
+
+        })
+
+        .then((response) => {
+            return response.json();
+        })
+
+        .then((data) => {
+
+            // Log response object
+            console.log("Response Object:", data);
+
+            // Check if id property exists
+            if (data.id) {
+                console.log("ID is present:", data.id);
+            } else {
+                console.log("ID is not present");
+            }
+
+        })
+
+        .catch((error) => {
+            console.log("Error:", error);
+        });
+
+    </script>
+
+</body>
+</html>
+
+Question 7,8.
+Create a function addNewPlaylist() that sends a POST request using fetch() to https://jsonplaceholder.typicode.com/posts with a playlist object containing a name and description. Log the response JSON to the console.<br><br><em><strong>Hint:</strong> Use method: 'POST' and headers: { 'Content-Type': 'application/json' } in your fetch options.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Playlist</title>
+</head>
+<body>
+
+    <h2>Check Console for Playlist Response</h2>
+
+    <script>
+
+        function addNewPlaylist() {
+
+            let playlist = {
+                name: "My Favorite Songs",
+                description: "A playlist containing my favorite music tracks."
+            };
+
+
+            fetch("https://jsonplaceholder.typicode.com/posts", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(playlist)
+
+            })
+
+            .then((response) => {
+                return response.json();
+            })
+
+            .then((data) => {
+                console.log("Playlist Response:", data);
+            })
+
+            .catch((error) => {
+                console.log("Error:", error);
+            });
+
+        }
+
+
+        // Calling function
+        addNewPlaylist();
+
+    </script>
+
+</body>
+</html>
+
+Question 9.
+Chain fetch() promises to fetch user data from https://jsonplaceholder.typicode.com/users, parse the JSON response, and then display all user emails in a single alert box separated by commas.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Emails</title>
+</head>
+<body>
+
+    <h2>Fetch User Emails</h2>
+
+    <script>
+
+        fetch("https://jsonplaceholder.typicode.com/users")
+
+            // Convert response to JSON
+            .then((response) => {
+                return response.json();
+            })
+
+            // Get emails and display in alert
+            .then((users) => {
+
+                let emails = users.map((user) => {
+                    return user.email;
+                });
+
+                alert(emails.join(", "));
+
+            })
+
+            .catch((error) => {
+                console.log("Error:", error);
+            });
+
+    </script>
+
+</body>
+</html>
+
+
+Question 10,11.
+Chain two fetch() calls: first, fetch a user from https://jsonplaceholder.typicode.com/users/2, then use that user's id to fetch their posts from https://jsonplaceholder.typicode.com/posts?userId=2, and finally log the user's name and the titles of their posts.
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Posts</title>
+</head>
+<body>
+
+    <h2>Check Console for User Details</h2>
+
+    <script>
+
+        fetch("https://jsonplaceholder.typicode.com/users/2")
+
+            // Convert user response to JSON
+            .then((response) => {
+                return response.json();
+            })
+
+            // Get user id and fetch posts
+            .then((user) => {
+
+                console.log("User Name:", user.name);
+
+                return fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`)
+                    .then((response) => response.json())
+                    .then((posts) => {
+
+                        console.log("Post Titles:");
+
+                        posts.forEach((post) => {
+                            console.log(post.title);
+                        });
+
+                    });
+
+            })
+
+            .catch((error) => {
+                console.log("Error:", error);
+            });
+
+    </script>
+
+</body>
+</html>
+
+Question 12,13,14.
+Open your browser's Developer Tools, go to the Network tab, and perform a fetch() GET request to https://jsonplaceholder.typicode.com/users. Take a screenshot showing the request and response details, and write two lines explaining the request-response cycle you observed.
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fetch Network Test</title>
+</head>
+<body>
+
+    <h2>Fetch Users API</h2>
+
+    <script>
+
+        fetch("https://jsonplaceholder.typicode.com/users")
+            .then((response) => {
+                return response.json();
+            })
+            .then((users) => {
+                console.log(users);
+            })
+            .catch((error) => {
+                console.log("Error:", error);
+            });
+
+    </script>
+
+</body>
+</html>
+
+(10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+0
+: 
+{id: 1, name: 'Leanne Graham', username: 'Bret', email: 'Sincere@april.biz', address: {…}, …}
+1
+: 
+{id: 2, name: 'Ervin Howell', username: 'Antonette', email: 'Shanna@melissa.tv', address: {…}, …}
+2
+: 
+{id: 3, name: 'Clementine Bauch', username: 'Samantha', email: 'Nathan@yesenia.net', address: {…}, …}
+3
+: 
+{id: 4, name: 'Patricia Lebsack', username: 'Karianne', email: 'Julianne.OConner@kory.org', address: {…}, …}
+4
+: 
+{id: 5, name: 'Chelsey Dietrich', username: 'Kamren', email: 'Lucio_Hettinger@annie.ca', address: {…}, …}
+5
+: 
+{id: 6, name: 'Mrs. Dennis Schulist', username: 'Leopoldo_Corkery', email: 'Karley_Dach@jasper.info', address: {…}, …}
+6
+: 
+{id: 7, name: 'Kurtis Weissnat', username: 'Elwyn.Skiles', email: 'Telly.Hoeger@billy.biz', address: {…}, …}
+7
+: 
+{id: 8, name: 'Nicholas Runolfsdottir V', username: 'Maxime_Nienow', email: 'Sherwood@rosamond.me', address: {…}, …}
+8
+: 
+{id: 9, name: 'Glenna Reichert', username: 'Delphine', email: 'Chaim_McDermott@dana.io', address: {…}, …}
+9
+: 
+{id: 10, name: 'Clementina DuBuque', username: 'Moriah.Stanton', email: 'Rey.Padberg@karina.biz', address: {…}, …}
+
+
+Question 15.
+Fetch a list of albums from https://jsonplaceholder.typicode.com/albums, then filter and display only those albums where the userId is 2. Show the filtered album titles in the console.<br><br><em><strong>Constraint:</strong> Use only fetch(), .then(), and array methods (no async/await).</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filter Albums</title>
+</head>
+<body>
+
+    <h2>Check Console for Album Titles</h2>
+
+    <script>
+
+        fetch("https://jsonplaceholder.typicode.com/albums")
+
+            // Convert response to JSON
+            .then((response) => {
+                return response.json();
+            })
+
+            // Filter albums where userId is 2
+            .then((albums) => {
+
+                let filteredAlbums = albums.filter((album) => {
+                    return album.userId === 2;
+                });
+
+                console.log("Albums of User ID 2:");
+
+                // Display only album titles
+                filteredAlbums.forEach((album) => {
+                    console.log(album.title);
+                });
+
+            })
+
+            .catch((error) => {
+                console.log("Error:", error);
+            });
+
+    </script>
+
+</body>
+</html>
+
+
+
+----------------------------------------------------------------------
+Session 13: Error Handling in JSCoverage Depth:try…catch…finally, custom errors, throw.Importance of defensive coding.Demo:If URL input invalid ? throw custom Error (“Invalid URL”).AI Integration: ChatGPT explains error stack trace for student practice.
+
+Question 1,2.
+Create a function validateSpotifyURL(url) that takes a string and checks if it starts with 'https://open.spotify.com/'. If not, throw a custom Error with the message 'Invalid Spotify URL'.
+Answer:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify URL Validation</title>
+</head>
+<body>
+
+    <h2>Check Console for Result</h2>
+
+    <script>
+
+        function validateSpotifyURL(url) {
+
+            if (!url.startsWith("https://open.spotify.com/")) {
+                throw new Error("Invalid Spotify URL");
+            }
+
+            return "Valid Spotify URL";
+        }
+
+
+        // Testing valid URL
+        try {
+            console.log(validateSpotifyURL("https://open.spotify.com/track/12345"));
+        }
+        catch(error) {
+            console.log(error.message);
+        }
+
+
+        // Testing invalid URL
+        try {
+            console.log(validateSpotifyURL("https://youtube.com/song"));
+        }
+        catch(error) {
+            console.log(error.message);
+        }
+
+    </script>
+
+</body>
+</html>
+
+Question 3.
+Create a function validateUsername(username) that checks if the username contains only letters and numbers; if not, use throw to raise a custom Error with the message 'Invalid Username'. Wrap the function call in try...catch and display the error message in the console.
+
+ANswer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Username Validation</title>
+</head>
+<body>
+
+    <h2>Check Console for Username Validation</h2>
+
+    <script>
+
+        function validateUsername(username) {
+
+            // Check if username contains only letters and numbers
+            let pattern = /^[a-zA-Z0-9]+$/;
+
+            if (!pattern.test(username)) {
+                throw new Error("Invalid Username");
+            }
+
+            return "Valid Username";
+        }
+
+
+        // Testing username
+        try {
+
+            console.log(validateUsername("Shital123"));
+
+        }
+        catch(error) {
+
+            console.log(error.message);
+
+        }
+
+
+        // Testing invalid username
+        try {
+
+            console.log(validateUsername("Shital@123"));
+
+        }
+        catch(error) {
+
+            console.log(error.message);
+
+        }
+
+    </script>
+
+</body>
+</html>
+
+Question 4,5.
+Write a try…catch…finally block that tries to parse a JSON string representing a Flipkart product (e.g., '{"name":"Shoes","price":999}'). If parsing fails, catch the error and log 'Invalid product data', and in the finally block, log 'Parsing attempt finished'.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Product Parsing</title>
+</head>
+<body>
+
+    <h2>Check Console for Result</h2>
+
+    <script>
+
+        let productData = '{"name":"Shoes","price":999}';
+
+        try {
+
+            let product = JSON.parse(productData);
+
+            console.log("Product Name:", product.name);
+            console.log("Product Price:", product.price);
+
+        }
+        catch(error) {
+
+            console.log("Invalid product data");
+
+        }
+        finally {
+
+            console.log("Parsing attempt finished");
+
+        }
+
+    </script>
+
+</body>
+</html>
+
+Question 6,7,8.
+Build a function checkPlaylistURL(url) for a Spotify-style app that validates if the URL starts with 'https://open.spotify.com/'. If not, throw a custom Error('Invalid Spotify URL'). Use try...catch...finally to handle the error, log the error message, and in the finally block, log 'Validation complete'.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify URL Validation</title>
+</head>
+<body>
+
+    <h2>Check Console for Validation Result</h2>
+
+    <script>
+
+        function checkPlaylistURL(url) {
+
+            if (!url.startsWith("https://open.spotify.com/")) {
+                throw new Error("Invalid Spotify URL");
+            }
+
+            return "Valid Spotify URL";
+
+        }
+
+
+        try {
+
+            console.log(checkPlaylistURL("https://youtube.com/playlist/123"));
+
+        }
+        catch(error) {
+
+            console.log(error.message);
+
+        }
+        finally {
+
+            console.log("Validation complete");
+
+        }
+
+    </script>
+
+</body>
+</html>
+
+Question 9.
+Write a function getOrderTotal(items) for a Zomato-style food order, where items is an array of objects with name and price. If any price is negative, throw a custom Error('Invalid item price'). Use try...catch to handle the error and display a friendly message.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zomato Order Total</title>
+</head>
+<body>
+
+    <h2>Check Console for Order Total</h2>
+
+    <script>
+
+        function getOrderTotal(items) {
+
+            let total = 0;
+
+            items.forEach((item) => {
+
+                if (item.price < 0) {
+                    throw new Error("Invalid item price");
+                }
+
+                total += item.price;
+
+            });
+
+            return total;
+
+        }
+
+
+        let orderItems = [
+            { name: "Pizza", price: 299 },
+            { name: "Burger", price: 149 },
+            { name: "Cold Drink", price: -50 }
+        ];
+
+
+        try {
+
+            let total = getOrderTotal(orderItems);
+
+            console.log("Total Order Amount: ₹" + total);
+
+        }
+        catch(error) {
+
+            console.log("Sorry, we couldn't process your order.");
+            console.log(error.message);
+
+        }
+
+    </script>
+
+</body>
+</html>
+
+Question 10,11.
+Given this buggy code, debug it so that it properly handles errors when trying to access a property of an undefined object:<br><br>let user;<br>try {<br> console.log(user.name);<br>} catch (e) {<br> // handle error<br>}<br><br><em><strong>Hint:</strong> Make sure the error message is user-friendly, like 'User data not found'.</em>
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Error Handling</title>
+</head>
+<body>
+
+    <h2>Check Console for Error Handling</h2>
+
+    <script>
+
+        let user;
+
+        try {
+
+            console.log(user.name);
+
+        }
+        catch (e) {
+
+            console.log("User data not found");
+
+        }
+
+    </script>
+
+</body>
+</html>
+
+
+Question 12.
+You are given this buggy code: function formatFollowers(count) { try { if(count < 0) throw 'Negative count'; return count + ' followers'; } catch(e) { return e.message; } }. It should return the error message if count is negative, but it returns undefined. Fix the code so it properly throws and catches an Error object.<br><br><em><strong>Hint:</strong> Use Error objects instead of strings for throwing and catching errors.</em>
+
+Answer:
+function formatFollowers(count) {
+
+    try {
+
+        if (count < 0) {
+            throw new Error("Negative count");
+        }
+
+        return count + " followers";
+
+    }
+    catch (e) {
+
+        return e.message;
+
+    }
+
+}
+
+
+// Testing
+console.log(formatFollowers(2500));
+console.log(formatFollowers(-10));
+
+Question 13,14.
+Copy an error stack trace from your browser's console when a thrown error occurs (for example, from a failed JSON.parse or invalid URL check), and paste it into ChatGPT. Ask ChatGPT to explain what the stack trace means and summarize the explanation in your own words.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error Stack Trace Example</title>
+</head>
+<body>
+
+<h2>Check Console</h2>
+
+<script>
+
+    function checkJSON() {
+
+        let data = '{"name":"Phone"'; // Invalid JSON
+
+        JSON.parse(data);
+
+    }
+
+
+    checkJSON();
+
+</script>
+
+</body>
+</html>
+
+Question 15.
+Copy a stack trace from a JavaScript error you encounter (for example, by calling a function that throws a custom Error), and paste it into ChatGPT. Ask ChatGPT to explain what the error means and which line caused the problem. Summarize ChatGPT's explanation in your own words in a comment above the code.
+
+Answer:
+// Explanation: The error occurs because the function receives an invalid age value.
+// The validateAge function throws a custom Error when the age is below 18.
+// The stack trace shows that the problem happened inside validateAge() where the error was thrown.
+
+function validateAge(age) {
+
+    if (age < 18) {
+        throw new Error("Age must be 18 or above");
+    }
+
+    return "Access granted";
+
+}
+
+
+// Calling function with invalid value
+validateAge(15);
+------------------------------------------------------------------------------------
+Session 14: Modular JavaScript (Imports &amp; Exports)  Coverage Depth:  File modularization with export &amp; import.  Default vs named exports. Demo: Move link-creation functions to utils.js and import in main file. Depth: Explain benefit for scalability (pre-React architecture).
+
+Question 1,2.
+Create a file called utils.js and write a function generateOrderId() that returns a random 8-character order ID string. Export this function using a named export, then import and use it in a separate file order.js to log a new order ID.
+Answer:
+// utils.js
+
+export function generateOrderId() {
+
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    let orderId = "";
+
+    for (let i = 0; i < 8; i++) {
+        orderId += characters.charAt(
+            Math.floor(Math.random() * characters.length)
+        );
+    }
+
+    return orderId;
+}
+// order.js
+
+import { generateOrderId } from "./utils.js";
+
+let newOrderId = generateOrderId();
+
+console.log("New Order ID:", newOrderId);
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order ID Generator</title>
+</head>
+<body>
+
+<h2>Check Console for Order ID</h2>
+
+<script type="module" src="order.js"></script>
+
+</body>
+</html>
+
+Question 3.
+Create a file called utils.js and write two functions: formatPrice(price) that returns a string like '₹199.00', and getDiscountedPrice(price, discount) that returns the price after applying the discount percentage. Export both functions as named exports.
+
+Answer:
+// utils.js
+
+export function formatPrice(price) {
+
+    return `₹${price.toFixed(2)}`;
+
+}
+
+
+export function getDiscountedPrice(price, discount) {
+
+    let discountedPrice = price - (price * discount / 100);
+
+    return discountedPrice;
+
+}
+// product.js
+
+import { formatPrice, getDiscountedPrice } from "./utils.js";
+
+
+let price = 199;
+let discount = 10;
+
+let finalPrice = getDiscountedPrice(price, discount);
+
+console.log("Original Price:", formatPrice(price));
+
+console.log("Discounted Price:", formatPrice(finalPrice));
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Price Utility</title>
+</head>
+<body>
+
+<h2>Check Console</h2>
+
+<script type="module" src="product.js"></script>
+
+</body>
+</html>
+
+Question 4,5.
+Write two functions in a file called spotifyUtils.js: formatSongTitle(title) that capitalizes every word, and getSongDurationInMinutes(seconds) that converts seconds to 'mm:ss' format. Export both as named exports and import them into a main.js file to format and display the details of a sample song.
+Answer:
+
+// spotifyUtils.js
+
+// Capitalize every word in song title
+export function formatSongTitle(title) {
+
+    return title
+        .split(" ")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
+}
+
+
+// Convert seconds into mm:ss format
+export function getSongDurationInMinutes(seconds) {
+
+    let minutes = Math.floor(seconds / 60);
+
+    let remainingSeconds = seconds % 60;
+
+    return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+
+}
+// main.js
+
+import { formatSongTitle, getSongDurationInMinutes } from "./spotifyUtils.js";
+
+
+let song = {
+    title: "shape of you",
+    duration: 233
+};
+
+
+let formattedTitle = formatSongTitle(song.title);
+
+let formattedDuration = getSongDurationInMinutes(song.duration);
+
+
+console.log("Song Title:", formattedTitle);
+
+console.log("Duration:", formattedDuration);
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Song Details</title>
+</head>
+<body>
+
+<h2>Check Console for Song Details</h2>
+
+<script type="module" src="main.js"></script>
+
+</body>
+</html>
+
+Question 6.
+In a new file called cart.js, import the formatPrice and getDiscountedPrice functions from utils.js and use them to display the original and discounted prices for three items as console output.
+Answer:
+// cart.js
+
+import { formatPrice, getDiscountedPrice } from "./utils.js";
+
+
+let cartItems = [
+    {
+        name: "Shoes",
+        price: 1999,
+        discount: 10
+    },
+    {
+        name: "Watch",
+        price: 2999,
+        discount: 15
+    },
+    {
+        name: "Bag",
+        price: 1499,
+        discount: 20
+    }
+];
+
+
+cartItems.forEach((item) => {
+
+    let discountedPrice = getDiscountedPrice(
+        item.price,
+        item.discount
+    );
+
+    console.log("Item:", item.name);
+    console.log("Original Price:", formatPrice(item.price));
+    console.log("Discounted Price:", formatPrice(discountedPrice));
+    console.log("----------------------");
+
+});
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+</head>
+<body>
+
+<h2>Check Console for Cart Details</h2>
+
+<script type="module" src="cart.js"></script>
+
+</body>
+</html>
+Question 7,8.
+In a file called instaHelpers.js, declare a default export function formatFollowers(count) that returns '1.2K' for 1200, '2.5M' for 2500000, etc. Import this default export in profile.js and use it to display the formatted follower count for three different users.
+
+Answer:
+// instaHelpers.js
+
+export default function formatFollowers(count) {
+
+    if (count >= 1000000) {
+        return (count / 1000000).toFixed(1) + "M";
+    }
+    else if (count >= 1000) {
+        return (count / 1000).toFixed(1) + "K";
+    }
+    else {
+        return count.toString();
+    }
+
+}
+
+// profile.js
+
+import formatFollowers from "./instaHelpers.js";
+
+
+let users = [
+    {
+        name: "Shital",
+        followers: 1200
+    },
+    {
+        name: "Kian",
+        followers: 2500000
+    },
+    {
+        name: "Griva",
+        followers: 850
+    }
+];
+
+
+users.forEach((user) => {
+
+    console.log(
+        user.name + " has " + formatFollowers(user.followers) + " followers"
+    );
+
+});
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Followers</title>
+</head>
+<body>
+
+<h2>Check Console for Followers</h2>
+
+<script type="module" src="profile.js"></script>
+
+</body>
+</html>
+
+Question 9.
+Refactor your cart.js so that getDiscountedPrice is imported as a default export from utils.js, while formatPrice remains a named export.<br><br><em><strong>Hint:</strong> You will need to change the export style in utils.js for getDiscountedPrice to use 'export default'.</em>
+Answer:
+// utils.js
+
+// Named export
+export function formatPrice(price) {
+
+    return `₹${price.toFixed(2)}`;
+
+}
+
+
+// Default export
+export default function getDiscountedPrice(price, discount) {
+
+    return price - (price * discount / 100);
+
+}
+// cart.js
+
+// Import default export without {}
+import getDiscountedPrice from "./utils.js";
+
+// Import named export with {}
+import { formatPrice } from "./utils.js";
+
+
+let cartItems = [
+    {
+        name: "Shoes",
+        price: 2000,
+        discount: 10
+    },
+    {
+        name: "Watch",
+        price: 3000,
+        discount: 20
+    },
+    {
+        name: "Bag",
+        price: 1500,
+        discount: 15
+    }
+];
+
+
+cartItems.forEach((item) => {
+
+    let finalPrice = getDiscountedPrice(
+        item.price,
+        item.discount
+    );
+
+    console.log("Item:", item.name);
+    console.log("Original Price:", formatPrice(item.price));
+    console.log("Discounted Price:", formatPrice(finalPrice));
+    console.log("---------------------");
+
+});
+
+
+Question 10,11.
+Refactor an existing file where you have three functions: addToCart, removeFromCart, and calculateTotal (all related to a Flipkart-style shopping cart) into a separate file cartUtils.js. Use named exports and update your main.js to import and use these functions.<br><br><em><strong>Hint:</strong> Make sure you remove the original function definitions from main.js and only use the imported versions.</em>
+Answer:
+// cartUtils.js
+
+export function addToCart(cart, item) {
+
+    cart.push(item);
+
+    return cart;
+
+}
+
+
+export function removeFromCart(cart, itemId) {
+
+    return cart.filter(item => item.id !== itemId);
+
+}
+
+
+export function calculateTotal(cart) {
+
+    return cart.reduce((total, item) => {
+        return total + item.price;
+    }, 0);
+
+}
+// main.js
+
+import { addToCart, removeFromCart, calculateTotal } from "./cartUtils.js";
+
+
+let cart = [];
+
+
+cart = addToCart(cart, {
+    id: 1,
+    name: "Mobile",
+    price: 15000
+});
+
+
+cart = addToCart(cart, {
+    id: 2,
+    name: "Headphones",
+    price: 2000
+});
+
+
+console.log("Cart Items:");
+console.log(cart);
+
+
+cart = removeFromCart(cart, 1);
+
+console.log("After Removing Item:");
+console.log(cart);
+
+
+let total = calculateTotal(cart);
+
+console.log("Total Price: ₹" + total);
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flipkart Cart</title>
+</head>
+<body>
+
+<h2>Check Console for Cart Details</h2>
+
+<script type="module" src="main.js"></script>
+
+</body>
+</html>
+
+Question 12.
+Imagine you are building a Flipkart-style wishlist feature. Move all functions related to adding, removing, and listing wishlist items from wishlist.js into a new file wishlistUtils.js, and import them back into wishlist.js using named imports.<br><br><em><strong>Hint:</strong> Make sure to update all import paths and function calls after moving the code.</em>
+Answer:
+// wishlistUtils.js
+
+// Add item to wishlist
+export function addToWishlist(wishlist, item) {
+
+    wishlist.push(item);
+
+    return wishlist;
+
+}
+
+
+// Remove item from wishlist
+export function removeFromWishlist(wishlist, itemId) {
+
+    return wishlist.filter(item => item.id !== itemId);
+
+}
+
+
+// Display wishlist items
+export function listWishlistItems(wishlist) {
+
+    wishlist.forEach((item) => {
+        console.log(`${item.name} - ₹${item.price}`);
+    });
+
+}
+update// wishlist.js
+
+import { 
+    addToWishlist, 
+    removeFromWishlist, 
+    listWishlistItems 
+} from "./wishlistUtils.js";
+
+
+let wishlist = [];
+
+
+// Adding products
+wishlist = addToWishlist(wishlist, {
+    id: 1,
+    name: "iPhone 15",
+    price: 70000
+});
+
+
+wishlist = addToWishlist(wishlist, {
+    id: 2,
+    name: "Smart Watch",
+    price: 5000
+});
+
+
+console.log("My Wishlist:");
+
+listWishlistItems(wishlist);
+
+
+// Removing product
+wishlist = removeFromWishlist(wishlist, 1);
+
+
+console.log("After Removing Item:");
+
+listWishlistItems(wishlist);
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wishlist Feature</title>
+</head>
+<body>
+
+<h2>Check Console for Wishlist</h2>
+
+<script type="module" src="wishlist.js"></script>
+
+</body>
+</html>
+
+Question 13,14.
+Explain in your own words (3-4 sentences) how splitting utility functions into separate files using imports and exports would help you scale a Zomato-like app as it grows from 2 to 20 features. Give one concrete example.
+
+Answer:
+Splitting utility functions into separate files using imports and exports makes the code more organized, reusable, and easier to maintain as the app grows. Instead of keeping all functions in one large file, each feature can have its own utility file that can be updated independently without affecting other parts of the application. For example, in a Zomato-like app, payment functions like calculateBill() and applyCoupon() can be stored in paymentUtils.js and imported wherever payment processing is needed. This approach helps a team manage 20 features more efficiently because developers can work on different modules without creating conflicts.
+
+
+
+
+
+---------------------------------------------------------------------------------------
+Session 15: Classes &amp; OOP in JS  Coverage Depth:  Declaring classes, constructors, methods.  Creating instances. Demo: class UserProfile { constructor(name, followers){...} } Add method displayProfile(). Trainer Note: Show parallel with Java classes ? OOP bridge for Phase 4.
+
+Question 1.
+Declare a JavaScript class named Playlist that has a constructor accepting two parameters: name and songs (an array). Create an instance for a Spotify playlist called 'Chill Vibes' with 3 song names.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Playlist</title>
+</head>
+<body>
+
+<h2>Check Console for Playlist Details</h2>
+
+<script>
+
+    class Playlist {
+
+        constructor(name, songs) {
+            this.name = name;
+            this.songs = songs;
+        }
+
+    }
+
+
+    // Creating Spotify playlist instance
+    let chillPlaylist = new Playlist(
+        "Chill Vibes",
+        [
+            "Perfect - Ed Sheeran",
+            "Until I Found You - Stephen Sanchez",
+            "Night Changes - One Direction"
+        ]
+    );
+
+
+    console.log(chillPlaylist);
+
+</script>
+
+</body>
+</html>
+
+Question 3.
+Declare a JavaScript class named Playlist with a constructor that takes two parameters: name and songs (an array of song names). Create an instance for your favorite Spotify playlist and log it to the console.
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Playlist</title>
+</head>
+<body>
+
+<h2>Check Console for Playlist</h2>
+
+<script>
+
+    class Playlist {
+
+        constructor(name, songs) {
+            this.name = name;
+            this.songs = songs;
+        }
+
+    }
+
+
+    // Creating favorite playlist instance
+    let favoritePlaylist = new Playlist(
+        "My Favorite Hits",
+        [
+            "Perfect - Ed Sheeran",
+            "Believer - Imagine Dragons",
+            "Counting Stars - OneRepublic"
+        ]
+    );
+
+
+    console.log(favoritePlaylist);
+
+</script>
+
+</body>
+</html>
+
+Question 4,5.
+Add a method displayPlaylist() to the Playlist class that logs the playlist name and all song titles in a formatted string.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Playlist</title>
+</head>
+<body>
+
+<h2>Check Console for Playlist</h2>
+
+<script>
+
+    class Playlist {
+
+        constructor(name, songs) {
+            this.name = name;
+            this.songs = songs;
+        }
+
+
+        // Method to display playlist details
+        displayPlaylist() {
+
+            console.log(`Playlist Name: ${this.name}`);
+
+            console.log("Songs:");
+
+            this.songs.forEach((song, index) => {
+                console.log(`${index + 1}. ${song}`);
+            });
+
+        }
+
+    }
+
+
+    // Creating playlist instance
+    let favoritePlaylist = new Playlist(
+        "Chill Vibes",
+        [
+            "Perfect - Ed Sheeran",
+            "Believer - Imagine Dragons",
+            "Counting Stars - OneRepublic"
+        ]
+    );
+
+
+    // Calling method
+    favoritePlaylist.displayPlaylist();
+
+</script>
+
+</body>
+</html>
+
+Question 6.
+Add a method getSongCount() to the Playlist class that returns the total number of songs in the playlist. Call this method on your instance and display the result.
+
+ANSWER:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Playlist</title>
+</head>
+<body>
+
+<h2>Check Console for Song Count</h2>
+
+<script>
+
+    class Playlist {
+
+        constructor(name, songs) {
+            this.name = name;
+            this.songs = songs;
+        }
+
+
+        // Method to display playlist details
+        displayPlaylist() {
+
+            console.log(`Playlist Name: ${this.name}`);
+
+            this.songs.forEach((song, index) => {
+                console.log(`${index + 1}. ${song}`);
+            });
+
+        }
+
+
+        // Method to return total number of songs
+        getSongCount() {
+
+            return this.songs.length;
+
+        }
+
+    }
+
+
+    // Creating playlist instance
+    let favoritePlaylist = new Playlist(
+        "Chill Vibes",
+        [
+            "Perfect - Ed Sheeran",
+            "Believer - Imagine Dragons",
+            "Counting Stars - OneRepublic"
+        ]
+    );
+
+
+    favoritePlaylist.displayPlaylist();
+
+
+    // Calling getSongCount()
+    let totalSongs = favoritePlaylist.getSongCount();
+
+    console.log("Total Songs:", totalSongs);
+
+</script>
+
+</body>
+</html>
+
+
+Question7,8.
+Create a class called FlipkartProduct with properties: title, price, and rating. Write a method getDiscountedPrice(discountPercent) that returns the price after applying the given discount percentage.<br><br><em><strong>Hint:</strong> Use the formula: discounted price = price - (price * discountPercent/100).</em>
+
+Answer:<!DOCTYPE html>
+<html>
+<head>
+    <title>Flipkart Product</title>
+</head>
+<body>
+
+<h2>Check Console for Product Details</h2>
+
+<script>
+
+    class FlipkartProduct {
+
+        constructor(title, price, rating) {
+
+            this.title = title;
+            this.price = price;
+            this.rating = rating;
+
+        }
+
+
+        // Method to calculate discounted price
+        getDiscountedPrice(discountPercent) {
+
+            let discountedPrice = this.price - (this.price * discountPercent / 100);
+
+            return discountedPrice;
+
+        }
+
+    }
+
+
+    // Creating product instance
+    let product = new FlipkartProduct(
+        "Wireless Headphones",
+        2000,
+        4.5
+    );
+
+
+    console.log("Product Title:", product.title);
+    console.log("Price: ₹" + product.price);
+    console.log("Rating:", product.rating);
+
+
+    // Applying 20% discount
+    let finalPrice = product.getDiscountedPrice(20);
+
+    console.log("Discounted Price: ₹" + finalPrice);
+
+</script>
+
+</body>
+</html>
+
+Question 9.
+Create a class FlipkartProduct with properties: title, price, and rating. Add a method displayDetails() that prints all details in a formatted string like 'Redmi Note 12 Pro - ₹18999 - 4.5⭐'.
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flipkart Product Details</title>
+</head>
+<body>
+
+<h2>Check Console for Product Details</h2>
+
+<script>
+
+    class FlipkartProduct {
+
+        constructor(title, price, rating) {
+
+            this.title = title;
+            this.price = price;
+            this.rating = rating;
+
+        }
+
+
+        // Method to display product details
+        displayDetails() {
+
+            console.log(
+                `${this.title} - ₹${this.price} - ${this.rating}⭐`
+            );
+
+        }
+
+    }
+
+
+    // Creating product instance
+    let product = new FlipkartProduct(
+        "Redmi Note 12 Pro",
+        18999,
+        4.5
+    );
+
+
+    // Calling method
+    product.displayDetails();
+
+</script>
+
+</body>
+</html>
+
+Question 10,11.
+Refactor the following code to use a class instead of a function constructor:<br><br>function Movie(title, genre) { this.title = title; this.genre = genre; }<br>Movie.prototype.display = function() { console.log(this.title + ' - ' + this.genre); }<br><br>Make sure your new class works the same way.
+
+Answer:
+class Movie {
+
+    constructor(title, genre) {
+
+        this.title = title;
+        this.genre = genre;
+
+    }
+
+
+    display() {
+
+        console.log(this.title + " - " + this.genre);
+
+    }
+
+}
+
+
+// Creating movie object
+let movie1 = new Movie("Interstellar", "Sci-Fi");
+
+
+// Calling display method
+movie1.display();
+
+Question 12.
+Extend the Playlist class by adding a method addSong(songName) that adds a new song to the songs array. Demonstrate by adding two songs and displaying the updated playlist.
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Playlist</title>
+</head>
+<body>
+
+<h2>Check Console for Updated Playlist</h2>
+
+<script>
+
+    class Playlist {
+
+        constructor(name, songs) {
+
+            this.name = name;
+            this.songs = songs;
+
+        }
+
+
+        // Method to add a new song
+        addSong(songName) {
+
+            this.songs.push(songName);
+
+        }
+
+
+        // Method to display playlist details
+        displayPlaylist() {
+
+            console.log("Playlist Name:", this.name);
+
+            console.log("Songs:");
+
+            this.songs.forEach((song, index) => {
+
+                console.log(`${index + 1}. ${song}`);
+
+            });
+
+        }
+
+    }
+
+
+    // Creating playlist instance
+    let playlist = new Playlist(
+        "Chill Vibes",
+        [
+            "Perfect - Ed Sheeran",
+            "Believer - Imagine Dragons"
+        ]
+    );
+
+
+    // Adding two new songs
+    playlist.addSong("Counting Stars - OneRepublic");
+    playlist.addSong("Night Changes - One Direction");
+
+
+    // Display updated playlist
+    playlist.displayPlaylist();
+
+</script>
+
+</body>
+</html>
+
+Question 13.
+Refactor the FlipkartProduct class: rename the displayDetails() method to showProductInfo() and ensure it still works as before.<br><br><em><strong>Hint:</strong> Update any code that calls the old method name.</em>
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flipkart Product</title>
+</head>
+<body>
+
+<h2>Check Console for Product Information</h2>
+
+<script>
+
+    class FlipkartProduct {
+
+        constructor(title, price, rating) {
+
+            this.title = title;
+            this.price = price;
+            this.rating = rating;
+
+        }
+
+
+        // Renamed method
+        showProductInfo() {
+
+            console.log(
+                `${this.title} - ₹${this.price} - ${this.rating}⭐`
+            );
+
+        }
+
+    }
+
+
+    // Creating product instance
+    let product = new FlipkartProduct(
+        "Redmi Note 12 Pro",
+        18999,
+        4.5
+    );
+
+
+    // Updated method call
+    product.showProductInfo();
+
+</script>
+
+</body>
+</html>
+
+
+
+
+------------------------------------------------------------------------------------
+
+Session 16: Advanced Array Methods  Coverage Depth:  map(), filter(), reduce(), find(), some(), every().  Real use cases for transformation. Demo: Filter active links (isActive:true), calculate total clicks. AI Tool: Ask ChatGPT to suggest one-liner map-reduce alternatives.
+
+Question 1,2
+Given an array of Flipkart product objects with properties name, price, and isInStock, use the filter() method to create a new array containing only the products that are in stock.
+
+Answer:
+// Flipkart product array
+
+let products = [
+    {
+        name: "iPhone 15",
+        price: 70000,
+        isInStock: true
+    },
+    {
+        name: "Samsung Galaxy S24",
+        price: 80000,
+        isInStock: false
+    },
+    {
+        name: "Redmi Note 12 Pro",
+        price: 18999,
+        isInStock: true
+    },
+    {
+        name: "OnePlus Nord",
+        price: 25000,
+        isInStock: false
+    }
+];
+
+
+// Filter only available products
+let inStockProducts = products.filter(product => product.isInStock);
+
+
+console.log("Available Products:");
+console.log(inStockProducts);
+
+Question 3.
+Given an array of playlists from a music app like Spotify, each with a name and isPublic property, use filter() to create a new array containing only the public playlists.
+Answer:
+// Spotify playlist array
+
+let playlists = [
+    {
+        name: "Chill Vibes",
+        isPublic: true
+    },
+    {
+        name: "My Private Songs",
+        isPublic: false
+    },
+    {
+        name: "Workout Hits",
+        isPublic: true
+    },
+    {
+        name: "Personal Favorites",
+        isPublic: false
+    }
+];
+
+
+// Filter only public playlists
+let publicPlaylists = playlists.filter(playlist => playlist.isPublic);
+
+
+console.log("Public Playlists:");
+console.log(publicPlaylists);
+
+Question 4,5.
+Use the map() method to transform an array of Instagram post objects (each with a likes property) into a new array of just the like counts.
+
+Answer:
+// Instagram posts array
+
+let posts = [
+    {
+        caption: "My first post",
+        likes: 250
+    },
+    {
+        caption: "Vacation photo",
+        likes: 1200
+    },
+    {
+        caption: "Food picture",
+        likes: 500
+    },
+    {
+        caption: "Coding setup",
+        likes: 800
+    }
+];
+
+
+// Create new array containing only like counts
+let likeCounts = posts.map(post => post.likes);
+
+
+console.log("Like Counts:");
+console.log(likeCounts);
+
+
+Question 6.
+Use map() to transform an array of Flipkart product objects (each with name and price) into an array of strings formatted as 'Product: [name], Price: ₹[price]'.
+Answer:
+// Flipkart products array
+
+let products = [
+    {
+        name: "Redmi Note 12 Pro",
+        price: 18999
+    },
+    {
+        name: "iPhone 15",
+        price: 70000
+    },
+    {
+        name: "Samsung Galaxy S24",
+        price: 80000
+    }
+];
+
+
+// Transform products into formatted strings
+let productDetails = products.map(product => {
+    
+    return `Product: ${product.name}, Price: ₹${product.price}`;
+
+});
+
+
+console.log(productDetails);
+
+Question 7,8.
+Given an array of Zomato order objects with a clicks property, use reduce() to calculate the total number of clicks across all orders.<br><br><em><strong>Hint:</strong> Start your reduce with an initial value of 0 and add each order's clicks to the accumulator.</em>
+
+Answer:
+// Zomato orders array
+
+let orders = [
+    {
+        restaurant: "Pizza Hut",
+        clicks: 120
+    },
+    {
+        restaurant: "Domino's",
+        clicks: 250
+    },
+    {
+        restaurant: "Burger King",
+        clicks: 180
+    },
+    {
+        restaurant: "KFC",
+        clicks: 300
+    }
+];
+
+
+// Calculate total clicks using reduce()
+let totalClicks = orders.reduce((total, order) => {
+
+    return total + order.clicks;
+
+}, 0);
+
+
+console.log("Total Clicks:", totalClicks);
+
+Question 9.
+Given an array of Instagram post objects with a likes property, use reduce() to calculate the total number of likes across all posts.
+Answer:
+// Instagram posts array
+
+let posts = [
+    {
+        caption: "My first photo",
+        likes: 250
+    },
+    {
+        caption: "Travel memories",
+        likes: 1200
+    },
+    {
+        caption: "Food post",
+        likes: 500
+    },
+    {
+        caption: "Coding setup",
+        likes: 800
+    }
+];
+
+
+// Calculate total likes using reduce()
+let totalLikes = posts.reduce((sum, post) => {
+
+    return sum + post.likes;
+
+}, 0);
+
+
+console.log("Total Likes:", totalLikes);
+
+
+Question 10,11.
+Given an array of YouTube video objects with a views property, use the find() method to get the first video that has more than 1 million views
+
+Answer:
+// YouTube videos array
+
+let videos = [
+    {
+        title: "JavaScript Tutorial",
+        views: 500000
+    },
+    {
+        title: "Python Full Course",
+        views: 2500000
+    },
+    {
+        title: "React JS Project",
+        views: 1500000
+    },
+    {
+        title: "HTML CSS Basics",
+        views: 800000
+    }
+];
+
+
+// Find first video with more than 1 million views
+let popularVideo = videos.find(video => video.views > 1000000);
+
+
+console.log("Popular Video:");
+console.log(popularVideo);
+
+
+Question 12.
+Given an array of Zomato restaurant objects, each with a cuisine property, use find() to get the first restaurant that serves 'Chinese' cuisine.<br><br><em><strong>Hint:</strong> Use the find() method and check the cuisine property inside the callback.</em>
+
+Answer:
+
+// Zomato restaurants array
+
+let restaurants = [
+    {
+        name: "Pizza Palace",
+        cuisine: "Italian"
+    },
+    {
+        name: "Dragon Wok",
+        cuisine: "Chinese"
+    },
+    {
+        name: "Burger Point",
+        cuisine: "Fast Food"
+    },
+    {
+        name: "Chinese Bowl",
+        cuisine: "Chinese"
+    }
+];
+
+
+// Find first restaurant serving Chinese cuisine
+let chineseRestaurant = restaurants.find(restaurant => restaurant.cuisine === "Chinese");
+
+
+console.log("Chinese Restaurant:");
+console.log(chineseRestaurant);
+
+Question 13,14.
+Ask ChatGPT to suggest a one-liner using map() and reduce() that calculates the sum of all prices in an array of Myntra cart items, and then implement the suggested code in your editor.
+
+Answer:
+// Myntra cart items array
+
+let cartItems = [
+    {
+        name: "T-Shirt",
+        price: 799
+    },
+    {
+        name: "Jeans",
+        price: 1499
+    },
+    {
+        name: "Shoes",
+        price: 2499
+    }
+];
+
+
+// Calculate total price using map() and reduce()
+let totalPrice = cartItems
+    .map(item => item.price)
+    .reduce((sum, price) => sum + price, 0);
+
+
+console.log("Total Cart Price: ₹" + totalPrice);
+
+Question 15.
+Use ChatGPT to suggest a one-liner alternative using map() and reduce() for calculating the total amount spent from an array of transactions (each with amount property), and then implement that one-liner in your code.
+
+Answer:
+// Transactions array
+
+let transactions = [
+    {
+        id: 1,
+        amount: 500
+    },
+    {
+        id: 2,
+        amount: 1200
+    },
+    {
+        id: 3,
+        amount: 800
+    },
+    {
+        id: 4,
+        amount: 1500
+    }
+];
+
+
+// Calculate total amount spent using map() and reduce()
+let totalSpent = transactions
+    .map(transaction => transaction.amount)
+    .reduce((total, amount) => total + amount, 0);
+
+
+console.log("Total Amount Spent: ₹" + totalSpent);
+
+
+
+
+
+------------------------------------------------------------------------------------------
+Session 17: Event Delegation &amp; Dynamic UI Updates  Coverage Depth:  Event bubbling vs capturing.  Delegating events for dynamic elements. Demo: Click “X” icon ? remove card without re-binding listeners. Depth: Students must grasp efficiency benefit.
+
+Question 1.
+Create a list of song cards (each with a title and an 'X' icon) using plain JavaScript and HTML. When you click the 'X' on any card, remove only that card from the DOM using event delegation (attach the click listener to the parent container, not each card).
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remove Song Cards</title>
+
+    <style>
+        .card {
+            width: 250px;
+            padding: 15px;
+            margin: 10px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .remove {
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Spotify Song List</h2>
+
+<div id="songContainer">
+
+    <div class="card">
+        <span>Perfect - Ed Sheeran</span>
+        <span class="remove">X</span>
+    </div>
+
+    <div class="card">
+        <span>Believer - Imagine Dragons</span>
+        <span class="remove">X</span>
+    </div>
+
+    <div class="card">
+        <span>Counting Stars - OneRepublic</span>
+        <span class="remove">X</span>
+    </div>
+
+</div>
+
+
+<script>
+
+    let songContainer = document.getElementById("songContainer");
+
+
+    // Event delegation
+    songContainer.addEventListener("click", function(event) {
+
+        // Check if clicked element is X button
+        if (event.target.classList.contains("remove")) {
+
+            // Remove only that song card
+            event.target.parentElement.remove();
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+
+Question 3.
+Create an HTML list of favorite songs where each item has a 'Remove' button. Use event delegation to handle all remove actions by attaching a single click event listener to the parent list element.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorite Songs</title>
+
+    <style>
+        li {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>My Favorite Songs</h2>
+
+<ul id="songList">
+
+    <li>
+        Perfect - Ed Sheeran
+        <button class="removeBtn">Remove</button>
+    </li>
+
+    <li>
+        Believer - Imagine Dragons
+        <button class="removeBtn">Remove</button>
+    </li>
+
+    <li>
+        Counting Stars - OneRepublic
+        <button class="removeBtn">Remove</button>
+    </li>
+
+</ul>
+
+
+<script>
+
+    let songList = document.getElementById("songList");
+
+
+    // Event delegation
+    songList.addEventListener("click", function(event) {
+
+        // Check if Remove button was clicked
+        if (event.target.classList.contains("removeBtn")) {
+
+            // Remove the selected song item
+            event.target.parentElement.remove();
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+
+
+Question 4.
+Build a Flipkart-style wishlist where each product card has a 'Remove' button. Add a new product card dynamically when the user clicks 'Add Product'. Ensure that the 'Remove' button works for both existing and newly added cards without attaching new listeners to each card.<br><br><em><strong>Hint:</strong> Use event.target to identify which button was clicked inside the parent listener.</em>
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flipkart Wishlist</title>
+
+    <style>
+        .product-card {
+            width: 250px;
+            padding: 15px;
+            margin: 10px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>My Wishlist</h2>
+
+<button id="addProduct">Add Product</button>
+
+<div id="wishlist">
+
+    <div class="product-card">
+        <span>iPhone 15 - ₹70000</span>
+        <button class="removeBtn">Remove</button>
+    </div>
+
+    <div class="product-card">
+        <span>Redmi Note 12 Pro - ₹18999</span>
+        <button class="removeBtn">Remove</button>
+    </div>
+
+</div>
+
+
+<script>
+
+    let wishlist = document.getElementById("wishlist");
+    let addButton = document.getElementById("addProduct");
+
+
+    // Add new product dynamically
+    addButton.addEventListener("click", function() {
+
+        let productCard = document.createElement("div");
+
+        productCard.className = "product-card";
+
+        productCard.innerHTML = `
+            <span>Samsung Galaxy S24 - ₹80000</span>
+            <button class="removeBtn">Remove</button>
+        `;
+
+
+        wishlist.appendChild(productCard);
+
+    });
+
+
+
+    // Event delegation for remove buttons
+    wishlist.addEventListener("click", function(event) {
+
+        if (event.target.classList.contains("removeBtn")) {
+
+            event.target.parentElement.remove();
+
+        }
+
+    });
+
+
+</script>
+
+</body>
+</html>
+
+Question 6.
+Build a Flipkart-style shopping cart UI with cards for each product and an 'X' icon to remove a product. Use event bubbling to ensure clicking the 'X' removes only the correct card without adding separate event listeners to each card.
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flipkart Shopping Cart</title>
+
+    <style>
+        .cart-card {
+            width: 300px;
+            padding: 15px;
+            margin: 10px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .remove {
+            color: red;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>My Shopping Cart</h2>
+
+<div id="cart">
+
+    <div class="cart-card">
+        <span>iPhone 15 - ₹70000</span>
+        <span class="remove">X</span>
+    </div>
+
+    <div class="cart-card">
+        <span>Wireless Headphones - ₹2000</span>
+        <span class="remove">X</span>
+    </div>
+
+    <div class="cart-card">
+        <span>Smart Watch - ₹5000</span>
+        <span class="remove">X</span>
+    </div>
+
+</div>
+
+
+<script>
+
+    let cart = document.getElementById("cart");
+
+
+    // Event bubbling: listener on parent container
+    cart.addEventListener("click", function(event) {
+
+
+        // Check if X icon was clicked
+        if (event.target.classList.contains("remove")) {
+
+
+            // Remove only clicked product card
+            event.target.parentElement.remove();
+
+        }
+
+    });
+
+
+</script>
+
+</body>
+</html>
+
+Question7,8.
+Given a code snippet where individual event listeners are added to each Instagram story card for removal, refactor the code to use a single event listener on the parent container (event delegation) for better efficiency.<br><br><em><strong>Constraint:</strong> Do not use more than one event listener for all cards.</em>
+
+Answer:
+let stories = document.querySelectorAll(".story");
+
+stories.forEach(story => {
+
+    story.querySelector(".removeBtn").addEventListener("click", function() {
+
+        story.remove();
+
+    });
+
+});
+
+Question 9.
+Add a feature to your cart UI so that when a new product card is added dynamically (for example, by clicking an 'Add Random Product' button), the 'X' remove functionality still works without adding any new event listeners.
+
+ANswer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Flipkart Cart</title>
+
+    <style>
+        .cart-card {
+            width: 300px;
+            padding: 15px;
+            margin: 10px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .removeBtn {
+            color: red;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Flipkart Shopping Cart</h2>
+
+<button id="addProduct">Add Random Product</button>
+
+
+<div id="cart">
+
+    <div class="cart-card">
+        <span>Mobile - ₹20000</span>
+        <span class="removeBtn">X</span>
+    </div>
+
+    <div class="cart-card">
+        <span>Laptop - ₹50000</span>
+        <span class="removeBtn">X</span>
+    </div>
+
+</div>
+
+
+<script>
+
+    let cart = document.getElementById("cart");
+    let addProductBtn = document.getElementById("addProduct");
+
+
+    let products = [
+        "Headphones - ₹2000",
+        "Smart Watch - ₹5000",
+        "Tablet - ₹15000",
+        "Camera - ₹30000"
+    ];
+
+
+    // Add product dynamically
+    addProductBtn.addEventListener("click", function() {
+
+        let randomProduct = products[
+            Math.floor(Math.random() * products.length)
+        ];
+
+
+        let card = document.createElement("div");
+
+        card.className = "cart-card";
+
+
+        card.innerHTML = `
+            <span>${randomProduct}</span>
+            <span class="removeBtn">X</span>
+        `;
+
+
+        cart.appendChild(card);
+
+    });
+
+
+
+    // Single event listener for all remove buttons
+    cart.addEventListener("click", function(event) {
+
+
+        if (event.target.classList.contains("removeBtn")) {
+
+            event.target.parentElement.remove();
+
+        }
+
+    });
+
+
+</script>
+
+</body>
+</html>
+
+
+Question 10,11.
+Simulate a notification feed like YouTube, where each notification card has a 'Dismiss' button. When you click 'Dismiss', fade out and remove the card. Make sure the event delegation works for dynamically loaded notifications as well as those present at page load.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Notification Feed</title>
+
+    <style>
+        .notification {
+            width: 350px;
+            padding: 15px;
+            margin: 10px;
+            border: 1px solid black;
+            transition: opacity 0.5s;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+
+        .dismissBtn {
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>YouTube Notifications</h2>
+
+<button id="addNotification">Load New Notification</button>
+
+
+<div id="notificationFeed">
+
+    <div class="notification">
+        <p>New video uploaded by Code Academy</p>
+        <button class="dismissBtn">Dismiss</button>
+    </div>
+
+    <div class="notification">
+        <p>Your video reached 10K views</p>
+        <button class="dismissBtn">Dismiss</button>
+    </div>
+
+</div>
+
+
+<script>
+
+    let notificationFeed = document.getElementById("notificationFeed");
+    let addButton = document.getElementById("addNotification");
+
+
+    // Add dynamic notification
+    addButton.addEventListener("click", function() {
+
+        let card = document.createElement("div");
+
+        card.className = "notification";
+
+
+        card.innerHTML = `
+            <p>New subscriber notification received!</p>
+            <button class="dismissBtn">Dismiss</button>
+        `;
+
+
+        notificationFeed.appendChild(card);
+
+    });
+
+
+
+    // Event delegation for all dismiss buttons
+    notificationFeed.addEventListener("click", function(event) {
+
+
+        if (event.target.classList.contains("dismissBtn")) {
+
+
+            let notification = event.target.parentElement;
+
+
+            // Add fade animation
+            notification.classList.add("fade-out");
+
+
+            // Remove after animation completes
+            setTimeout(() => {
+
+                notification.remove();
+
+            }, 500);
+
+        }
+
+    });
+
+
+</script>
+
+</body>
+</html>
+
+Question 12.
+Given the following code snippet, fix the bug so that clicking the 'X' icon on any card removes only that card, even if cards are added dynamically:<br><br><code>document.querySelectorAll('.remove-btn').forEach(btn => { btn.addEventListener('click', function() { this.parentElement.remove(); }); });</code><br><br><em><strong>Hint:</strong> Use event delegation by adding a single event listener to the parent container instead of looping through all buttons.</em>
+
+Answer:
+// Parent container
+let cardContainer = document.getElementById("card-container");
+
+
+// Single event listener for all remove buttons
+cardContainer.addEventListener("click", function(event) {
+
+    if (event.target.classList.contains("remove-btn")) {
+
+        event.target.parentElement.remove();
+
+    }
+
+});
+
+
+
+-----------------------------------------------------------------------------------
+Session 18: Debugging &amp; Developer Tools  Coverage Depth:  Console methods (log, warn, error, table).  Setting breakpoints in Sources tab.  Understanding stack traces. Demo: Debug addLink() and inspect variables. AI Tip: Ask ChatGPT to explain error messages from console.
+
+
+Question 1,2.
+Open the developer console in your browser and use console.log(), console.warn(), and console.error() to display a mock notification like Instagram's: log a successful post upload, warn if the caption is missing, and show an error if the image fails to upload.
+
+Answer:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Console Notifications</title>
+</head>
+<body>
+
+<h2>Open Developer Console</h2>
+
+<script>
+
+    // Successful post upload notification
+    console.log("✅ Post uploaded successfully!");
+
+
+    // Warning when caption is missing
+    let caption = "";
+
+    if (caption === "") {
+        console.warn("⚠️ Warning: Caption is missing.");
+    }
+
+
+    // Error when image upload fails
+    let imageUpload = false;
+
+    if (!imageUpload) {
+        console.error("❌ Error: Image failed to upload.");
+    }
+
+</script>
+
+</body>
+</html>
+
+Question 3.
+Create a JavaScript file that defines an array of 5 songs (each with title, artist, and duration), then use console.table() to display the array in a formatted table in the browser console.
+
+Answer:
+// Array of songs
+
+let songs = [
+    {
+        title: "Perfect",
+        artist: "Ed Sheeran",
+        duration: "4:23"
+    },
+    {
+        title: "Believer",
+        artist: "Imagine Dragons",
+        duration: "3:24"
+    },
+    {
+        title: "Counting Stars",
+        artist: "OneRepublic",
+        duration: "4:17"
+    },
+    {
+        title: "Shape of You",
+        artist: "Ed Sheeran",
+        duration: "3:53"
+    },
+    {
+        title: "Night Changes",
+        artist: "One Direction",
+        duration: "3:46"
+    }
+];
+
+
+// Display songs in table format
+console.table(songs);
+
+Browser Console Output:
+┌─────────┬────────────────┬───────────────────┬──────────┐
+│ (index) │ title          │ artist            │ duration │
+├─────────┼────────────────┼───────────────────┼──────────┤
+│ 0       │ Perfect        │ Ed Sheeran        │ 4:23     │
+│ 1       │ Believer       │ Imagine Dragons   │ 3:24     │
+│ 2       │ Counting Stars │ OneRepublic       │ 4:17     │
+│ 3       │ Shape of You   │ Ed Sheeran        │ 3:53     │
+│ 4       │ Night Changes  │ One Direction    │ 3:46     │
+└─────────┴────────────────┴───────────────────┴──────────┘
+Question 4,5.
+Create an array of 5 food orders (each with orderId, itemName, price) and use console.table() to neatly display all orders in the browser console like a Zomato admin dashboard.
+
+Answer:
+Answer:
+// Zomato food orders array
+
+let orders = [
+    {
+        orderId: 101,
+        itemName: "Margherita Pizza",
+        price: 499
+    },
+    {
+        orderId: 102,
+        itemName: "Burger Combo",
+        price: 299
+    },
+    {
+        orderId: 103,
+        itemName: "Paneer Biryani",
+        price: 399
+    },
+    {
+        orderId: 104,
+        itemName: "Chocolate Cake",
+        price: 249
+    },
+    {
+        orderId: 105,
+        itemName: "Pasta Alfredo",
+        price: 450
+    }
+];
+
+
+// Display orders in table format
+console.table(orders);
+Browser Console Output:
+┌─────────┬──────────┬───────────────────┬───────┐
+│ (index) │ orderId  │ itemName          │ price │
+├─────────┼──────────┼───────────────────┼───────┤
+│ 0       │ 101      │ Margherita Pizza  │ 499   │
+│ 1       │ 102      │ Burger Combo      │ 299   │
+│ 2       │ 103      │ Paneer Biryani    │ 399   │
+│ 3       │ 104      │ Chocolate Cake    │ 249   │
+│ 4       │ 105      │ Pasta Alfredo     │ 450   │
+└─────────┴──────────┴───────────────────┴───────┘
+
+Question 6.
+Write a function addToCart(productName, quantity) that logs a success message using console.log(), a warning if quantity is zero using console.warn(), and an error if quantity is negative using console.error(). Call the function with all three scenarios to see each message type in the console.
+
+Answer:
+// Function to add product to cart
+
+function addToCart(productName, quantity) {
+
+    if (quantity < 0) {
+
+        console.error(`❌ Error: Invalid quantity for ${productName}`);
+
+    } 
+    else if (quantity === 0) {
+
+        console.warn(`⚠️ Warning: ${productName} quantity is zero`);
+
+    } 
+    else {
+
+        console.log(`✅ Success: ${quantity} ${productName}(s) added to cart`);
+
+    }
+
+}
+
+
+// Testing all three scenarios
+
+addToCart("Laptop", 2);        // Success message
+addToCart("Mobile Cover", 0);  // Warning message
+addToCart("Headphones", -1);   // Error message
+
+Question 7,8.
+Write a JavaScript function addToCart(item, quantity) that accidentally throws an error when quantity is 0. Set a breakpoint in the Sources tab before the error line, run the function with quantity 0, and inspect the values of item and quantity at the breakpoint.<br><br><em><strong>Hint:</strong> Use the browser's Sources tab to pause execution and check variable values.</em>
+
+Answer:
+function addToCart(item, quantity) {
+
+    console.log("Adding item to cart...");
+
+
+    if (quantity === 0) {
+
+        // Set breakpoint on this line in Sources tab
+        throw new Error("Quantity cannot be zero");
+
+    }
+
+
+    console.log(`${quantity} ${item}(s) added to cart`);
+
+}
+
+
+// Test with quantity 0
+addToCart("Laptop", 0);
+
+Question 9.
+Open the Sources tab in Chrome DevTools, set a breakpoint inside a loop that prints each friend's name from an array, and step through the code to inspect the value of the loop variable at each iteration.<br><br><em><strong>Hint:</strong> Use F8 to continue and F10 to step over lines.</em>
+
+Answer:
+let friends = [
+    "Rahul",
+    "Priya",
+    "Amit",
+    "Neha"
+];
+
+
+for (let i = 0; i < friends.length; i++) {
+
+    // Set breakpoint on this line
+    console.log(friends[i]);
+
+}
+
+Question 10,11.
+Given the following broken function, run it in your browser and use the stack trace in the console to identify which function call caused the error: function placeOrder() { confirmOrder(); } function confirmOrder() { processPayment(); } function processPayment() { throw new Error('Payment failed'); } placeOrder();<br><br><em><strong>Hint:</strong> Expand the error in the console to see the call stack.</em>
+
+Answer:
+function placeOrder() {
+
+    confirmOrder();
+
+}
+
+
+function confirmOrder() {
+
+    processPayment();
+
+}
+
+
+function processPayment() {
+
+    throw new Error("Payment failed");
+
+}
+
+
+// Start order process
+placeOrder();
+Error: Payment failed
+
+    at processPayment (script.js:12)
+    at confirmOrder (script.js:7)
+    at placeOrder (script.js:2)
+    at script.js:17
+
+Question 12.
+Given the following buggy code, run it in your browser and use the stack trace in the console to identify which function is causing the error: function getUser() { return fetchUser(); } function fetchUser() { return JSON.parse(undefined); } getUser(); Write down the function name and line number where the error occurs.<br><br><em><strong>Hint:</strong> Expand the error in the console to view the call stack.</em>
+
+Answer:
+function getUser() {
+
+    return fetchUser();
+
+}
+
+
+function fetchUser() {
+
+    return JSON.parse(undefined);
+
+}
+
+
+getUser();
+
+
+Question 13,14.
+Copy any error message you see in the browser console (from your previous tasks) and paste it into ChatGPT. Ask ChatGPT to explain what the error means and suggest how to fix it, then write down the explanation you received.
+
+Answer:
+SyntaxError: "undefined" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fetchUser (script.js:8)
+    at getUser (script.js:3)
+
+Question 15.
+Copy a real error message you get from your browser console (from any of the above tasks) and paste it into ChatGPT. Ask ChatGPT to explain what the error means and suggest how to fix it. Write down the explanation in your own words.
+Answer:
+Example code causing the error:
+let user;
+
+console.log(user.name);
+
+Suggested Fix:
+
+let user = {
+    name: "Shital"
+};
+
+console.log(user.name);
+
+The error happened because I tried to access a property from an undefined object. JavaScript only allows property access on existing objects, so I need to check that the object has data before using it. Using proper initialization or optional chaining can prevent this error. 
+
+-------------------------------------------------------------------------------------
+Session 19: Mini-Project Preparation &amp; Integration  Coverage Depth:  Combine HTML, CSS, and JS into one interactive application.  Plan modules: Form ? Data Storage ? Display ? Edit/Delete. Activity: Sketch architecture on whiteboard (show how data flows between functions). Trainer Goal: Help students map concepts to app features clearly.
 
 
 

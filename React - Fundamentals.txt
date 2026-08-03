@@ -1,0 +1,5 @@
+Session 1 – Introduction to ReactTopics to Cover:What is React?Why React (Virtual DOM, Components).create-react-app setup.Demo:Run first React app and modify default component.
+
+Question1 
+Install Node.js and use npx create-react-app to set up a new React project called InstaCloneStarter on your computer.
+Answer:

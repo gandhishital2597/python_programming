@@ -1,0 +1,7 @@
+React Advanced (Hooks, Firebase, Redux)
+Session 1 – Introduction to Advanced React ConceptsTopics to Cover:Review: props, state, useEffect, component hierarchy.Why scalability matters (component reusability, maintainability).Introduction to advanced hooks (custom hooks, reducer hooks).Depth:Explain problems with prop drilling and redundant code in large apps.Practical Demo:Show an example of repetitive API call logic to motivate custom hooks.
+
+Question 1 : 
+Create a React component called PlaylistCard that accepts song name and artist as props and displays them, then render three PlaylistCard components with different data to practice passing props.
+
+Answer :

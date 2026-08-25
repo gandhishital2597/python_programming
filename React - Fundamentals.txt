@@ -83,7 +83,7 @@ React's Virtual DOM is a lightweight copy of the real DOM kept in memory.
 When something changes, React first updates the Virtual DOM and compares it with the previous version.
 It finds only the parts that actually changed and updates those parts in the real DOM.
 This reduces unnecessary DOM operations and makes UI updates faster and more efficient.
-
+------------------------------------------------------------------------------------------------------------
 Session 2 – JSX &amp; ComponentsTopics to Cover:JSX syntax and rules.Function vs Class components.Demo:Render “Hello {username}” component.
 
 

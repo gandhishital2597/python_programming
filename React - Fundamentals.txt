@@ -3,3 +3,88 @@ Session 1 – Introduction to ReactTopics to Cover:What is React?Why React (Virt
 Question1 
 Install Node.js and use npx create-react-app to set up a new React project called InstaCloneStarter on your computer.
 Answer:
+Option 1: Install using the official Node.js website
+Open the Node.js official website
+Download the LTS version.
+LTS = Long Term Support
+Recommended for React/Vite development.
+Open the downloaded .pkg file.
+Click Continue → Agree → Install.
+Enter your Mac password if requested.
+Finish the installation.
+
+node -v : v22.x.x
+npm -v : 10.x.x
+ Install with NVM — recommended for developers
+
+If you plan to work with React, Node.js, and different Node versions, I recommend NVM (Node Version Manager).
+
+nvm install --lts
+nvm use --lts
+
+npx create-react-app InstaCloneStarter
+cd InstaCloneStarter
+
+npm run dev
+http://localhost:5173
+
+
+Question 2.
+Open App.js in your InstaCloneStarter project and change the default text to display 'Welcome to My React Zomato App' inside an <h1> tag.
+
+App.jsx
+function App() {
+  return (
+    <div>
+      <h1>Welcome to My React Zomato App</h1>
+    </div>
+  );
+}
+
+export default App;
+
+Question 3.
+Create a new functional component called TrendingSong.js that returns an <h2> element with the text 'Trending on Spotify: Calm Down'. Import and use this component inside App.js so it shows below your main heading.
+
+Answer:
+Create src/TrendingSong.jsx
+function TrendingSong() {
+  return (
+    <h2>Trending on Spotify: Calm Down</h2>
+  );
+}
+
+export default TrendingSong;
+
+Update App.jsx
+import TrendingSong from "./TrendingSong";
+
+function App() {
+  return (
+    <div>
+      <h1>Welcome to My React Zomato App</h1>
+
+      <TrendingSong />
+    </div>
+  );
+}
+
+export default App;
+
+output: 
+Welcome to My React Zomato App
+
+Trending on Spotify: Calm Down
+
+Question 4.
+Explain in your own words (3-4 lines) how React's Virtual DOM makes updating the UI faster compared to traditional DOM manipulation.
+Answer :
+React's Virtual DOM is a lightweight copy of the real DOM kept in memory.
+When something changes, React first updates the Virtual DOM and compares it with the previous version.
+It finds only the parts that actually changed and updates those parts in the real DOM.
+This reduces unnecessary DOM operations and makes UI updates faster and more efficient.
+
+Session 2 – JSX &amp; ComponentsTopics to Cover:JSX syntax and rules.Function vs Class components.Demo:Render “Hello {username}” component.
+
+
+

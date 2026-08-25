@@ -5,3 +5,89 @@ Question 1 :
 Create a React component called PlaylistCard that accepts song name and artist as props and displays them, then render three PlaylistCard components with different data to practice passing props.
 
 Answer :
+PlaylistCard.jsx
+function PlaylistCard(props) {
+  return (
+    <div>
+      <h2>{props.songName}</h2>
+      <p>Artist: {props.artist}</p>
+    </div>
+  );
+}
+
+export default PlaylistCard;
+
+Use it in App.jsx   
+import PlaylistCard from "./PlaylistCard";
+
+function App() {
+  return (
+    <div>
+      <h1>My Playlist</h1>
+
+      <PlaylistCard 
+        songName="Shape of You" 
+        artist="Ed Sheeran" 
+      />
+
+      <PlaylistCard 
+        songName="Perfect" 
+        artist="Ed Sheeran" 
+      />
+
+      <PlaylistCard 
+        songName="Believer" 
+        artist="Imagine Dragons" 
+      />
+    </div>
+  );
+}
+
+export default App;
+
+Question 2.
+Build a simple LikeCounter component that uses useState to track and display the number of likes, and increments the count each time a 'Like' button is clicked, similar to Instagram.
+
+Answer:
+LikeCounter.jsx
+import { useState } from "react";
+
+function LikeCounter() {
+  const [likes, setLikes] = useState(0);
+
+  const handleLike = () => {
+    setLikes(likes + 1);
+  };
+
+  return (
+    <div>
+      <h2>Instagram Post</h2>
+
+      <p>{likes} Likes</p>
+
+      <button onClick={handleLike}>
+        Like
+      </button>
+    </div>
+  );
+}
+
+export default LikeCounter;
+
+App.jsx
+import LikeCounter from "./LikeCounter";
+
+function App() {
+  return (
+    <div>
+      <LikeCounter />
+    </div>
+  );
+}
+
+export default App;
+
+Question 3.
+Refactor a given React component tree where a user object is passed down through three levels (App > Feed > Post > LikeButton) via props — update it to use React Context to avoid prop drilling.<br><br><em><strong>Hint:</strong> Use createContext and useContext to provide and consume the user object.</em>
+
+ANswer:

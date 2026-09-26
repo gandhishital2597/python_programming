@@ -35,4 +35,55 @@ export default function Home() {
 
 Question 3 : Add a new page called explore.js inside the pages folder that displays a heading 'Explore Trending Reels' and a short paragraph about why server-side rendering (SSR) can help social media apps load trending content faster.
 
+Answer :
+src/app/Explore : page.js
+export default function Explore() {
+  return (
+    <div>
+      <h1>Explore Trending Reels</h1>
+
+      <p>
+        Server-side rendering (SSR) helps social media apps load trending
+        content faster by rendering the page on the server before sending it
+        to the user's browser. This allows users to see trending reels quickly
+        and improves the initial page loading experience.
+      </p>
+    </div>
+  );
+}
+
+main app/ page.js added
+<Link href="/Explore">Explore</Link>
+
+Question 4.
+Compare the folder structure of your Next.js project (insta-feed) with a basic Create React App project. List 3 differences you notice in how routing and pages are handled.
+ Answer :
+ Difference Between Next.js and Create React App
+
+ 1. Routing
+Next.js: Has built-in routing using the folder and file structure.
+CRA: Does not have built-in routing. We usually use React Router.
+
+2. Pages
+Next.js: Each route can have its own page.js file.
+CRA: Usually uses components such as App.js, and React Router is used to display different pages.
+
+3. Rendering
+Next.js: Supports SSR (Server-Side Rendering), SSG, and CSR.
+CRA: Mainly uses CSR (Client-Side Rendering) by default.
+
+Question 5.
+Write a short explanation (3-4 lines) on how SSR in Next.js can improve SEO for a food delivery app like Zomato, compared to using only client-side rendering (CSR).<br><br><em><strong>Hint:</strong> Think about how search engines see content and what loads first for users.</em>
+
+Answer :
+SSR in Next.js and SEO
+SSR renders the food delivery page on the server and sends HTML content to the browser.
+Search engines can easily read restaurant names, menus, locations, and other content from the initial HTML.
+This can improve SEO and help pages appear more effectively in search results.
+With only CSR, content is mainly loaded in the browser using JavaScript, which can delay the initial content display and make indexing more challenging.
+
+-------------------------------------------------------------------------------------------------------------
+Session 7 – Next.js Pages and RoutingTopics to Cover:File-based routing: /pages directory.Dynamic routes [id].js.Navigation with Link component.Demo:Build 3-page blog app (Home, About, Post Detail).Depth:Clarify automatic routing and static path generation.AI Add-on:
+
+
 

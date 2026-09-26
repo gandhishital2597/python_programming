@@ -1,0 +1,38 @@
+Session 6 – Introduction to Next.jsTopics to Cover:What is Next.js, and why use it over Create React App.SSR (Server-Side Rendering) vs CSR (Client-Side Rendering).Next.js folder structure overview.Demo:Create first Next.js app using npx create-next-app.Depth:Explain how SSR improves SEO and load performance.
+
+Question : 1.Install Node.js if not already installed, then use npx create-next-app to create a new Next.js project called insta-feed and run it locally to see the default homepage.
+
+Answer :
+npx create-next-app@latest insta-feed
+Would you like to use TypeScript? → No
+Would you like to use ESLint? → Yes
+Would you like to use Tailwind CSS? → No
+Would you like your code inside a `src/` directory? → No
+Would you like to use App Router? → Yes
+Would you like to customize the import alias? → No
+cd insta-feed
+npm run dev : ▲ Next.js
+- Local: http://localhost:3000
+
+
+Question 2:
+Inside your insta-feed Next.js project, open the pages/index.js file and replace the default content with a simple homepage that displays 'Welcome to Insta Feed!' and your name.
+
+Answer : 
+Page.js
+import Image from "next/image";
+import styles from "./page.module.css";
+
+export default function Home() {
+  return (
+    <div>
+       <h1>Welcome to Insta Feed!</h1>
+      <h2>My name is Shital Gandhi</h2>
+    </div>
+      );
+}
+
+
+Question 3 : Add a new page called explore.js inside the pages folder that displays a heading 'Explore Trending Reels' and a short paragraph about why server-side rendering (SSR) can help social media apps load trending content faster.
+
+

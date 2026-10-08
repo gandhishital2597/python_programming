@@ -1,0 +1,4 @@
+Session 1 – The Role of AI in Modern Web DesignTopics to Cover:What is generative AI and its place in web development.Overview of AI tools: ChatGPT, Copilot, Firefly, Figma AI, Uizard.Ethical AI usage and prompt engineering basics.Depth:Students should understand how AI assists developers (not replaces them).Demo:Use ChatGPT to generate a sample landing page structure (HTML outline).
+
+Question1 :
+Use ChatGPT to generate an HTML outline for a Flipkart-style product listing page, including sections for header, search bar, product grid, and footer.&lt;br&gt;&lt;br&gt;&lt;em&gt;&lt;strong&gt;Hint:&lt;/strong&gt; Try different prompts to see how the structure changes and copy the best outline into a file called product-listing-outline.html.&lt;/em&gt;
